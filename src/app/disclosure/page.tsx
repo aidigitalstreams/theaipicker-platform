@@ -13,6 +13,7 @@ export default async function DisclosurePage() {
   return (
     <>
       <PageHero
+        dark={false}
         title="Affiliate Disclosure"
         subtitle="Full transparency about how we earn money and how it affects (and doesn't affect) our reviews."
       />

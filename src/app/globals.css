@@ -234,3 +234,66 @@ body {
   text-transform: uppercase;
   margin-bottom: 0.625rem;
 }
+
+/* Score table — first td bold */
+.article-content table tbody tr td:first-child {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Pros/Cons: style h3 "What We Liked" / "What We Didn't Like" followed by lists */
+.article-content h3:has(+ ul) {
+  margin-bottom: 0.25rem;
+}
+
+/* Pros box — What We Liked */
+.pros-cons-liked {
+  background: rgba(16, 185, 129, 0.04);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  margin-bottom: 1.25rem;
+}
+.pros-cons-liked h3 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--brand-green);
+  margin: 0 0 0.875rem;
+}
+.pros-cons-liked ul { list-style: none; padding-left: 1.25rem; }
+.pros-cons-liked li { position: relative; font-size: 0.9375rem; color: var(--text-med); margin-bottom: 0.5rem; }
+.pros-cons-liked li::before { content: '✓'; position: absolute; left: -1.25rem; color: var(--brand-green); font-weight: 700; }
+
+/* Cons box — What We Didn't Like */
+.pros-cons-disliked {
+  background: rgba(239, 68, 68, 0.04);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  margin-bottom: 1.25rem;
+}
+.pros-cons-disliked h3 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--brand-red);
+  margin: 0 0 0.875rem;
+}
+.pros-cons-disliked ul { list-style: none; padding-left: 1.25rem; }
+.pros-cons-disliked li { position: relative; font-size: 0.9375rem; color: var(--text-med); margin-bottom: 0.5rem; }
+.pros-cons-disliked li::before { content: '✗'; position: absolute; left: -1.25rem; color: var(--brand-red); font-weight: 700; }
+
+/* Final Verdict box */
+.article-content .final-verdict-box {
+  background: var(--surface);
+  border-radius: 0.875rem;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* Comparison page responsive */
+@media (max-width: 640px) {
+  .compare-grid-row { grid-template-columns: 1fr !important; }
+}

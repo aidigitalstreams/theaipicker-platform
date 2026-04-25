@@ -34,8 +34,9 @@ export default function Header() {
     { href: '/best', label: 'Best Of' },
     { href: '/rankings', label: 'Rankings' },
     { href: '/tools', label: 'All Tools' },
-    { href: '/guides', label: 'Guides' },
     { href: '/about', label: 'About' },
+    { href: '/how-we-review', label: 'How We Review' },
+    { href: '/disclosure', label: 'Disclosure' },
   ];
 
   return (
@@ -50,11 +51,11 @@ export default function Header() {
     }}>
       <nav style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
-          <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
+          <Link href="/" style={{ textDecoration: 'none', flexShrink: 0, marginRight: '1rem' }}>
             <Logo />
           </Link>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} className="hidden md:flex">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.125rem' }} className="hidden md:flex">
             {links.map(link => (
               <Link
                 key={link.href}
@@ -64,7 +65,7 @@ export default function Header() {
                   textDecoration: 'none',
                   fontWeight: 600,
                   fontSize: '0.8125rem',
-                  padding: '0.4375rem 1rem',
+                  padding: '0.4375rem 0.75rem',
                   borderRadius: '0.5rem',
                   whiteSpace: 'nowrap',
                 }}
@@ -74,20 +75,29 @@ export default function Header() {
             ))}
           </div>
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
-            aria-label="Toggle menu"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
-              {menuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M3 12h18M3 6h18M3 18h18" />
-              )}
-            </svg>
-          </button>
+          <div style={{ marginLeft: 'auto', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span
+              className="btn-primary hidden md:inline-flex"
+              style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem', borderRadius: '0.5rem', whiteSpace: 'nowrap', cursor: 'pointer' }}
+            >
+              Subscribe
+            </span>
+
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
+              aria-label="Toggle menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
+                {menuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {menuOpen && (

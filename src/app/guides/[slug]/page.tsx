@@ -3,6 +3,7 @@ import { getArticleBySlug, getAllSlugs } from '@/lib/content';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import PageHero from '@/components/PageHero';
+import ArticleContent from '@/components/ArticleContent';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -57,10 +58,7 @@ export default async function GuidePage({ params }: Props) {
           </div>
 
           {/* Content */}
-          <div
-            className="article-content"
-            dangerouslySetInnerHTML={{ __html: article.htmlContent }}
-          />
+          <ArticleContent html={article.htmlContent} />
         </div>
       </section>
     </>

@@ -3,6 +3,7 @@ import { getArticleBySlug, getAllSlugs } from '@/lib/content';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import PageHero from '@/components/PageHero';
+import ArticleContent from '@/components/ArticleContent';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,7 +45,7 @@ export default async function RankingsPage({ params }: Props) {
       />
 
       <section style={{ background: '#FFFFFF', padding: '3rem 2rem 5rem' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           {/* Breadcrumb */}
           <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
             <Link href="/" style={{ color: '#2563EB', textDecoration: 'none' }}>Home</Link>
@@ -53,10 +54,7 @@ export default async function RankingsPage({ params }: Props) {
           </nav>
 
           {/* Content */}
-          <div
-            className="article-content"
-            dangerouslySetInnerHTML={{ __html: article.htmlContent }}
-          />
+          <ArticleContent html={article.htmlContent} />
         </div>
       </section>
     </>
