@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import { getArticleBySlug, getAllSlugs } from '@/lib/content';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import PageHero from '@/components/PageHero';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -34,47 +36,39 @@ export default async function ComparisonPage({ params }: Props) {
   if (!article) notFound();
 
   return (
-    <article style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-      {/* Breadcrumb */}
-      <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
-        <a href="/" style={{ color: '#94A3B8', textDecoration: 'none' }}>Home</a>
-        <span style={{ margin: '0 0.5rem' }}>/</span>
-        <a href="/compare" style={{ color: '#94A3B8', textDecoration: 'none' }}>Comparisons</a>
-        {article.meta.category && (
-          <>
-            <span style={{ margin: '0 0.5rem' }}>/</span>
-            <span>{article.meta.category}</span>
-          </>
-        )}
-      </nav>
-
-      {/* Title */}
-      <h1 style={{ fontSize: '2rem', fontWeight: 800, lineHeight: 1.25, marginBottom: '1rem', color: '#1E293B' }}>
-        {article.meta.title}
-      </h1>
-
-      {/* Category + type badge */}
-      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '2rem' }}>
-        {article.meta.category && (
-          <span style={{ background: '#DBEAFE', color: '#2563EB', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.8125rem', fontWeight: 500 }}>
-            {article.meta.category}
-          </span>
-        )}
-        <span style={{ background: '#FEF3C7', color: '#D97706', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.8125rem', fontWeight: 500 }}>
-          VS Comparison
-        </span>
-      </div>
-
-      {/* Affiliate disclosure */}
-      <div style={{ background: '#F1F5F9', borderRadius: '0.5rem', padding: '0.75rem 1rem', marginBottom: '2rem', fontSize: '0.8125rem', color: '#64748B', fontStyle: 'italic' }}>
-        Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This does not influence our scoring.
-      </div>
-
-      {/* Content */}
-      <div
-        className="article-content"
-        dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+    <>
+      <PageHero
+        label={article.meta.category || 'COMPARISON'}
+        title={article.meta.title}
       />
-    </article>
+
+      <section style={{ background: '#FFFFFF', padding: '3rem 2rem 5rem' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          {/* Breadcrumb */}
+          <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
+            <Link href="/" style={{ color: '#2563EB', textDecoration: 'none' }}>Home</Link>
+            <span style={{ margin: '0 0.5rem' }}>/</span>
+            <Link href="/compare" style={{ color: '#2563EB', textDecoration: 'none' }}>Compare</Link>
+            {article.meta.category && (
+              <>
+                <span style={{ margin: '0 0.5rem' }}>/</span>
+                <span style={{ color: '#64748B' }}>{article.meta.category}</span>
+              </>
+            )}
+          </nav>
+
+          {/* Disclosure */}
+          <div className="disclosure">
+            <strong>Disclosure:</strong> We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn&apos;t influence our scoring — we research tools honestly and score transparently.
+          </div>
+
+          {/* Content */}
+          <div
+            className="article-content"
+            dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+          />
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,10 +1,25 @@
 import Link from 'next/link';
 import { getAllArticles } from '@/lib/content';
 import { Metadata } from 'next';
+import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Compare AI Tools — VS Comparisons',
   description: 'Head-to-head AI tool comparisons. Every matchup scored across five weighted factors with a clear verdict.',
+};
+
+const catColors: Record<string, string> = {
+  'AI Chatbots': '#EC4899',
+  'AI Writing Tools': '#2563EB',
+  'AI Voice Generators': '#8B5CF6',
+  'AI Image Generators': '#10B981',
+  'AI Video Tools': '#F59E0B',
+  'AI Coding Assistants': '#06B6D4',
+  'AI Meeting Assistants': '#F97316',
+  'AI SEO Tools': '#14B8A6',
+  'AI Music Generation': '#A855F7',
+  'AI Presentation Tools': '#EC4899',
+  'AI Transcription Tools': '#3B82F6',
 };
 
 export default async function CompareHub() {
@@ -20,37 +35,56 @@ export default async function CompareHub() {
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-      <div style={{ maxWidth: '768px', margin: '0 auto 2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#1E293B', marginBottom: '0.5rem' }}>
-          Compare AI Tools
-        </h1>
-        <p style={{ color: '#64748B', fontSize: '1.0625rem' }}>
-          {sorted.length} head-to-head comparisons across {byCategory.size} categories. Every matchup scored and verdicted.
-        </p>
-      </div>
+    <>
+      <PageHero
+        label="COMPARISON"
+        title="Compare AI Tools"
+        subtitle={`${sorted.length} head-to-head comparisons across ${byCategory.size} categories. Pick a matchup and see how they stack up.`}
+      />
 
-      {Array.from(byCategory.entries()).map(([category, articles]) => (
-        <div key={category} style={{ marginBottom: '2.5rem' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1E293B', marginBottom: '1rem', borderBottom: '2px solid #E2E8F0', paddingBottom: '0.5rem' }}>
-            {category}
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '0.75rem' }}>
-            {articles.map(article => (
-              <Link
-                key={article.meta.slug}
-                href={`/compare/${article.meta.slug}`}
-                className="card"
-                style={{ textDecoration: 'none', color: 'inherit', padding: '1rem' }}
-              >
-                <h3 style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#1E293B' }}>
-                  {article.meta.title}
-                </h3>
-              </Link>
-            ))}
-          </div>
+      <section style={{ background: '#FFFFFF', padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          {/* Comparisons by category */}
+          {Array.from(byCategory.entries())
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([category, articles]) => {
+              const color = catColors[category] || '#64748B';
+              return (
+                <div key={category} style={{ marginBottom: '3.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: color, boxShadow: `0 0 12px ${color}40`, flexShrink: 0 }} />
+                    <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: '1.75rem', fontWeight: 800, color: '#0F172A', margin: 0 }}>{category}</h2>
+                    <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#2563EB', padding: '0.25rem 0.75rem', borderRadius: '0.375rem', border: '1.5px solid #2563EB' }}>{articles.length} comparisons</span>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1rem' }}>
+                    {articles.map(article => (
+                      <Link
+                        key={article.meta.slug}
+                        href={`/compare/${article.meta.slug}`}
+                        style={{
+                          background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '0.875rem', padding: '1.25rem 1.5rem',
+                          textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem',
+                          transition: 'border-color 0.2s',
+                        }}
+                      >
+                        <div>
+                          <h3 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: '1rem', fontWeight: 700, color: '#0F172A', margin: '0 0 0.25rem' }}>
+                            {article.meta.title}
+                          </h3>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: color, boxShadow: `0 0 8px ${color}40` }} />
+                            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748B' }}>{category.replace('AI ', '')}</span>
+                          </div>
+                        </div>
+                        <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#2563EB', whiteSpace: 'nowrap' }}>Read →</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
         </div>
-      ))}
-    </div>
+      </section>
+    </>
   );
 }

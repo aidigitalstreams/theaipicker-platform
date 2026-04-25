@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import { getArticleBySlug, getAllSlugs } from '@/lib/content';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import PageHero from '@/components/PageHero';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -34,36 +36,29 @@ export default async function RankingsPage({ params }: Props) {
   if (!article) notFound();
 
   return (
-    <article style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-      {/* Breadcrumb */}
-      <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
-        <a href="/" style={{ color: '#94A3B8', textDecoration: 'none' }}>Home</a>
-        <span style={{ margin: '0 0.5rem' }}>/</span>
-        <a href="/rankings" style={{ color: '#94A3B8', textDecoration: 'none' }}>Rankings</a>
-      </nav>
-
-      {/* Title */}
-      <h1 style={{ fontSize: '2rem', fontWeight: 800, lineHeight: 1.25, marginBottom: '1rem', color: '#1E293B' }}>
-        {article.meta.title}
-      </h1>
-
-      {/* Category badge */}
-      {article.meta.category && (
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '2rem' }}>
-          <span style={{ background: '#EDE9FE', color: '#7C3AED', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.8125rem', fontWeight: 500 }}>
-            Leaderboard
-          </span>
-          <span style={{ background: '#DBEAFE', color: '#2563EB', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.8125rem', fontWeight: 500 }}>
-            {article.meta.category}
-          </span>
-        </div>
-      )}
-
-      {/* Content */}
-      <div
-        className="article-content"
-        dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+    <>
+      <PageHero
+        label="LEADERBOARD"
+        title={article.meta.title}
+        subtitle={article.meta.category ? `Full rankings for ${article.meta.category}` : undefined}
       />
-    </article>
+
+      <section style={{ background: '#FFFFFF', padding: '3rem 2rem 5rem' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          {/* Breadcrumb */}
+          <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
+            <Link href="/" style={{ color: '#2563EB', textDecoration: 'none' }}>Home</Link>
+            <span style={{ margin: '0 0.5rem' }}>/</span>
+            <Link href="/rankings" style={{ color: '#2563EB', textDecoration: 'none' }}>Rankings</Link>
+          </nav>
+
+          {/* Content */}
+          <div
+            className="article-content"
+            dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+          />
+        </div>
+      </section>
+    </>
   );
 }

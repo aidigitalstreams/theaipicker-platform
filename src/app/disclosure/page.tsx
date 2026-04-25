@@ -1,5 +1,6 @@
 import { getArticle } from '@/lib/content';
 import { Metadata } from 'next';
+import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Affiliate Disclosure',
@@ -10,16 +11,22 @@ export default async function DisclosurePage() {
   const article = await getArticle('pages', 'affiliate-disclosure.md');
 
   return (
-    <article style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 800, lineHeight: 1.25, marginBottom: '2rem', color: '#1E293B' }}>
-        Affiliate Disclosure
-      </h1>
-      {article && (
-        <div
-          className="article-content"
-          dangerouslySetInnerHTML={{ __html: article.htmlContent }}
-        />
-      )}
-    </article>
+    <>
+      <PageHero
+        title="Affiliate Disclosure"
+        subtitle="Full transparency about how we earn money and how it affects (and doesn't affect) our reviews."
+      />
+
+      <section style={{ background: '#FFFFFF', padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          {article && (
+            <div
+              className="article-content"
+              dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+            />
+          )}
+        </div>
+      </section>
+    </>
   );
 }

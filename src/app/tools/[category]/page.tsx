@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getAllStructuredData, getCategories } from '@/lib/content';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import PageHero from '@/components/PageHero';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -24,10 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function scoreClass(score: number): string {
-  if (score >= 80) return 'score-badge score-high';
-  if (score >= 60) return 'score-badge score-mid';
-  return 'score-badge score-low';
+function ScorePick({ score, size = 30 }: { score: number; size?: number }) {
+  const color = score >= 85 ? '#10B981' : score >= 75 ? '#2563EB' : score >= 65 ? '#F59E0B' : '#EF4444';
+  return (
+    <svg viewBox="0 0 36 44" width={size} height={size * 1.2} style={{ flexShrink: 0 }}>
+      <path d="M18 1 C27 1 34 8.5 34 17.5 C34 29 23 40 18 44 C13 40 2 29 2 17.5 C2 8.5 9 1 18 1 Z" fill={`${color}18`} stroke={color} strokeWidth="1.8"/>
+      <text x="18" y="20" fontFamily="Inter,system-ui,sans-serif" fontSize="13" fontWeight="800" fill={color} textAnchor="middle" dominantBaseline="middle">{score}</text>
+    </svg>
+  );
 }
 
 export default async function CategoryToolsPage({ params }: Props) {
@@ -43,61 +48,62 @@ export default async function CategoryToolsPage({ params }: Props) {
     .sort((a, b) => b.overallScore - a.overallScore);
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-      {/* Breadcrumb */}
-      <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
-        <a href="/" style={{ color: '#94A3B8', textDecoration: 'none' }}>Home</a>
-        <span style={{ margin: '0 0.5rem' }}>/</span>
-        <Link href="/tools" style={{ color: '#94A3B8', textDecoration: 'none' }}>All Tools</Link>
-        <span style={{ margin: '0 0.5rem' }}>/</span>
-        <span>{cat.name}</span>
-      </nav>
+    <>
+      <PageHero
+        label={cat.name.toUpperCase()}
+        title={cat.name}
+        subtitle={`${tools.length} tools reviewed and ranked. Every score broken down across 5 weighted factors.`}
+      />
 
-      {/* Header */}
-      <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#1E293B', marginBottom: '0.5rem' }}>
-        {cat.name}
-      </h1>
-      <p style={{ color: '#64748B', fontSize: '1.0625rem', marginBottom: '2rem' }}>
-        {tools.length} tools reviewed and scored out of 100.
-      </p>
+      <section style={{ background: '#FFFFFF', padding: '3rem 2rem 5rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          {/* Breadcrumb */}
+          <nav style={{ fontSize: '0.8125rem', color: '#94A3B8', marginBottom: '1.5rem' }}>
+            <Link href="/" style={{ color: '#2563EB', textDecoration: 'none' }}>Home</Link>
+            <span style={{ margin: '0 0.5rem' }}>/</span>
+            <Link href="/tools" style={{ color: '#2563EB', textDecoration: 'none' }}>All Tools</Link>
+            <span style={{ margin: '0 0.5rem' }}>/</span>
+            <span style={{ color: '#64748B' }}>{cat.name}</span>
+          </nav>
 
-      {/* Tools table */}
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid #E2E8F0' }}>
-              <th style={{ textAlign: 'left', padding: '0.75rem', fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>Rank</th>
-              <th style={{ textAlign: 'left', padding: '0.75rem', fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>Tool</th>
-              <th style={{ textAlign: 'center', padding: '0.75rem', fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>Score</th>
-              <th style={{ textAlign: 'left', padding: '0.75rem', fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>Best For</th>
-              <th style={{ textAlign: 'left', padding: '0.75rem', fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>Price From</th>
-              <th style={{ textAlign: 'center', padding: '0.75rem', fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>Free Plan</th>
-            </tr>
-          </thead>
-          <tbody>
+          {/* Rankings table */}
+          <div style={{ borderRadius: '0.875rem', border: '1px solid #E2E8F0', overflow: 'hidden' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '0.4fr 1.5fr 0.8fr 2.5fr 1fr 0.6fr', padding: '0.875rem 1.25rem', background: '#0F172A', gap: '0.5rem' }}>
+              {['#', 'Tool', 'Score', 'Best For', 'Price', 'Free'].map(h => (
+                <div key={h} style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{h}</div>
+              ))}
+            </div>
             {tools.map((tool, i) => (
-              <tr key={tool.toolName} style={{ borderBottom: '1px solid #F1F5F9' }}>
-                <td style={{ padding: '0.75rem', fontWeight: 700, color: '#1E293B' }}>#{i + 1}</td>
-                <td style={{ padding: '0.75rem', fontWeight: 600, color: '#1E293B' }}>{tool.toolName}</td>
-                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                  <span className={scoreClass(tool.overallScore)}>{tool.overallScore}/100</span>
-                </td>
-                <td style={{ padding: '0.75rem', fontSize: '0.875rem', color: '#475569' }}>{tool.bestFor}</td>
-                <td style={{ padding: '0.75rem', fontSize: '0.875rem', color: '#475569' }}>{tool.priceFrom}</td>
-                <td style={{ padding: '0.75rem', textAlign: 'center', fontSize: '0.875rem' }}>
-                  {tool.freePlan === 'Yes' ? '✓' : '—'}
-                </td>
-              </tr>
+              <div key={tool.toolName} style={{
+                display: 'grid', gridTemplateColumns: '0.4fr 1.5fr 0.8fr 2.5fr 1fr 0.6fr',
+                padding: '0.875rem 1.25rem',
+                background: i === 0 ? 'rgba(16,185,129,0.04)' : i % 2 === 0 ? '#FFFFFF' : '#F8FAFC',
+                borderTop: '1px solid #E2E8F0', gap: '0.5rem', alignItems: 'center',
+              }}>
+                <div style={{ fontSize: '0.875rem', fontWeight: 800, color: i === 0 ? '#10B981' : '#64748B' }}>{i + 1}</div>
+                <div style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#0F172A' }}>
+                  {tool.toolName}
+                  {i === 0 && <span style={{ background: 'linear-gradient(135deg, #2563EB, #10B981)', color: 'white', fontSize: '0.625rem', fontWeight: 700, padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem' }}>TOP</span>}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <ScorePick score={tool.overallScore} size={28} />
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#475569' }}>{tool.bestFor}</div>
+                <div style={{ fontSize: '0.875rem', color: '#475569' }}>{tool.priceFrom}</div>
+                <div style={{ fontSize: '0.875rem', color: tool.freePlan === 'Yes' ? '#10B981' : '#64748B' }}>
+                  {tool.freePlan === 'Yes' ? 'Yes' : '—'}
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </div>
 
-      {tools.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#94A3B8' }}>
-          <p>No tools reviewed in this category yet.</p>
+          {tools.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#94A3B8' }}>
+              <p>No tools reviewed in this category yet.</p>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </section>
+    </>
   );
 }
