@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import EmailCaptureForm from './EmailCaptureForm';
 
 const catColors: Record<string, string> = {
   'AI Chatbots': '#EC4899',
@@ -56,6 +57,7 @@ export default function CompareBuilder({ tools, comparisons }: { tools: ToolData
   const [selCat, setSelCat] = useState('');
   const [toolA, setToolA] = useState('');
   const [toolB, setToolB] = useState('');
+  const [captureDismissed, setCaptureDismissed] = useState(false);
 
   // Get categories that have tools
   const categories = Array.from(new Set(tools.map(t => t.category))).sort();
@@ -200,6 +202,19 @@ export default function CompareBuilder({ tools, comparisons }: { tools: ToolData
               </div>
             ))}
           </div>
+
+          {!captureDismissed && (
+            <div style={{ marginBottom: '2.5rem' }}>
+              <EmailCaptureForm
+                source="comparison-builder"
+                context={`${toolA} vs ${toolB}`}
+                heading="Save this comparison"
+                description={`Want this ${toolA} vs ${toolB} breakdown by email plus future score updates? We'll send it over. No spam — unsubscribe any time.`}
+                buttonLabel="Send it to me"
+                onDismiss={() => setCaptureDismissed(true)}
+              />
+            </div>
+          )}
         </>
       ) : (
         /* Popular comparisons grid */
