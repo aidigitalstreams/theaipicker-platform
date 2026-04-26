@@ -40,6 +40,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
           <div className="admin-nav-section">Insights</div>
           <AdminNav href="/admin/analytics" label="Analytics" />
+          <AdminNav href="/admin/seo" label="SEO War Room" />
         </nav>
 
         <div className="admin-sidebar-footer">
