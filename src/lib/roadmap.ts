@@ -106,6 +106,18 @@ export const PHASES: Phase[] = [
       { label: 'Newsletter compose + archive (manual send for now)', done: true },
     ],
   },
+  {
+    number: 8,
+    title: 'Activity Log & Live Dashboard',
+    summary: 'Persist every change as a structured event so the Owner can audit what shipped and the dashboard can show real state.',
+    status: 'complete',
+    items: [
+      { label: 'Activity log foundation in content/data/activity.json', done: true },
+      { label: 'logActivity wired into every save/delete action', done: true },
+      { label: '/admin/activity chronological view with group filter', done: true },
+      { label: 'Dashboard upgrade — alerts, decisions, recent activity, revenue', done: true },
+    ],
+  },
 ];
 
 export function phaseStatus(phase: Phase): PhaseStatus {
