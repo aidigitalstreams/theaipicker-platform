@@ -1092,6 +1092,20 @@
 .admin-pill.severity-warn { background: #FEF3C7; color: #92400E; }
 .admin-pill.severity-error { background: #FEE2E2; color: #B91C1C; }
 
+/* Newsletter sent body view */
+.admin-newsletter-body {
+  background: var(--admin-page-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.125rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--admin-text);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
 /* Operations Centre — milestone list */
 .admin-milestone-list {
   list-style: none;

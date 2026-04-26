@@ -34,6 +34,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
           <div className="admin-nav-section">Audience</div>
           <AdminNav href="/admin/subscribers" label="Subscribers" />
+          <AdminNav href="/admin/newsletter/compose" label="Newsletter" />
 
           <div className="admin-nav-section">Revenue</div>
           <AdminNav href="/admin/affiliates" label="Affiliates" />
