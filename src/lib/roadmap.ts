@@ -70,7 +70,8 @@ export const PHASES: Phase[] = [
     status: 'in-progress',
     items: [
       { label: 'Point theaipicker.com domain from WordPress to Vercel', done: false },
-      { label: 'Email capture system (comparison builder + free tools)', done: false },
+      { label: 'Email capture system (comparison builder soft prompt)', done: true },
+      { label: 'Subscribers admin with CSV export and unsubscribe', done: true },
       { label: 'Sitemap generation', done: true },
       { label: 'RSS feed', done: true },
       { label: 'robots.txt blocking /admin', done: true },
