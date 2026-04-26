@@ -176,6 +176,25 @@
   background: var(--admin-accent);
   color: #FFFFFF;
 }
+.admin-nav-link-label { flex: 1; }
+.admin-nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.25rem;
+  padding: 0 0.4rem;
+  background: var(--admin-warning);
+  color: #FFFFFF;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.admin-nav-link.active .admin-nav-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
 
 .admin-nav-section {
   font-size: 0.7rem;
@@ -1105,6 +1124,159 @@
 .admin-pill.kind-intelligence { background: #FEE2E2; color: #B91C1C; }
 .admin-pill.kind-audience { background: #F3E8FF; color: #6B21A8; }
 .admin-pill.kind-other { background: #F1F5F9; color: #475569; }
+
+/* Inbox board */
+.admin-inbox-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem 0.875rem;
+}
+.admin-inbox-form-grid-wide { grid-column: 1 / -1; }
+@media (max-width: 700px) {
+  .admin-inbox-form-grid { grid-template-columns: 1fr; }
+}
+
+.admin-inbox-board { display: flex; flex-direction: column; gap: 0.875rem; }
+.admin-inbox-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+  background: var(--admin-page-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.5rem;
+}
+.admin-inbox-selection-meta {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--admin-text);
+}
+.admin-inbox-reorder-panel {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  background: var(--admin-content-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.4rem;
+}
+.admin-inbox-reorder-panel button {
+  padding: 0.3rem 0.55rem;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.admin-inbox-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.admin-inbox-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  background: var(--admin-content-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.875rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.admin-inbox-row.selected {
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 1px var(--admin-accent);
+}
+.admin-inbox-row.expanded {
+  background: linear-gradient(180deg, var(--admin-content-bg) 0%, var(--admin-page-bg) 100%);
+}
+.admin-inbox-checkbox {
+  display: flex;
+  align-items: center;
+  padding-top: 0.25rem;
+}
+.admin-inbox-row-main {
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+.admin-inbox-row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.admin-inbox-row-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  flex: 1;
+  min-width: 0;
+}
+.admin-inbox-row-meta {
+  display: flex;
+  gap: 0.875rem;
+  font-size: 0.78rem;
+  color: var(--admin-text-muted);
+}
+.admin-inbox-row-body {
+  grid-column: 2 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid var(--admin-border);
+  margin-top: 0.625rem;
+}
+.admin-inbox-instructions {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  background: var(--admin-page-bg);
+  border-radius: 0.4rem;
+  padding: 0.625rem 0.75rem;
+  margin: 0;
+  white-space: pre-wrap;
+  color: var(--admin-text);
+}
+.admin-inbox-row-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.admin-inbox-row-delete { padding: 0.35rem 0.7rem; font-size: 0.78rem; }
+.admin-inbox-result-notes {
+  font-size: 0.82rem;
+  color: var(--admin-text);
+  margin: 0.4rem 0 0;
+  line-height: 1.55;
+}
+.admin-inbox-completed-list .admin-inbox-row {
+  grid-template-columns: 1fr auto;
+  background: var(--admin-page-bg);
+}
+
+.admin-inbox-priority {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.admin-inbox-priority.priority-high { background: #FEE2E2; color: #B91C1C; }
+.admin-inbox-priority.priority-medium { background: #DBEAFE; color: #1D4ED8; }
+.admin-inbox-priority.priority-low { background: #F1F5F9; color: #475569; }
 
 /* Notifications — alerts list */
 .admin-alert-list {

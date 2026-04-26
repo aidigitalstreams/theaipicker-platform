@@ -2,10 +2,14 @@ import AdminNav from './_components/AdminNav';
 import StreamSelector from './_components/StreamSelector';
 import { logoutAction } from '../login/actions';
 import { listStreams, getActiveStreamId } from '@/lib/streams';
+import { getInboxCounts } from '@/lib/inbox';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const streams = await listStreams();
-  const activeStreamId = await getActiveStreamId();
+  const [streams, activeStreamId, inboxCounts] = await Promise.all([
+    listStreams(),
+    getActiveStreamId(),
+    getInboxCounts(),
+  ]);
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
@@ -45,6 +49,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
           <div className="admin-nav-section">Operations</div>
           <AdminNav href="/admin/operations" label="Operations Centre" />
+          <AdminNav href="/admin/inbox" label="Inbox" badge={inboxCounts.totalOpen} />
           <AdminNav href="/admin/notifications" label="Notifications" />
           <AdminNav href="/admin/activity" label="Activity log" />
         </nav>
