@@ -31,8 +31,8 @@ export async function saveNoteAction(
   if (!isResearchKind(kind)) return { error: 'Invalid kind.' };
   if (!isResearchStatus(status)) return { error: 'Invalid status.' };
 
-  const streamId = getActiveStreamId();
-  saveResearchNote({
+  const streamId = await getActiveStreamId();
+  await saveResearchNote({
     id: id || undefined,
     streamId,
     kind,
@@ -42,7 +42,7 @@ export async function saveNoteAction(
     status,
   });
 
-  logActivity({
+  await logActivity({
     streamId,
     kind: 'research-saved',
     subject: title,
@@ -57,11 +57,12 @@ export async function saveNoteAction(
 export async function deleteNoteAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const streamId = getActiveStreamId();
-  const target = getResearchNotes(streamId).find(n => n.id === id);
-  deleteResearchNote(id);
+  const streamId = await getActiveStreamId();
+  const notes = await getResearchNotes(streamId);
+  const target = notes.find(n => n.id === id);
+  await deleteResearchNote(id);
   if (target) {
-    logActivity({
+    await logActivity({
       streamId,
       kind: 'research-deleted',
       subject: target.title,

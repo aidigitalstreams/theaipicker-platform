@@ -10,9 +10,9 @@ const STATUS_LABELS: Record<string, string> = {
   archived: 'Archived',
 };
 
-export default function StreamsPage() {
-  const streams = listStreams();
-  const activeId = getActiveStreamId();
+export default async function StreamsPage() {
+  const streams = await listStreams();
+  const activeId = await getActiveStreamId();
   const onlyOne = streams.length <= 1;
 
   return (

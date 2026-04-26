@@ -28,8 +28,8 @@ function normaliseToolName(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-export function runAffiliateAudit(streamId?: string): AuditResult {
-  const programs = getAffiliates(streamId);
+export async function runAffiliateAudit(streamId?: string): Promise<AuditResult> {
+  const programs = await getAffiliates(streamId);
   const programNames = new Map<string, AffiliateProgram>();
   for (const p of programs) programNames.set(normaliseToolName(p.toolName), p);
 

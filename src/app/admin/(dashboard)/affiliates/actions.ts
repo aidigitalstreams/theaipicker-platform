@@ -36,8 +36,8 @@ export async function saveAffiliateAction(
   if (!toolName) return { error: 'Tool name is required.' };
   if (!isStatus(status)) return { error: 'Invalid status.' };
 
-  const streamId = getActiveStreamId();
-  saveAffiliate({
+  const streamId = await getActiveStreamId();
+  await saveAffiliate({
     id: id || undefined,
     streamId,
     toolName,
@@ -48,7 +48,7 @@ export async function saveAffiliateAction(
     notes: notes || undefined,
   });
 
-  logActivity({
+  await logActivity({
     streamId,
     kind: 'affiliate-saved',
     subject: toolName,
@@ -63,11 +63,12 @@ export async function saveAffiliateAction(
 export async function deleteAffiliateAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const streamId = getActiveStreamId();
-  const target = getAffiliates(streamId).find(a => a.id === id);
-  deleteAffiliate(id);
+  const streamId = await getActiveStreamId();
+  const programs = await getAffiliates(streamId);
+  const target = programs.find(a => a.id === id);
+  await deleteAffiliate(id);
   if (target) {
-    logActivity({
+    await logActivity({
       streamId,
       kind: 'affiliate-deleted',
       subject: target.toolName,

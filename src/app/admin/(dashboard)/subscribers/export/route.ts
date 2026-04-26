@@ -6,8 +6,8 @@ export async function GET() {
   if (!(await isAuthenticated())) {
     return new Response('Unauthorized', { status: 401 });
   }
-  const streamId = getActiveStreamId();
-  const rows = getSubscribers(streamId);
+  const streamId = await getActiveStreamId();
+  const rows = await getSubscribers(streamId);
   const csv = subscribersToCsv(rows);
   const date = new Date().toISOString().slice(0, 10);
   return new Response(csv, {

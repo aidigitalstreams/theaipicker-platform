@@ -10,9 +10,9 @@ const SEVERITY_LABEL: Record<string, string> = {
   error: 'Error',
 };
 
-export default function NotificationsPage() {
-  const stream = getActiveStream();
-  const { alerts, generatedAt } = generateAlerts(stream);
+export default async function NotificationsPage() {
+  const stream = await getActiveStream();
+  const { alerts, generatedAt } = await generateAlerts(stream);
   const decisions = getDecisionQueue();
 
   const errors = alerts.filter(a => a.severity === 'error').length;

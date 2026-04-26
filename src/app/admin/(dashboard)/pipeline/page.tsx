@@ -71,8 +71,8 @@ function formatScheduled(iso: string): string {
   return `${dateStr} at ${timeStr}`;
 }
 
-export default function PipelinePage() {
-  const stream = getActiveStream();
+export default async function PipelinePage() {
+  const stream = await getActiveStream();
   const articles = getAllAdminArticles(stream);
   const buckets = bucketArticles(articles);
 

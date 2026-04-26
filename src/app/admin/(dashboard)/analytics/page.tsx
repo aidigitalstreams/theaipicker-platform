@@ -45,10 +45,10 @@ function formatMoney(amount: number, currency: string): string {
   }
 }
 
-export default function AnalyticsPage() {
-  const stream = getActiveStream();
-  const entries = getRevenueEntries(stream.id).sort((a, b) => b.date.localeCompare(a.date));
-  const summary = getRevenueSummary(stream.id);
+export default async function AnalyticsPage() {
+  const stream = await getActiveStream();
+  const entries = (await getRevenueEntries(stream.id)).sort((a, b) => b.date.localeCompare(a.date));
+  const summary = await getRevenueSummary(stream.id);
   const today = new Date().toISOString().slice(0, 10);
 
   return (

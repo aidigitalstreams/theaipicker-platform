@@ -5,8 +5,8 @@ import ContentTable from './ContentTable';
 
 export const dynamic = 'force-dynamic';
 
-export default function ContentPage() {
-  const stream = getActiveStream();
+export default async function ContentPage() {
+  const stream = await getActiveStream();
   const articles = getAllAdminArticles(stream);
 
   return (

@@ -8,11 +8,12 @@ import { getActiveStreamId } from '@/lib/streams';
 export async function unsubscribeAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const streamId = getActiveStreamId();
-  const target = getSubscribers(streamId).find(s => s.id === id);
-  unsubscribe(id);
+  const streamId = await getActiveStreamId();
+  const subs = await getSubscribers(streamId);
+  const target = subs.find(s => s.id === id);
+  await unsubscribe(id);
   if (target) {
-    logActivity({
+    await logActivity({
       streamId,
       kind: 'subscriber-unsubscribed',
       subject: target.email,
@@ -25,11 +26,12 @@ export async function unsubscribeAction(formData: FormData): Promise<void> {
 export async function deleteSubscriberAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const streamId = getActiveStreamId();
-  const target = getSubscribers(streamId).find(s => s.id === id);
-  deleteSubscriber(id);
+  const streamId = await getActiveStreamId();
+  const subs = await getSubscribers(streamId);
+  const target = subs.find(s => s.id === id);
+  await deleteSubscriber(id);
   if (target) {
-    logActivity({
+    await logActivity({
       streamId,
       kind: 'subscriber-deleted',
       subject: target.email,

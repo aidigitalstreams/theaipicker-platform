@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { eq } from 'drizzle-orm';
+import { getDb, schema } from './db';
+import type { Stream as DbStream } from './db';
 
 export interface Stream {
   id: string;
@@ -11,12 +12,7 @@ export interface Stream {
   status: 'active' | 'planned' | 'archived';
 }
 
-interface StreamsConfig {
-  activeStreamId: string;
-  streams: Stream[];
-}
-
-const CONFIG_FILE = path.join(process.cwd(), 'content', 'data', 'streams.json');
+const ACTIVE_STREAM_KEY = 'active_stream_id';
 
 const FALLBACK_STREAM: Stream = {
   id: 'theaipicker',
@@ -28,49 +24,48 @@ const FALLBACK_STREAM: Stream = {
   status: 'active',
 };
 
-const FALLBACK_CONFIG: StreamsConfig = {
-  activeStreamId: FALLBACK_STREAM.id,
-  streams: [FALLBACK_STREAM],
-};
-
-function readConfig(): StreamsConfig {
-  if (!fs.existsSync(CONFIG_FILE)) return FALLBACK_CONFIG;
-  try {
-    const raw = fs.readFileSync(CONFIG_FILE, 'utf-8').trim();
-    if (!raw) return FALLBACK_CONFIG;
-    const parsed = JSON.parse(raw) as Partial<StreamsConfig>;
-    const streams = Array.isArray(parsed.streams) && parsed.streams.length > 0 ? parsed.streams as Stream[] : FALLBACK_CONFIG.streams;
-    const activeStreamId =
-      typeof parsed.activeStreamId === 'string' && streams.some(s => s.id === parsed.activeStreamId)
-        ? parsed.activeStreamId
-        : streams[0].id;
-    return { activeStreamId, streams };
-  } catch {
-    return FALLBACK_CONFIG;
-  }
+function rowToStream(row: DbStream): Stream {
+  return {
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    tagline: row.tagline,
+    domain: row.domain,
+    contentDirs: row.contentDirs,
+    status: row.status as Stream['status'],
+  };
 }
 
-function writeConfig(config: StreamsConfig): void {
-  const dir = path.dirname(CONFIG_FILE);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2) + '\n', 'utf-8');
+export async function listStreams(): Promise<Stream[]> {
+  const db = getDb();
+  const rows = await db.select().from(schema.streams);
+  if (rows.length === 0) return [FALLBACK_STREAM];
+  return rows.map(rowToStream);
 }
 
-export function listStreams(): Stream[] {
-  return readConfig().streams;
+export async function getActiveStreamId(): Promise<string> {
+  const db = getDb();
+  const [setting] = await db.select().from(schema.appSettings)
+    .where(eq(schema.appSettings.key, ACTIVE_STREAM_KEY))
+    .limit(1);
+  if (setting?.value) return setting.value;
+  // Fall back to the first stream in the table.
+  const [first] = await db.select().from(schema.streams).limit(1);
+  return first?.id ?? FALLBACK_STREAM.id;
 }
 
-export function getActiveStreamId(): string {
-  return readConfig().activeStreamId;
+export async function getActiveStream(): Promise<Stream> {
+  const id = await getActiveStreamId();
+  const db = getDb();
+  const [row] = await db.select().from(schema.streams).where(eq(schema.streams.id, id)).limit(1);
+  if (row) return rowToStream(row);
+  return FALLBACK_STREAM;
 }
 
-export function getActiveStream(): Stream {
-  const cfg = readConfig();
-  return cfg.streams.find(s => s.id === cfg.activeStreamId) ?? cfg.streams[0];
-}
-
-export function getStream(id: string): Stream | undefined {
-  return readConfig().streams.find(s => s.id === id);
+export async function getStream(id: string): Promise<Stream | undefined> {
+  const db = getDb();
+  const [row] = await db.select().from(schema.streams).where(eq(schema.streams.id, id)).limit(1);
+  return row ? rowToStream(row) : undefined;
 }
 
 const VALID_SUBDIRS = ['reviews', 'comparisons', 'best-of', 'guides', 'rankings'];
@@ -92,10 +87,10 @@ export interface SaveStreamInput {
   status: Stream['status'];
 }
 
-export function saveStream(input: SaveStreamInput, opts: { activate?: boolean } = {}): Stream {
-  const cfg = readConfig();
+export async function saveStream(input: SaveStreamInput, opts: { activate?: boolean } = {}): Promise<Stream> {
+  const db = getDb();
   const dirs = input.contentDirs.filter(d => VALID_SUBDIRS.includes(d));
-  const stream: Stream = {
+  const values = {
     id: input.id,
     name: input.name,
     slug: input.slug || input.id,
@@ -103,33 +98,50 @@ export function saveStream(input: SaveStreamInput, opts: { activate?: boolean } 
     domain: input.domain,
     contentDirs: dirs,
     status: input.status,
+    updatedAt: new Date(),
   };
-  const existingIdx = cfg.streams.findIndex(s => s.id === input.id);
-  if (existingIdx >= 0) {
-    cfg.streams[existingIdx] = stream;
-  } else {
-    cfg.streams.push(stream);
-  }
+  const [row] = await db.insert(schema.streams).values(values)
+    .onConflictDoUpdate({
+      target: schema.streams.id,
+      set: {
+        name: values.name,
+        slug: values.slug,
+        tagline: values.tagline,
+        domain: values.domain,
+        contentDirs: values.contentDirs,
+        status: values.status,
+        updatedAt: values.updatedAt,
+      },
+    })
+    .returning();
   if (opts.activate) {
-    cfg.activeStreamId = stream.id;
+    await setActiveStream(row.id);
   }
-  writeConfig(cfg);
-  return stream;
+  return rowToStream(row);
 }
 
-export function setActiveStream(id: string): void {
-  const cfg = readConfig();
-  if (!cfg.streams.some(s => s.id === id)) return;
-  cfg.activeStreamId = id;
-  writeConfig(cfg);
+export async function setActiveStream(id: string): Promise<void> {
+  const db = getDb();
+  // Verify the stream exists before pointing the active flag at it.
+  const [existing] = await db.select({ id: schema.streams.id }).from(schema.streams)
+    .where(eq(schema.streams.id, id)).limit(1);
+  if (!existing) return;
+  await db.insert(schema.appSettings).values({ key: ACTIVE_STREAM_KEY, value: id, updatedAt: new Date() })
+    .onConflictDoUpdate({
+      target: schema.appSettings.key,
+      set: { value: id, updatedAt: new Date() },
+    });
 }
 
-export function deleteStream(id: string): void {
-  const cfg = readConfig();
-  if (cfg.streams.length <= 1) return;
-  cfg.streams = cfg.streams.filter(s => s.id !== id);
-  if (cfg.activeStreamId === id) {
-    cfg.activeStreamId = cfg.streams[0].id;
+export async function deleteStream(id: string): Promise<void> {
+  const db = getDb();
+  const all = await db.select({ id: schema.streams.id }).from(schema.streams);
+  if (all.length <= 1) return;
+  await db.delete(schema.streams).where(eq(schema.streams.id, id));
+  // If the deleted stream was active, point active at whatever remains.
+  const activeId = await getActiveStreamId();
+  if (activeId === id) {
+    const [first] = await db.select({ id: schema.streams.id }).from(schema.streams).limit(1);
+    if (first) await setActiveStream(first.id);
   }
-  writeConfig(cfg);
 }

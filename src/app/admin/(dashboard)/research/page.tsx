@@ -15,9 +15,9 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
-export default function ResearchHubPage() {
-  const stream = getActiveStream();
-  const notes = getResearchNotes(stream.id).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+export default async function ResearchHubPage() {
+  const stream = await getActiveStream();
+  const notes = await getResearchNotes(stream.id);
   const open = notes.filter(n => n.status === 'open');
   const actioned = notes.filter(n => n.status === 'actioned');
   const archived = notes.filter(n => n.status === 'archived');

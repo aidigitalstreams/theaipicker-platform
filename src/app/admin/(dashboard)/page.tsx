@@ -29,15 +29,15 @@ function relativeTime(iso: string): string {
   return `${day}d ago`;
 }
 
-export default function DashboardPage() {
-  const stream = getActiveStream();
+export default async function DashboardPage() {
+  const stream = await getActiveStream();
   const articles = getAllAdminArticles(stream);
   const stats = getAdminStats(articles);
-  const alerts = generateAlerts(stream);
+  const alerts = await generateAlerts(stream);
   const decisions = getDecisionQueue();
-  const revenue = getRevenueSummary(stream.id);
+  const revenue = await getRevenueSummary(stream.id);
   const costs = summariseCosts();
-  const recent = getActivity(stream.id, { limit: 8 });
+  const recent = await getActivity(stream.id, { limit: 8 });
 
   const publishedCount = stats.byStatus.find(s => s.status === 'publish' || s.status === 'published')?.count ?? 0;
   const draftCount = stats.byStatus.find(s => s.status === 'draft')?.count ?? 0;

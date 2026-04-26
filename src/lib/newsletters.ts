@@ -1,8 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-
-const DATA_DIR = path.join(process.cwd(), 'content', 'data');
-const NEWSLETTERS_FILE = path.join(DATA_DIR, 'newsletters.json');
+import { eq, desc } from 'drizzle-orm';
+import { getDb, schema } from './db';
+import type { Newsletter as DbNewsletter } from './db';
 
 export type NewsletterStatus = 'draft' | 'scheduled' | 'sent';
 
@@ -22,46 +20,45 @@ export interface Newsletter {
 
 const VALID_STATUS: NewsletterStatus[] = ['draft', 'scheduled', 'sent'];
 
-function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-function readAll(): Newsletter[] {
-  ensureDir();
-  if (!fs.existsSync(NEWSLETTERS_FILE)) {
-    fs.writeFileSync(NEWSLETTERS_FILE, '[]\n', 'utf-8');
-    return [];
-  }
-  try {
-    const raw = fs.readFileSync(NEWSLETTERS_FILE, 'utf-8').trim();
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as Newsletter[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeAll(rows: Newsletter[]): void {
-  ensureDir();
-  fs.writeFileSync(NEWSLETTERS_FILE, JSON.stringify(rows, null, 2) + '\n', 'utf-8');
-}
-
 function genId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function rowToNewsletter(row: DbNewsletter): Newsletter {
+  return {
+    id: row.id,
+    streamId: row.streamId,
+    subject: row.subject,
+    body: row.body,
+    preview: row.preview ?? undefined,
+    status: row.status as NewsletterStatus,
+    scheduledAt: row.scheduledAt ? row.scheduledAt.toISOString() : undefined,
+    sentAt: row.sentAt ? row.sentAt.toISOString() : undefined,
+    recipientCount: row.recipientCount ?? undefined,
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  };
 }
 
 export function isNewsletterStatus(v: string): v is NewsletterStatus {
   return (VALID_STATUS as string[]).includes(v);
 }
 
-export function getNewsletters(streamId?: string): Newsletter[] {
-  const all = readAll();
-  return streamId ? all.filter(n => n.streamId === streamId) : all;
+export async function getNewsletters(streamId?: string): Promise<Newsletter[]> {
+  const db = getDb();
+  const rows = streamId
+    ? await db.select().from(schema.newsletters)
+        .where(eq(schema.newsletters.streamId, streamId))
+        .orderBy(desc(schema.newsletters.updatedAt))
+    : await db.select().from(schema.newsletters).orderBy(desc(schema.newsletters.updatedAt));
+  return rows.map(rowToNewsletter);
 }
 
-export function getNewsletter(id: string): Newsletter | undefined {
-  return readAll().find(n => n.id === id);
+export async function getNewsletter(id: string): Promise<Newsletter | undefined> {
+  const db = getDb();
+  const [row] = await db.select().from(schema.newsletters)
+    .where(eq(schema.newsletters.id, id)).limit(1);
+  return row ? rowToNewsletter(row) : undefined;
 }
 
 export interface SaveNewsletterInput {
@@ -74,55 +71,53 @@ export interface SaveNewsletterInput {
   scheduledAt?: string;
 }
 
-export function saveNewsletter(input: SaveNewsletterInput): Newsletter {
-  const all = readAll();
-  const now = new Date().toISOString();
+export async function saveNewsletter(input: SaveNewsletterInput): Promise<Newsletter> {
+  const db = getDb();
+  const now = new Date();
+  const scheduledAt = input.scheduledAt ? new Date(input.scheduledAt) : null;
+
   if (input.id) {
-    const idx = all.findIndex(n => n.id === input.id);
-    if (idx >= 0) {
-      const merged: Newsletter = {
-        ...all[idx],
+    const [updated] = await db.update(schema.newsletters)
+      .set({
         subject: input.subject,
         body: input.body,
-        preview: input.preview,
+        preview: input.preview ?? null,
         status: input.status,
-        scheduledAt: input.scheduledAt,
+        scheduledAt,
         updatedAt: now,
-      };
-      all[idx] = merged;
-      writeAll(all);
-      return merged;
-    }
+      })
+      .where(eq(schema.newsletters.id, input.id))
+      .returning();
+    if (updated) return rowToNewsletter(updated);
   }
-  const created: Newsletter = {
+  const [created] = await db.insert(schema.newsletters).values({
     id: genId(),
     streamId: input.streamId,
     subject: input.subject,
     body: input.body,
-    preview: input.preview,
+    preview: input.preview ?? null,
     status: input.status,
-    scheduledAt: input.scheduledAt,
-    createdAt: now,
-    updatedAt: now,
-  };
-  all.push(created);
-  writeAll(all);
-  return created;
+    scheduledAt,
+  }).returning();
+  return rowToNewsletter(created);
 }
 
-export function markSent(id: string, recipientCount: number): Newsletter | undefined {
-  const all = readAll();
-  const target = all.find(n => n.id === id);
-  if (!target) return undefined;
-  target.status = 'sent';
-  target.sentAt = new Date().toISOString();
-  target.recipientCount = recipientCount;
-  target.updatedAt = target.sentAt;
-  writeAll(all);
-  return target;
+export async function markSent(id: string, recipientCount: number): Promise<Newsletter | undefined> {
+  const db = getDb();
+  const now = new Date();
+  const [updated] = await db.update(schema.newsletters)
+    .set({
+      status: 'sent',
+      sentAt: now,
+      recipientCount,
+      updatedAt: now,
+    })
+    .where(eq(schema.newsletters.id, id))
+    .returning();
+  return updated ? rowToNewsletter(updated) : undefined;
 }
 
-export function deleteNewsletter(id: string): void {
-  const all = readAll().filter(n => n.id !== id);
-  writeAll(all);
+export async function deleteNewsletter(id: string): Promise<void> {
+  const db = getDb();
+  await db.delete(schema.newsletters).where(eq(schema.newsletters.id, id));
 }

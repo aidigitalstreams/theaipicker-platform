@@ -1,12 +1,10 @@
-import fs from 'fs';
-import path from 'path';
+import { eq, desc } from 'drizzle-orm';
+import { getDb, schema } from './db';
+import type { ResearchNote as DbResearchNote } from './db';
 import { RESEARCH_KINDS, isResearchKind, type ResearchKind } from './research-kinds';
 
 export { RESEARCH_KINDS, isResearchKind } from './research-kinds';
 export type { ResearchKind } from './research-kinds';
-
-const DATA_DIR = path.join(process.cwd(), 'content', 'data');
-const RESEARCH_FILE = path.join(DATA_DIR, 'research.json');
 
 export interface ResearchNote {
   id: string;
@@ -22,42 +20,36 @@ export interface ResearchNote {
 
 const VALID_STATUS: ResearchNote['status'][] = ['open', 'actioned', 'archived'];
 
-function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-function readAll(): ResearchNote[] {
-  ensureDir();
-  if (!fs.existsSync(RESEARCH_FILE)) {
-    fs.writeFileSync(RESEARCH_FILE, '[]\n', 'utf-8');
-    return [];
-  }
-  try {
-    const raw = fs.readFileSync(RESEARCH_FILE, 'utf-8').trim();
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as ResearchNote[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeAll(rows: ResearchNote[]): void {
-  ensureDir();
-  fs.writeFileSync(RESEARCH_FILE, JSON.stringify(rows, null, 2) + '\n', 'utf-8');
-}
-
 function genId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function rowToNote(row: DbResearchNote): ResearchNote {
+  return {
+    id: row.id,
+    streamId: row.streamId,
+    kind: row.kind as ResearchKind,
+    title: row.title,
+    body: row.body,
+    source: row.source ?? undefined,
+    status: row.status as ResearchNote['status'],
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  };
 }
 
 export function isResearchStatus(v: string): v is ResearchNote['status'] {
   return (VALID_STATUS as string[]).includes(v);
 }
 
-export function getResearchNotes(streamId?: string): ResearchNote[] {
-  const all = readAll();
-  return streamId ? all.filter(n => n.streamId === streamId) : all;
+export async function getResearchNotes(streamId?: string): Promise<ResearchNote[]> {
+  const db = getDb();
+  const rows = streamId
+    ? await db.select().from(schema.researchNotes)
+        .where(eq(schema.researchNotes.streamId, streamId))
+        .orderBy(desc(schema.researchNotes.updatedAt))
+    : await db.select().from(schema.researchNotes).orderBy(desc(schema.researchNotes.updatedAt));
+  return rows.map(rowToNote);
 }
 
 export interface SaveNoteInput {
@@ -70,43 +62,36 @@ export interface SaveNoteInput {
   status: ResearchNote['status'];
 }
 
-export function saveResearchNote(input: SaveNoteInput): ResearchNote {
-  const all = readAll();
-  const now = new Date().toISOString();
+export async function saveResearchNote(input: SaveNoteInput): Promise<ResearchNote> {
+  const db = getDb();
+  const now = new Date();
   if (input.id) {
-    const idx = all.findIndex(n => n.id === input.id);
-    if (idx >= 0) {
-      const merged: ResearchNote = {
-        ...all[idx],
+    const [updated] = await db.update(schema.researchNotes)
+      .set({
         kind: input.kind,
         title: input.title,
         body: input.body,
-        source: input.source,
+        source: input.source ?? null,
         status: input.status,
         updatedAt: now,
-      };
-      all[idx] = merged;
-      writeAll(all);
-      return merged;
-    }
+      })
+      .where(eq(schema.researchNotes.id, input.id))
+      .returning();
+    if (updated) return rowToNote(updated);
   }
-  const created: ResearchNote = {
+  const [created] = await db.insert(schema.researchNotes).values({
     id: genId(),
     streamId: input.streamId,
     kind: input.kind,
     title: input.title,
     body: input.body,
-    source: input.source,
+    source: input.source ?? null,
     status: input.status,
-    createdAt: now,
-    updatedAt: now,
-  };
-  all.push(created);
-  writeAll(all);
-  return created;
+  }).returning();
+  return rowToNote(created);
 }
 
-export function deleteResearchNote(id: string): void {
-  const all = readAll().filter(n => n.id !== id);
-  writeAll(all);
+export async function deleteResearchNote(id: string): Promise<void> {
+  const db = getDb();
+  await db.delete(schema.researchNotes).where(eq(schema.researchNotes.id, id));
 }

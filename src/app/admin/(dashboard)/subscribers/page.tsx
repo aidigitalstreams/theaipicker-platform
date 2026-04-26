@@ -17,9 +17,9 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
-export default function SubscribersPage() {
-  const stream = getActiveStream();
-  const subs = getSubscribers(stream.id).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+export default async function SubscribersPage() {
+  const stream = await getActiveStream();
+  const subs = (await getSubscribers(stream.id)).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   const active = subs.filter(s => s.status === 'active');
   const unsubscribed = subs.filter(s => s.status === 'unsubscribed');
 

@@ -25,8 +25,8 @@ export async function saveRevenueAction(
   const amount = Number(amountRaw);
   if (!Number.isFinite(amount) || amount < 0) return { error: 'Amount must be a positive number.' };
 
-  const streamId = getActiveStreamId();
-  saveRevenueEntry({
+  const streamId = await getActiveStreamId();
+  await saveRevenueEntry({
     streamId,
     date,
     toolName,
@@ -35,7 +35,7 @@ export async function saveRevenueAction(
     notes: notes || undefined,
   });
 
-  logActivity({
+  await logActivity({
     streamId,
     kind: 'revenue-added',
     subject: `${toolName} · ${currency} ${amount.toFixed(2)}`,
@@ -50,11 +50,12 @@ export async function saveRevenueAction(
 export async function deleteRevenueAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const streamId = getActiveStreamId();
-  const target = getRevenueEntries(streamId).find(r => r.id === id);
-  deleteRevenueEntry(id);
+  const streamId = await getActiveStreamId();
+  const entries = await getRevenueEntries(streamId);
+  const target = entries.find(r => r.id === id);
+  await deleteRevenueEntry(id);
   if (target) {
-    logActivity({
+    await logActivity({
       streamId,
       kind: 'revenue-deleted',
       subject: `${target.toolName} · ${target.currency} ${target.amount.toFixed(2)}`,

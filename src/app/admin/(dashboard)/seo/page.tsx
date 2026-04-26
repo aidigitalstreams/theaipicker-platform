@@ -13,8 +13,8 @@ function ratioClass(passed: number, total: number): string {
   return 'admin-score low';
 }
 
-export default function SeoWarRoomPage() {
-  const stream = getActiveStream();
+export default async function SeoWarRoomPage() {
+  const stream = await getActiveStream();
   const snapshots = getArticleSeoSnapshots(stream);
   const summary = summariseSeo(snapshots);
 

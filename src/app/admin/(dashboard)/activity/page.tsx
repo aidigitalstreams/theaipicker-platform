@@ -64,8 +64,8 @@ export default async function ActivityPage({ searchParams }: PageProps) {
   const { group: groupRaw } = await searchParams;
   const group = groupRaw && GROUPS.includes(groupRaw) ? groupRaw : undefined;
 
-  const stream = getActiveStream();
-  const entries = getActivity(stream.id, { limit: 500, group });
+  const stream = await getActiveStream();
+  const entries = await getActivity(stream.id, { limit: 500, group });
   const days = bucketByDay(entries);
 
   return (

@@ -11,9 +11,10 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
-export default function NewsletterComposePage() {
-  const stream = getActiveStream();
-  const drafts = getNewsletters(stream.id)
+export default async function NewsletterComposePage() {
+  const stream = await getActiveStream();
+  const all = await getNewsletters(stream.id);
+  const drafts = all
     .filter(n => n.status !== 'sent')
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 

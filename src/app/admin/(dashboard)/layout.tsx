@@ -3,9 +3,9 @@ import StreamSelector from './_components/StreamSelector';
 import { logoutAction } from '../login/actions';
 import { listStreams, getActiveStreamId } from '@/lib/streams';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const streams = listStreams();
-  const activeStreamId = getActiveStreamId();
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const streams = await listStreams();
+  const activeStreamId = await getActiveStreamId();
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">

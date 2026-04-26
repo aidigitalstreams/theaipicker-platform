@@ -42,8 +42,8 @@ export async function POST(request: Request) {
 
   const source: SubscriberSource = isValidSource(sourceRaw) ? sourceRaw : 'other';
 
-  const streamId = getActiveStreamId();
-  const result = addSubscriber({
+  const streamId = await getActiveStreamId();
+  const result = await addSubscriber({
     streamId,
     email,
     source,
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   });
 
   if (result.ok && result.subscriber) {
-    logActivity({
+    await logActivity({
       streamId,
       kind: 'subscriber-added',
       subject: email,

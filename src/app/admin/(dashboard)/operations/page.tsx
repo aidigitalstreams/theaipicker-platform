@@ -14,10 +14,10 @@ function gbp(value: number): string {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 2 }).format(value);
 }
 
-export default function OperationsCentrePage() {
-  const stream = getActiveStream();
+export default async function OperationsCentrePage() {
+  const stream = await getActiveStream();
   const costs = summariseCosts();
-  const revenue = getRevenueSummary(stream.id);
+  const revenue = await getRevenueSummary(stream.id);
 
   const monthlyNet = revenue.thisMonth - costs.monthlyActiveCostGbp;
   const nextMilestone = REVENUE_MILESTONES.find(m => revenue.thisMonth < m.amount);

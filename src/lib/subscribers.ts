@@ -1,8 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-
-const DATA_DIR = path.join(process.cwd(), 'content', 'data');
-const SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
+import { eq, and, desc } from 'drizzle-orm';
+import { getDb, schema } from './db';
+import type { Subscriber as DbSubscriber } from './db';
 
 export type SubscriberSource = 'comparison-builder' | 'free-tools' | 'newsletter' | 'other';
 
@@ -21,31 +19,6 @@ const VALID_SOURCES: SubscriberSource[] = ['comparison-builder', 'free-tools', '
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-function readAll(): EmailSubscriber[] {
-  ensureDir();
-  if (!fs.existsSync(SUBSCRIBERS_FILE)) {
-    fs.writeFileSync(SUBSCRIBERS_FILE, '[]\n', 'utf-8');
-    return [];
-  }
-  try {
-    const raw = fs.readFileSync(SUBSCRIBERS_FILE, 'utf-8').trim();
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as EmailSubscriber[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeAll(rows: EmailSubscriber[]): void {
-  ensureDir();
-  fs.writeFileSync(SUBSCRIBERS_FILE, JSON.stringify(rows, null, 2) + '\n', 'utf-8');
-}
-
 function genId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
@@ -58,9 +31,27 @@ export function isValidSource(value: string): value is SubscriberSource {
   return (VALID_SOURCES as string[]).includes(value);
 }
 
-export function getSubscribers(streamId?: string): EmailSubscriber[] {
-  const all = readAll();
-  return streamId ? all.filter(s => s.streamId === streamId) : all;
+function rowToSubscriber(row: DbSubscriber): EmailSubscriber {
+  return {
+    id: row.id,
+    streamId: row.streamId,
+    email: row.email,
+    source: row.source as SubscriberSource,
+    status: (row.status as 'active' | 'unsubscribed'),
+    context: row.context ?? undefined,
+    createdAt: row.createdAt.toISOString(),
+    unsubscribedAt: row.unsubscribedAt ? row.unsubscribedAt.toISOString() : undefined,
+  };
+}
+
+export async function getSubscribers(streamId?: string): Promise<EmailSubscriber[]> {
+  const db = getDb();
+  const rows = streamId
+    ? await db.select().from(schema.subscribers)
+        .where(eq(schema.subscribers.streamId, streamId))
+        .orderBy(desc(schema.subscribers.createdAt))
+    : await db.select().from(schema.subscribers).orderBy(desc(schema.subscribers.createdAt));
+  return rows.map(rowToSubscriber);
 }
 
 export interface AddSubscriberInput {
@@ -76,52 +67,53 @@ export interface AddSubscriberResult {
   subscriber?: EmailSubscriber;
 }
 
-export function addSubscriber(input: AddSubscriberInput): AddSubscriberResult {
+export async function addSubscriber(input: AddSubscriberInput): Promise<AddSubscriberResult> {
   const email = input.email.trim().toLowerCase();
   if (!isValidEmail(email)) return { ok: false, reason: 'invalid-email' };
   if (!isValidSource(input.source)) return { ok: false, reason: 'invalid-source' };
 
-  const all = readAll();
-  const existing = all.find(s => s.email === email && s.streamId === input.streamId);
+  const db = getDb();
+  const [existing] = await db.select().from(schema.subscribers)
+    .where(and(eq(schema.subscribers.email, email), eq(schema.subscribers.streamId, input.streamId)))
+    .limit(1);
+
   if (existing) {
     if (existing.status === 'unsubscribed') {
-      // Reactivate
-      existing.status = 'active';
-      existing.unsubscribedAt = undefined;
-      existing.source = input.source;
-      if (input.context) existing.context = input.context;
-      writeAll(all);
-      return { ok: true, subscriber: existing };
+      const [updated] = await db.update(schema.subscribers)
+        .set({
+          status: 'active',
+          unsubscribedAt: null,
+          source: input.source,
+          context: input.context ?? existing.context,
+        })
+        .where(eq(schema.subscribers.id, existing.id))
+        .returning();
+      return { ok: true, subscriber: rowToSubscriber(updated) };
     }
-    return { ok: false, reason: 'already-subscribed', subscriber: existing };
+    return { ok: false, reason: 'already-subscribed', subscriber: rowToSubscriber(existing) };
   }
 
-  const created: EmailSubscriber = {
+  const [created] = await db.insert(schema.subscribers).values({
     id: genId(),
     streamId: input.streamId,
     email,
     source: input.source,
     status: 'active',
-    context: input.context,
-    createdAt: new Date().toISOString(),
-  };
-  all.push(created);
-  writeAll(all);
-  return { ok: true, subscriber: created };
+    context: input.context ?? null,
+  }).returning();
+  return { ok: true, subscriber: rowToSubscriber(created) };
 }
 
-export function unsubscribe(id: string): void {
-  const all = readAll();
-  const target = all.find(s => s.id === id);
-  if (!target) return;
-  target.status = 'unsubscribed';
-  target.unsubscribedAt = new Date().toISOString();
-  writeAll(all);
+export async function unsubscribe(id: string): Promise<void> {
+  const db = getDb();
+  await db.update(schema.subscribers)
+    .set({ status: 'unsubscribed', unsubscribedAt: new Date() })
+    .where(eq(schema.subscribers.id, id));
 }
 
-export function deleteSubscriber(id: string): void {
-  const all = readAll().filter(s => s.id !== id);
-  writeAll(all);
+export async function deleteSubscriber(id: string): Promise<void> {
+  const db = getDb();
+  await db.delete(schema.subscribers).where(eq(schema.subscribers.id, id));
 }
 
 export function subscribersToCsv(rows: EmailSubscriber[]): string {

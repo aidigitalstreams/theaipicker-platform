@@ -104,8 +104,8 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
 
   const becamePublished = article.meta.status !== 'publish' && validStatus === 'publish';
   const becameUnpublished = article.meta.status === 'publish' && validStatus !== 'publish';
-  logActivity({
-    streamId: getActiveStreamId(),
+  await logActivity({
+    streamId: await getActiveStreamId(),
     kind: becamePublished ? 'article-published' : becameUnpublished ? 'article-unpublished' : 'article-saved',
     subject: title,
     detail: `${article.meta.type} · ${validStatus}`,
@@ -146,8 +146,8 @@ export async function togglePublishAction(formData: FormData): Promise<void> {
     existing: { subdir: article.meta.subdir, filename: article.meta.filename },
   });
 
-  logActivity({
-    streamId: getActiveStreamId(),
+  await logActivity({
+    streamId: await getActiveStreamId(),
     kind: nextStatus === 'publish' ? 'article-published' : 'article-unpublished',
     subject: article.meta.title,
     detail: `${article.meta.type} · toggled via topbar`,
@@ -166,8 +166,8 @@ export async function deleteArticleAction(formData: FormData): Promise<void> {
   if (!article) return;
 
   deleteArticle(article.meta.subdir, article.meta.filename);
-  logActivity({
-    streamId: getActiveStreamId(),
+  await logActivity({
+    streamId: await getActiveStreamId(),
     kind: 'article-deleted',
     subject: article.meta.title,
     detail: `${article.meta.type} · ${article.meta.subdir}/${article.meta.filename}`,

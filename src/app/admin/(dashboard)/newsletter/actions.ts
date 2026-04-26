@@ -34,8 +34,8 @@ export async function saveNewsletterAction(
   if (!isNewsletterStatus(status)) return { error: 'Invalid status.' };
   if (status === 'scheduled' && !scheduledAt) return { error: 'Scheduled status needs a date/time.' };
 
-  const streamId = getActiveStreamId();
-  const saved = saveNewsletter({
+  const streamId = await getActiveStreamId();
+  const saved = await saveNewsletter({
     id: id || undefined,
     streamId,
     subject,
@@ -45,7 +45,7 @@ export async function saveNewsletterAction(
     scheduledAt: scheduledAt || undefined,
   });
 
-  logActivity({
+  await logActivity({
     streamId,
     kind: 'newsletter-saved',
     subject,
@@ -64,11 +64,11 @@ export async function saveNewsletterAction(
 export async function markSentAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const newsletter = getNewsletter(id);
+  const newsletter = await getNewsletter(id);
   if (!newsletter) return;
-  const subs = getSubscribers(newsletter.streamId).filter(s => s.status === 'active');
-  markSent(id, subs.length);
-  logActivity({
+  const subs = (await getSubscribers(newsletter.streamId)).filter(s => s.status === 'active');
+  await markSent(id, subs.length);
+  await logActivity({
     streamId: newsletter.streamId,
     kind: 'newsletter-sent',
     subject: newsletter.subject,
@@ -82,10 +82,10 @@ export async function markSentAction(formData: FormData): Promise<void> {
 export async function deleteNewsletterAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
-  const target = getNewsletter(id);
-  deleteNewsletter(id);
+  const target = await getNewsletter(id);
+  await deleteNewsletter(id);
   if (target) {
-    logActivity({
+    await logActivity({
       streamId: target.streamId,
       kind: 'newsletter-deleted',
       subject: target.subject,

@@ -4,9 +4,9 @@ import { getActiveStream } from '@/lib/streams';
 
 export const dynamic = 'force-dynamic';
 
-export default function AffiliateAuditPage() {
-  const stream = getActiveStream();
-  const audit = runAffiliateAudit(stream.id);
+export default async function AffiliateAuditPage() {
+  const stream = await getActiveStream();
+  const audit = await runAffiliateAudit(stream.id);
 
   const programsActive = audit.programs.filter(p => p.status === 'active').length;
   const totalCoveredLinks = audit.programCoverage.reduce((acc, c) => acc + c.affiliateLinkCount, 0);

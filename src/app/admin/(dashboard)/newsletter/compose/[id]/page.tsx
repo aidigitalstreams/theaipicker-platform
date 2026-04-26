@@ -16,13 +16,14 @@ interface Props {
 export default async function ComposeNewsletterPage({ params, searchParams }: Props) {
   const { id } = await params;
   const { saved } = await searchParams;
-  const newsletter = getNewsletter(id);
+  const newsletter = await getNewsletter(id);
   if (!newsletter) notFound();
 
-  const stream = getActiveStream();
+  const stream = await getActiveStream();
   if (newsletter.streamId !== stream.id) notFound();
 
-  const activeSubs = getSubscribers(stream.id).filter(s => s.status === 'active').length;
+  const subs = await getSubscribers(stream.id);
+  const activeSubs = subs.filter(s => s.status === 'active').length;
   const isSent = newsletter.status === 'sent';
 
   return (

@@ -70,8 +70,8 @@ export async function createArticleAction(_prev: CreateState | null, formData: F
     body,
   });
 
-  logActivity({
-    streamId: getActiveStreamId(),
+  await logActivity({
+    streamId: await getActiveStreamId(),
     kind: status === 'publish' ? 'article-published' : 'article-saved',
     subject: title,
     detail: `${type} · created`,

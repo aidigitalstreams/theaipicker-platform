@@ -13,9 +13,9 @@ const STATUS_LABELS: Record<string, string> = {
   paused: 'Paused',
 };
 
-export default function AffiliatesPage() {
-  const stream = getActiveStream();
-  const programs = getAffiliates(stream.id);
+export default async function AffiliatesPage() {
+  const stream = await getActiveStream();
+  const programs = await getAffiliates(stream.id);
   const active = programs.filter(p => p.status === 'active').length;
 
   return (

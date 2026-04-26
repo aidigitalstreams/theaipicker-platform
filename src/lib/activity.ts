@@ -1,9 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-
-const DATA_DIR = path.join(process.cwd(), 'content', 'data');
-const ACTIVITY_FILE = path.join(DATA_DIR, 'activity.json');
-const MAX_ENTRIES = 5000;
+import { eq, and, gte, inArray, desc } from 'drizzle-orm';
+import { getDb, schema } from './db';
+import type { ActivityEntry as DbActivityEntry } from './db';
 
 export type ActivityKind =
   | 'article-saved'
@@ -80,33 +77,20 @@ export interface ActivityEntry {
   at: string;
 }
 
-function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-function readAll(): ActivityEntry[] {
-  ensureDir();
-  if (!fs.existsSync(ACTIVITY_FILE)) {
-    fs.writeFileSync(ACTIVITY_FILE, '[]\n', 'utf-8');
-    return [];
-  }
-  try {
-    const raw = fs.readFileSync(ACTIVITY_FILE, 'utf-8').trim();
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as ActivityEntry[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeAll(rows: ActivityEntry[]): void {
-  ensureDir();
-  fs.writeFileSync(ACTIVITY_FILE, JSON.stringify(rows, null, 2) + '\n', 'utf-8');
-}
-
 function genId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function rowToEntry(row: DbActivityEntry): ActivityEntry {
+  return {
+    id: row.id,
+    streamId: row.streamId ?? undefined,
+    kind: row.kind as ActivityKind,
+    subject: row.subject,
+    detail: row.detail ?? undefined,
+    href: row.href ?? undefined,
+    at: row.at.toISOString(),
+  };
 }
 
 export interface LogInput {
@@ -117,24 +101,23 @@ export interface LogInput {
   href?: string;
 }
 
-export function logActivity(input: LogInput): void {
+/**
+ * Append a row to the activity log. Fail-soft — logs the error but never
+ * throws, so a DB hiccup can't break a save action.
+ */
+export async function logActivity(input: LogInput): Promise<void> {
   try {
-    const all = readAll();
-    const entry: ActivityEntry = {
+    const db = getDb();
+    await db.insert(schema.activityEntries).values({
       id: genId(),
-      streamId: input.streamId,
+      streamId: input.streamId ?? null,
       kind: input.kind,
       subject: input.subject,
-      detail: input.detail,
-      href: input.href,
-      at: new Date().toISOString(),
-    };
-    all.push(entry);
-    // Keep file from growing unbounded.
-    const trimmed = all.length > MAX_ENTRIES ? all.slice(all.length - MAX_ENTRIES) : all;
-    writeAll(trimmed);
-  } catch {
-    // Activity log failures must never break a save action.
+      detail: input.detail ?? null,
+      href: input.href ?? null,
+    });
+  } catch (err) {
+    console.error('logActivity failed:', err);
   }
 }
 
@@ -145,22 +128,33 @@ export interface GetActivityOptions {
   sinceIso?: string;
 }
 
-export function getActivity(streamId?: string, opts: GetActivityOptions = {}): ActivityEntry[] {
-  const all = readAll();
-  let filtered = streamId ? all.filter(a => !a.streamId || a.streamId === streamId) : all;
-  if (opts.kinds && opts.kinds.length > 0) {
-    const set = new Set<string>(opts.kinds as string[]);
-    filtered = filtered.filter(a => set.has(a.kind));
+export async function getActivity(streamId?: string, opts: GetActivityOptions = {}): Promise<ActivityEntry[]> {
+  const db = getDb();
+  const conditions = [];
+  if (streamId) {
+    // Match rows belonging to this stream OR with no stream attached.
+    conditions.push(eq(schema.activityEntries.streamId, streamId));
   }
+  let kinds = opts.kinds;
   if (opts.group) {
-    const groupKinds = new Set(ACTIVITY_GROUPS.filter(g => g.group === opts.group).map(g => g.kind));
-    filtered = filtered.filter(a => groupKinds.has(a.kind));
+    const groupKinds = ACTIVITY_GROUPS.filter(g => g.group === opts.group).map(g => g.kind);
+    kinds = kinds ? kinds.filter(k => groupKinds.includes(k)) : groupKinds;
+  }
+  if (kinds && kinds.length > 0) {
+    conditions.push(inArray(schema.activityEntries.kind, kinds));
   }
   if (opts.sinceIso) {
-    filtered = filtered.filter(a => a.at >= opts.sinceIso!);
+    conditions.push(gte(schema.activityEntries.at, new Date(opts.sinceIso)));
   }
-  const sorted = filtered.sort((a, b) => b.at.localeCompare(a.at));
-  return opts.limit ? sorted.slice(0, opts.limit) : sorted;
+
+  const where = conditions.length === 1 ? conditions[0] : conditions.length > 1 ? and(...conditions) : undefined;
+  const limit = opts.limit ?? 500;
+
+  const rows = await (where
+    ? db.select().from(schema.activityEntries).where(where).orderBy(desc(schema.activityEntries.at)).limit(limit)
+    : db.select().from(schema.activityEntries).orderBy(desc(schema.activityEntries.at)).limit(limit));
+
+  return rows.map(rowToEntry);
 }
 
 export function getActivityGroups(): string[] {

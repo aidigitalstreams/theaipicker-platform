@@ -19,11 +19,11 @@ export interface AlertsResult {
   generatedAt: string;
 }
 
-export function generateAlerts(stream: Stream): AlertsResult {
+export async function generateAlerts(stream: Stream): Promise<AlertsResult> {
   const alerts: Alert[] = [];
   const articles = getAllAdminArticles(stream);
   const seo = getArticleSeoSnapshots(stream);
-  const audit = runAffiliateAudit(stream.id);
+  const audit = await runAffiliateAudit(stream.id);
   const now = Date.now();
   const dayMs = 24 * 60 * 60 * 1000;
 
