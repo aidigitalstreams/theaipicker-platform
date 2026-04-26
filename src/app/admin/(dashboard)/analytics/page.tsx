@@ -1,4 +1,5 @@
 import { getRevenueEntries, getRevenueSummary } from '@/lib/affiliate-data';
+import { getActiveStream } from '@/lib/streams';
 import RevenueEntryForm from './RevenueEntryForm';
 import { deleteRevenueAction } from './actions';
 
@@ -45,15 +46,16 @@ function formatMoney(amount: number, currency: string): string {
 }
 
 export default function AnalyticsPage() {
-  const entries = getRevenueEntries().sort((a, b) => b.date.localeCompare(a.date));
-  const summary = getRevenueSummary();
+  const stream = getActiveStream();
+  const entries = getRevenueEntries(stream.id).sort((a, b) => b.date.localeCompare(a.date));
+  const summary = getRevenueSummary(stream.id);
   const today = new Date().toISOString().slice(0, 10);
 
   return (
     <>
       <div className="admin-topbar">
         <div>
-          <div className="breadcrumb">Insights</div>
+          <div className="breadcrumb">{stream.name} · Insights</div>
           <h1>Analytics</h1>
         </div>
       </div>

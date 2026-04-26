@@ -1,4 +1,5 @@
 import { getAffiliates } from '@/lib/affiliate-data';
+import { getActiveStream } from '@/lib/streams';
 import AffiliateForm from './AffiliateForm';
 import { deleteAffiliateAction } from './actions';
 
@@ -12,14 +13,15 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 export default function AffiliatesPage() {
-  const programs = getAffiliates();
+  const stream = getActiveStream();
+  const programs = getAffiliates(stream.id);
   const active = programs.filter(p => p.status === 'active').length;
 
   return (
     <>
       <div className="admin-topbar">
         <div>
-          <div className="breadcrumb">Revenue</div>
+          <div className="breadcrumb">{stream.name} · Revenue</div>
           <h1>Affiliate programs</h1>
         </div>
         <div className="admin-topbar-meta">

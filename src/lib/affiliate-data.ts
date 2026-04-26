@@ -7,6 +7,7 @@ const REVENUE_FILE = path.join(DATA_DIR, 'revenue.json');
 
 export interface AffiliateProgram {
   id: string;
+  streamId: string;
   toolName: string;
   commissionRate: string;
   cookieDuration: string;
@@ -18,6 +19,7 @@ export interface AffiliateProgram {
 
 export interface RevenueEntry {
   id: string;
+  streamId: string;
   date: string;
   toolName: string;
   amount: number;
@@ -57,12 +59,20 @@ function genId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-export function getAffiliates(): AffiliateProgram[] {
-  return readJson<AffiliateProgram>(AFFILIATES_FILE);
+function withStreamFilter<T extends { streamId?: string }>(rows: T[], streamId?: string): T[] {
+  if (!streamId) return rows;
+  return rows.filter(r => r.streamId === streamId);
 }
 
-export function saveAffiliate(input: Omit<AffiliateProgram, 'id' | 'createdAt'> & { id?: string }): AffiliateProgram {
-  const all = getAffiliates();
+export function getAffiliates(streamId?: string): AffiliateProgram[] {
+  const all = readJson<AffiliateProgram>(AFFILIATES_FILE);
+  return withStreamFilter(all, streamId);
+}
+
+export function saveAffiliate(
+  input: Omit<AffiliateProgram, 'id' | 'createdAt' | 'streamId'> & { id?: string; streamId: string },
+): AffiliateProgram {
+  const all = readJson<AffiliateProgram>(AFFILIATES_FILE);
   if (input.id) {
     const idx = all.findIndex(a => a.id === input.id);
     if (idx >= 0) {
@@ -74,6 +84,7 @@ export function saveAffiliate(input: Omit<AffiliateProgram, 'id' | 'createdAt'> 
   }
   const created: AffiliateProgram = {
     id: genId(),
+    streamId: input.streamId,
     toolName: input.toolName,
     commissionRate: input.commissionRate,
     cookieDuration: input.cookieDuration,
@@ -88,18 +99,22 @@ export function saveAffiliate(input: Omit<AffiliateProgram, 'id' | 'createdAt'> 
 }
 
 export function deleteAffiliate(id: string): void {
-  const all = getAffiliates().filter(a => a.id !== id);
+  const all = readJson<AffiliateProgram>(AFFILIATES_FILE).filter(a => a.id !== id);
   writeJson(AFFILIATES_FILE, all);
 }
 
-export function getRevenueEntries(): RevenueEntry[] {
-  return readJson<RevenueEntry>(REVENUE_FILE);
+export function getRevenueEntries(streamId?: string): RevenueEntry[] {
+  const all = readJson<RevenueEntry>(REVENUE_FILE);
+  return withStreamFilter(all, streamId);
 }
 
-export function saveRevenueEntry(input: Omit<RevenueEntry, 'id' | 'createdAt'>): RevenueEntry {
-  const all = getRevenueEntries();
+export function saveRevenueEntry(
+  input: Omit<RevenueEntry, 'id' | 'createdAt' | 'streamId'> & { streamId: string },
+): RevenueEntry {
+  const all = readJson<RevenueEntry>(REVENUE_FILE);
   const created: RevenueEntry = {
     id: genId(),
+    streamId: input.streamId,
     date: input.date,
     toolName: input.toolName,
     amount: input.amount,
@@ -113,7 +128,7 @@ export function saveRevenueEntry(input: Omit<RevenueEntry, 'id' | 'createdAt'>):
 }
 
 export function deleteRevenueEntry(id: string): void {
-  const all = getRevenueEntries().filter(e => e.id !== id);
+  const all = readJson<RevenueEntry>(REVENUE_FILE).filter(e => e.id !== id);
   writeJson(REVENUE_FILE, all);
 }
 
@@ -124,8 +139,8 @@ export interface RevenueSummary {
   currency: string;
 }
 
-export function getRevenueSummary(): RevenueSummary {
-  const entries = getRevenueEntries();
+export function getRevenueSummary(streamId?: string): RevenueSummary {
+  const entries = getRevenueEntries(streamId);
   if (entries.length === 0) {
     return { totalAllTime: 0, thisMonth: 0, byTool: [], currency: 'GBP' };
   }

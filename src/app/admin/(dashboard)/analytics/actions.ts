@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { saveRevenueEntry, deleteRevenueEntry } from '@/lib/affiliate-data';
+import { getActiveStreamId } from '@/lib/streams';
 
 export interface RevenueFormState {
   ok?: boolean;
@@ -24,6 +25,7 @@ export async function saveRevenueAction(
   if (!Number.isFinite(amount) || amount < 0) return { error: 'Amount must be a positive number.' };
 
   saveRevenueEntry({
+    streamId: getActiveStreamId(),
     date,
     toolName,
     amount,

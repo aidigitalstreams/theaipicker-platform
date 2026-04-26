@@ -6,6 +6,7 @@ import {
   deleteAffiliate,
   type AffiliateProgram,
 } from '@/lib/affiliate-data';
+import { getActiveStreamId } from '@/lib/streams';
 
 const VALID_STATUS: AffiliateProgram['status'][] = ['active', 'pending', 'rejected', 'paused'];
 
@@ -35,6 +36,7 @@ export async function saveAffiliateAction(
 
   saveAffiliate({
     id: id || undefined,
+    streamId: getActiveStreamId(),
     toolName,
     commissionRate,
     cookieDuration,
