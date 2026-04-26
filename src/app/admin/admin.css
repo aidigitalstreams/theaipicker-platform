@@ -796,6 +796,110 @@
 }
 .admin-score-input { max-width: 6rem; }
 
+/* Pipeline kanban board */
+.admin-pipeline-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+@media (max-width: 1100px) {
+  .admin-pipeline-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .admin-pipeline-board { grid-template-columns: 1fr; }
+}
+
+.admin-pipeline-column {
+  background: var(--admin-page-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.75rem;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 60vh;
+  border-top: 3px solid var(--admin-text-muted);
+}
+.admin-pipeline-column.status-draft { border-top-color: var(--admin-warning); }
+.admin-pipeline-column.status-in-review { border-top-color: var(--admin-accent); }
+.admin-pipeline-column.status-ready { border-top-color: #6366F1; }
+.admin-pipeline-column.status-published { border-top-color: var(--admin-success); }
+
+.admin-pipeline-column-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.25rem 0.5rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+.admin-pipeline-column-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--admin-text);
+  margin: 0;
+}
+.admin-pipeline-column-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--admin-content-bg);
+  color: var(--admin-text-muted);
+  padding: 0.15rem 0.55rem;
+  border-radius: 99px;
+  border: 1px solid var(--admin-border);
+}
+
+.admin-pipeline-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.admin-pipeline-card {
+  display: block;
+  background: var(--admin-content-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.625rem;
+  padding: 0.75rem 0.875rem;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.admin-pipeline-card:hover {
+  border-color: var(--admin-accent);
+  box-shadow: 0 4px 12px -6px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+.admin-pipeline-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.admin-pipeline-card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.admin-pipeline-card-meta {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+  margin-top: 0.4rem;
+}
+.admin-pipeline-empty {
+  font-size: 0.82rem;
+  color: var(--admin-text-muted);
+  padding: 0.875rem 0.5rem;
+  text-align: center;
+  border: 1px dashed var(--admin-border);
+  border-radius: 0.5rem;
+  background: var(--admin-content-bg);
+}
+
 /* Analytics placeholder panels */
 .admin-analytics-grid {
   display: grid;
