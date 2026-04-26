@@ -1,7 +1,10 @@
 import AdminNav from './_components/AdminNav';
+import StreamSelector from './_components/StreamSelector';
 import { logoutAction } from '../login/actions';
+import { listStreams, ACTIVE_STREAM_ID } from '@/lib/streams';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const streams = listStreams();
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
@@ -9,6 +12,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           AI Digital Streams
           <span className="small">Admin</span>
         </div>
+
+        <StreamSelector streams={streams} activeStreamId={ACTIVE_STREAM_ID} />
 
         <nav className="admin-sidebar-nav">
           <div className="admin-nav-section">Overview</div>

@@ -1,9 +1,11 @@
 import { getAllAdminArticles, getAdminStats } from '@/lib/admin-content';
+import { getActiveStream } from '@/lib/streams';
 
 export const dynamic = 'force-dynamic';
 
 export default function DashboardPage() {
-  const articles = getAllAdminArticles();
+  const stream = getActiveStream();
+  const articles = getAllAdminArticles(stream);
   const stats = getAdminStats(articles);
 
   const publishedCount = stats.byStatus.find(s => s.status === 'publish' || s.status === 'published')?.count ?? 0;
@@ -15,7 +17,7 @@ export default function DashboardPage() {
     <>
       <div className="admin-topbar">
         <div>
-          <div className="breadcrumb">Overview</div>
+          <div className="breadcrumb">{stream.name} · Overview</div>
           <h1>Dashboard</h1>
         </div>
       </div>

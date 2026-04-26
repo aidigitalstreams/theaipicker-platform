@@ -80,8 +80,11 @@ export const PHASES: Phase[] = [
     number: 6,
     title: 'Multi-Stream Architecture',
     summary: 'Generalise the platform so AI Digital Streams can run multiple revenue streams from a single admin.',
+    status: 'in-progress',
     items: [
-      { label: 'Stream selector in admin (AI Digital Streams parent)', done: false },
+      { label: 'Stream interface + config in src/lib/streams.ts', done: true },
+      { label: 'Stream selector in admin sidebar', done: true },
+      { label: 'Stream-aware dashboard, content, and pipeline pages', done: true },
       { label: 'Add new business stream from dashboard', done: false },
       { label: 'Per-stream analytics and content management', done: false },
       { label: 'Shared component library across streams', done: false },

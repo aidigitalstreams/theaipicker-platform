@@ -1,17 +1,19 @@
 import Link from 'next/link';
 import { getAllAdminArticles } from '@/lib/admin-content';
+import { getActiveStream } from '@/lib/streams';
 import ContentTable from './ContentTable';
 
 export const dynamic = 'force-dynamic';
 
 export default function ContentPage() {
-  const articles = getAllAdminArticles();
+  const stream = getActiveStream();
+  const articles = getAllAdminArticles(stream);
 
   return (
     <>
       <div className="admin-topbar">
         <div>
-          <div className="breadcrumb">Content</div>
+          <div className="breadcrumb">{stream.name} · Content</div>
           <h1>All articles</h1>
         </div>
         <div className="admin-topbar-actions">

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { parseStructuredData, type StructuredData } from './content';
+import type { Stream } from './streams';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -70,10 +71,11 @@ function readArticle(subdir: string, type: ArticleType, filename: string): Admin
   };
 }
 
-export function getAllAdminArticles(): AdminArticle[] {
+export function getAllAdminArticles(stream?: Stream): AdminArticle[] {
   const articles: AdminArticle[] = [];
+  const dirs = stream ? SUBDIRS.filter(s => stream.contentDirs.includes(s.dir)) : SUBDIRS;
 
-  for (const { dir, type } of SUBDIRS) {
+  for (const { dir, type } of dirs) {
     const fullDir = path.join(CONTENT_DIR, dir);
     if (!fs.existsSync(fullDir)) continue;
     const files = fs.readdirSync(fullDir).filter(f => f.endsWith('.md'));

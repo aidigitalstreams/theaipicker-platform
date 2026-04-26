@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllAdminArticles, typeLabel, type AdminArticle } from '@/lib/admin-content';
+import { getActiveStream } from '@/lib/streams';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,14 +59,15 @@ function scoreClass(score: number | null): string {
 }
 
 export default function PipelinePage() {
-  const articles = getAllAdminArticles();
+  const stream = getActiveStream();
+  const articles = getAllAdminArticles(stream);
   const buckets = bucketArticles(articles);
 
   return (
     <>
       <div className="admin-topbar">
         <div>
-          <div className="breadcrumb">Content</div>
+          <div className="breadcrumb">{stream.name} · Content</div>
           <h1>Pipeline</h1>
         </div>
         <div className="admin-topbar-meta">
