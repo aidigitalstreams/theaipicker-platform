@@ -49,7 +49,7 @@ const CONFIG = {
   HEARTBEAT_INTERVAL_MS: Number(process.env.HEARTBEAT_INTERVAL_MS) || 60_000,
   MAX_JOB_MS: Number(process.env.MAX_JOB_MS) || 60 * 60 * 1000, // 60 min
   CLAUDE_PROMPT: process.env.CLAUDE_PROMPT
-    ?? 'Read tasks.md and execute every task in order. No questions. Make all decisions yourself. Commit and push when done.',
+    ?? 'STOP. Your ONLY job is to open and read the file called tasks.md in the current directory, then do exactly what it says. Do not ask questions. Do not wait for input. Read tasks.md NOW and execute the instructions inside it. Commit and push when done.',
 };
 
 // ---------- Logger ----------
@@ -137,7 +137,7 @@ function truncate(s, max) {
 function runClaude() {
   return new Promise(resolve => {
     log('INFO', `Spawning: claude -p "${CONFIG.CLAUDE_PROMPT.slice(0, 80)}…"`);
-    const child = spawn('claude', ['-p', CONFIG.CLAUDE_PROMPT], {
+    const child = spawn('claude', ['--dangerously-skip-permissions', '-p', CONFIG.CLAUDE_PROMPT], {
       cwd: CONFIG.PROJECT_DIR,
       shell: true, // Windows resolves claude.cmd via the shell
     });
