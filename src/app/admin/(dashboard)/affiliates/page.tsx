@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getAffiliates } from '@/lib/affiliate-data';
 import { getActiveStream } from '@/lib/streams';
 import AffiliateForm from './AffiliateForm';
@@ -30,7 +31,8 @@ export default function AffiliatesPage() {
       </div>
 
       <div className="admin-content">
-        <div className="admin-affiliate-actions">
+        <div className="admin-affiliate-actions" style={{ gap: '0.5rem' }}>
+          <Link href="/admin/affiliates/audit" className="admin-button-ghost">Run audit</Link>
           <AffiliateForm />
         </div>
 
