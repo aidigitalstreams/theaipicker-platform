@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getAllAdminArticles } from '@/lib/admin-content';
 import ContentTable from './ContentTable';
 
@@ -13,8 +14,11 @@ export default function ContentPage() {
           <div className="breadcrumb">Content</div>
           <h1>All articles</h1>
         </div>
-        <div style={{ fontSize: '0.85rem', color: 'var(--admin-text-muted)' }}>
-          {articles.length} total
+        <div className="admin-topbar-actions">
+          <span className="admin-topbar-meta">{articles.length} total</span>
+          <Link href="/admin/content/new" className="admin-button-primary">
+            <span aria-hidden="true">+</span> New article
+          </Link>
         </div>
       </div>
 

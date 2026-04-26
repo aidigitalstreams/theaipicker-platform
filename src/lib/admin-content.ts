@@ -1,11 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { parseStructuredData } from './content';
+import { parseStructuredData, type StructuredData } from './content';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
 export type ArticleType = 'review' | 'comparison' | 'best-of' | 'guide' | 'ranking' | 'page';
+
+export type EditableArticleType = Exclude<ArticleType, 'page'>;
 
 export interface AdminArticle {
   slug: string;
@@ -20,13 +22,23 @@ export interface AdminArticle {
   toolCount: number;
 }
 
-const SUBDIRS: { dir: string; type: ArticleType }[] = [
+export const SUBDIRS: { dir: string; type: ArticleType }[] = [
   { dir: 'reviews', type: 'review' },
   { dir: 'comparisons', type: 'comparison' },
   { dir: 'best-of', type: 'best-of' },
   { dir: 'guides', type: 'guide' },
   { dir: 'rankings', type: 'ranking' },
 ];
+
+export function subdirForType(type: EditableArticleType): string {
+  const entry = SUBDIRS.find(s => s.type === type);
+  if (!entry) throw new Error(`Unknown article type: ${type}`);
+  return entry.dir;
+}
+
+export function frontmatterDocType(type: EditableArticleType): 'post' | 'page' {
+  return type === 'ranking' ? 'page' : 'post';
+}
 
 function readArticle(subdir: string, type: ArticleType, filename: string): AdminArticle | null {
   const filePath = path.join(CONTENT_DIR, subdir, filename);
@@ -124,4 +136,119 @@ export function getAdminStats(articles: AdminArticle[]): AdminStats {
 
 export function typeLabel(type: ArticleType): string {
   return TYPE_LABELS[type];
+}
+
+export interface AdminArticleFull {
+  meta: AdminArticle;
+  frontmatter: Record<string, unknown>;
+  body: string;
+  structuredData: StructuredData[];
+}
+
+export function getAdminArticleBySlug(slug: string): AdminArticleFull | null {
+  for (const { dir, type } of SUBDIRS) {
+    const fullDir = path.join(CONTENT_DIR, dir);
+    if (!fs.existsSync(fullDir)) continue;
+    const files = fs.readdirSync(fullDir).filter(f => f.endsWith('.md'));
+    for (const file of files) {
+      const filePath = path.join(fullDir, file);
+      const raw = fs.readFileSync(filePath, 'utf-8');
+      const { data, content } = matter(raw);
+      const articleSlug = data.slug || file.replace(/\.md$/, '');
+      if (articleSlug !== slug) continue;
+      const meta = readArticle(dir, type, file);
+      if (!meta) return null;
+      return {
+        meta,
+        frontmatter: { ...data },
+        body: content,
+        structuredData: parseStructuredData(content),
+      };
+    }
+  }
+  return null;
+}
+
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+export function validateSlug(slug: string): string | null {
+  if (!slug) return 'Slug is required.';
+  if (!SLUG_PATTERN.test(slug)) {
+    return 'Slug must be lowercase letters, numbers, and single hyphens only.';
+  }
+  return null;
+}
+
+export function slugIsTaken(slug: string, ignoreFile?: { subdir: string; filename: string }): boolean {
+  for (const { dir } of SUBDIRS) {
+    const fullDir = path.join(CONTENT_DIR, dir);
+    if (!fs.existsSync(fullDir)) continue;
+    const files = fs.readdirSync(fullDir).filter(f => f.endsWith('.md'));
+    for (const file of files) {
+      if (ignoreFile && ignoreFile.subdir === dir && ignoreFile.filename === file) continue;
+      const raw = fs.readFileSync(path.join(fullDir, file), 'utf-8');
+      const { data } = matter(raw);
+      const existing = data.slug || file.replace(/\.md$/, '');
+      if (existing === slug) return true;
+    }
+  }
+  return false;
+}
+
+export interface SaveArticleInput {
+  type: EditableArticleType;
+  slug: string;
+  title: string;
+  category: string;
+  status: 'draft' | 'publish';
+  targetKeyword?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  body: string;
+  preserveFrontmatter?: Record<string, unknown>;
+  existing?: { subdir: string; filename: string };
+}
+
+export function saveArticle(input: SaveArticleInput): { subdir: string; filename: string } {
+  const subdir = subdirForType(input.type);
+  const filename = `${input.slug}.md`;
+  const fullDir = path.join(CONTENT_DIR, subdir);
+  const fullPath = path.join(fullDir, filename);
+
+  if (!fs.existsSync(fullDir)) {
+    fs.mkdirSync(fullDir, { recursive: true });
+  }
+
+  const preserved = { ...(input.preserveFrontmatter || {}) };
+  const frontmatter: Record<string, unknown> = {
+    ...preserved,
+    title: input.title,
+    slug: input.slug,
+    type: frontmatterDocType(input.type),
+    status: input.status,
+    meta_title: input.metaTitle ?? preserved.meta_title ?? input.title,
+    meta_description: input.metaDescription ?? preserved.meta_description ?? '',
+    target_keyword: input.targetKeyword ?? preserved.target_keyword ?? '',
+    category: input.category,
+    wp_id: preserved.wp_id ?? '',
+  };
+
+  const output = matter.stringify(input.body, frontmatter);
+  fs.writeFileSync(fullPath, output, 'utf-8');
+
+  if (input.existing) {
+    const oldPath = path.join(CONTENT_DIR, input.existing.subdir, input.existing.filename);
+    if (oldPath !== fullPath && fs.existsSync(oldPath)) {
+      fs.unlinkSync(oldPath);
+    }
+  }
+
+  return { subdir, filename };
+}
+
+export function deleteArticle(subdir: string, filename: string): void {
+  const fullPath = path.join(CONTENT_DIR, subdir, filename);
+  if (fs.existsSync(fullPath)) {
+    fs.unlinkSync(fullPath);
+  }
 }

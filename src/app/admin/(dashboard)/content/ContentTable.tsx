@@ -1,15 +1,25 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { AdminArticle, ArticleType } from '@/lib/admin-content';
+
+type StatusFilter = 'all' | 'publish' | 'draft';
 
 const TYPE_FILTERS: { type: ArticleType | 'all'; label: string }[] = [
   { type: 'all', label: 'All' },
-  { type: 'review', label: 'Reviews' },
-  { type: 'comparison', label: 'Comparisons' },
+  { type: 'review', label: 'Review' },
+  { type: 'comparison', label: 'Comparison' },
   { type: 'best-of', label: 'Best-of' },
-  { type: 'guide', label: 'Guides' },
-  { type: 'ranking', label: 'Rankings' },
+  { type: 'guide', label: 'Guide' },
+  { type: 'ranking', label: 'Ranking' },
+];
+
+const STATUS_FILTERS: { status: StatusFilter; label: string }[] = [
+  { status: 'all', label: 'All' },
+  { status: 'publish', label: 'Published' },
+  { status: 'draft', label: 'Draft' },
 ];
 
 function scoreClass(score: number | null): string {
@@ -21,17 +31,21 @@ function scoreClass(score: number | null): string {
 
 function statusLabel(status: string): string {
   if (!status || status === 'unknown') return 'unknown';
+  if (status === 'publish') return 'published';
   return status;
 }
 
 export default function ContentTable({ articles }: { articles: AdminArticle[] }) {
+  const router = useRouter();
   const [typeFilter, setTypeFilter] = useState<ArticleType | 'all'>('all');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return articles.filter(a => {
       if (typeFilter !== 'all' && a.type !== typeFilter) return false;
+      if (statusFilter !== 'all' && a.status !== statusFilter) return false;
       if (!q) return true;
       return (
         a.title.toLowerCase().includes(q) ||
@@ -39,21 +53,39 @@ export default function ContentTable({ articles }: { articles: AdminArticle[] })
         a.slug.toLowerCase().includes(q)
       );
     });
-  }, [articles, typeFilter, search]);
+  }, [articles, typeFilter, statusFilter, search]);
 
   return (
     <>
-      <div className="admin-filters">
-        {TYPE_FILTERS.map(f => (
-          <button
-            key={f.type}
-            className={`admin-filter${typeFilter === f.type ? ' active' : ''}`}
-            onClick={() => setTypeFilter(f.type)}
-            type="button"
-          >
-            {f.label}
-          </button>
-        ))}
+      <div className="admin-filter-stack">
+        <div className="admin-filter-group">
+          <span className="admin-filter-label">Type</span>
+          {TYPE_FILTERS.map(f => (
+            <button
+              key={f.type}
+              className={`admin-filter${typeFilter === f.type ? ' active' : ''}`}
+              onClick={() => setTypeFilter(f.type)}
+              type="button"
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="admin-filter-group">
+          <span className="admin-filter-label">Status</span>
+          {STATUS_FILTERS.map(f => (
+            <button
+              key={f.status}
+              className={`admin-filter${statusFilter === f.status ? ' active' : ''}`}
+              onClick={() => setStatusFilter(f.status)}
+              type="button"
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+
         <input
           type="search"
           placeholder="Search by title, slug, or category…"
@@ -64,7 +96,7 @@ export default function ContentTable({ articles }: { articles: AdminArticle[] })
       </div>
 
       <div className="admin-table-wrap">
-        <table className="admin-table">
+        <table className="admin-table admin-table-clickable">
           <thead>
             <tr>
               <th style={{ width: '40%' }}>Title</th>
@@ -82,33 +114,46 @@ export default function ContentTable({ articles }: { articles: AdminArticle[] })
                 </td>
               </tr>
             )}
-            {filtered.map(a => (
-              <tr key={`${a.subdir}/${a.filename}`}>
-                <td>
-                  <span className="admin-title-cell">{a.title}</span>
-                  <span className="admin-slug-cell">{a.slug}</span>
-                </td>
-                <td>
-                  <span className={`admin-pill ${a.type}`}>{a.type.replace('-', ' ')}</span>
-                </td>
-                <td style={{ color: 'var(--admin-text-muted)', fontSize: '0.85rem' }}>
-                  {a.category || '—'}
-                </td>
-                <td>
-                  <span className={`admin-pill status-${a.status}`}>{statusLabel(a.status)}</span>
-                </td>
-                <td style={{ textAlign: 'right' }}>
-                  <span className={scoreClass(a.topScore)}>
-                    {a.topScore !== null ? a.topScore : '—'}
-                  </span>
-                  {a.toolCount > 1 && (
-                    <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--admin-text-muted)', marginTop: 2 }}>
-                      top of {a.toolCount}
+            {filtered.map(a => {
+              const href = `/admin/content/${a.slug}`;
+              return (
+                <tr
+                  key={`${a.subdir}/${a.filename}`}
+                  onClick={() => router.push(href)}
+                  className="admin-row-clickable"
+                >
+                  <td>
+                    <Link
+                      href={href}
+                      className="admin-title-link"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <span className="admin-title-cell">{a.title}</span>
+                      <span className="admin-slug-cell">{a.slug}</span>
+                    </Link>
+                  </td>
+                  <td>
+                    <span className={`admin-pill ${a.type}`}>{a.type.replace('-', ' ')}</span>
+                  </td>
+                  <td style={{ color: 'var(--admin-text-muted)', fontSize: '0.85rem' }}>
+                    {a.category || '—'}
+                  </td>
+                  <td>
+                    <span className={`admin-pill status-${a.status}`}>{statusLabel(a.status)}</span>
+                  </td>
+                  <td style={{ textAlign: 'right' }}>
+                    <span className={scoreClass(a.topScore)}>
+                      {a.topScore !== null ? a.topScore : '—'}
                     </span>
-                  )}
-                </td>
-              </tr>
-            ))}
+                    {a.toolCount > 1 && (
+                      <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--admin-text-muted)', marginTop: 2 }}>
+                        top of {a.toolCount}
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
