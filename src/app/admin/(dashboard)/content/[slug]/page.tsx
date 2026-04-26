@@ -53,6 +53,10 @@ export default async function EditArticlePage({ params, searchParams }: PageProp
           body={article.body}
           type={article.meta.type}
           toolCount={article.structuredData.length}
+          title={article.meta.title}
+          metaTitle={String(article.frontmatter.meta_title ?? '')}
+          metaDescription={String(article.frontmatter.meta_description ?? '')}
+          targetKeyword={article.meta.targetKeyword}
         />
 
         <EditArticleForm
