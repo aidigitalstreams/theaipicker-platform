@@ -1,13 +1,15 @@
 ---
-title: "Gemini vs Claude: Google's AI vs Anthropic's — Which Thinks Better? (2026)"
+title: 'Gemini vs Claude: Google''s AI vs Anthropic''s — Which Thinks Better? (2026)'
 slug: gemini-vs-claude
 type: post
-status: draft
+status: publish
 meta_title: Gemini vs Claude (2026) — AI Chatbots Compared
-meta_description: Gemini vs Claude compared across 5 factors. Reasoning, writing, Google integration, coding, pricing, and honest verdict.
+meta_description: >-
+  Gemini vs Claude compared across 5 factors. Reasoning, writing, Google
+  integration, coding, pricing, and honest verdict.
 target_keyword: gemini vs claude
 category: AI Chatbots
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

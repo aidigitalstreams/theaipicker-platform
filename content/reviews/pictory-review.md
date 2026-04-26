@@ -1,13 +1,15 @@
 ---
-title: "Pictory Review (2026): The Fastest Script-to-Video Tool for B2B Content?"
+title: 'Pictory Review (2026): The Fastest Script-to-Video Tool for B2B Content?'
 slug: pictory-review
 type: post
-status: draft
+status: publish
 meta_title: Pictory Review (2026) — Best Script-to-Video Tool for Marketers?
-meta_description: Our research-based Pictory review covers script-to-video, blog-to-video, auto-captions, pricing, and how it stacks up against Synthesia and HeyGen.
+meta_description: >-
+  Our research-based Pictory review covers script-to-video, blog-to-video,
+  auto-captions, pricing, and how it stacks up against Synthesia and HeyGen.
 target_keyword: pictory review 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

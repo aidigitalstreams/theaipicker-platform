@@ -1,13 +1,15 @@
 ---
-title: "AI Writing Tool Pricing Comparison 2026: Every Plan Side-by-Side"
+title: 'AI Writing Tool Pricing Comparison 2026: Every Plan Side-by-Side'
 slug: ai-writing-tool-pricing-comparison-2026
 type: post
-status: draft
+status: publish
 meta_title: AI Writing Tool Pricing 2026 — Jasper vs Copy.ai vs Rytr vs More
-meta_description: Every AI writing tool's real pricing compared side by side — free tiers, entry tiers, word limits, what's included. Updated 2026.
+meta_description: >-
+  Every AI writing tool's real pricing compared side by side — free tiers, entry
+  tiers, word limits, what's included. Updated 2026.
 target_keyword: ai writing tool pricing 2026
 category: AI Writing Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

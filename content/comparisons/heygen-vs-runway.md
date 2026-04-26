@@ -1,13 +1,15 @@
 ---
-title: "HeyGen vs Runway: Which AI Video Tool Is Right for You in 2026?"
+title: 'HeyGen vs Runway: Which AI Video Tool Is Right for You in 2026?'
 slug: heygen-vs-runway
 type: post
-status: draft
+status: publish
 meta_title: HeyGen vs Runway (2026) — Avatar vs Generative AI Video
-meta_description: HeyGen (82/100) vs Runway (85/100) — a direct comparison of avatar-based vs generative AI video for 2026. Which solves your use case?
+meta_description: >-
+  HeyGen (82/100) vs Runway (85/100) — a direct comparison of avatar-based vs
+  generative AI video for 2026. Which solves your use case?
 target_keyword: heygen vs runway
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our comparisons — we research tools honestly and score transparently.*

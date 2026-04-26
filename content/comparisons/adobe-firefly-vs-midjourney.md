@@ -1,13 +1,15 @@
 ---
-title: "Adobe Firefly vs Midjourney: Creative Control vs Creative Freedom (2026)"
+title: 'Adobe Firefly vs Midjourney: Creative Control vs Creative Freedom (2026)'
 slug: adobe-firefly-vs-midjourney
 type: post
-status: draft
+status: publish
 meta_title: Adobe Firefly vs Midjourney (2026) — AI Image Generators Compared
-meta_description: Adobe Firefly vs Midjourney compared across 5 factors. Full breakdown of image quality, editing, pricing, commercial licensing, and verdict.
+meta_description: >-
+  Adobe Firefly vs Midjourney compared across 5 factors. Full breakdown of image
+  quality, editing, pricing, commercial licensing, and verdict.
 target_keyword: adobe firefly vs midjourney
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

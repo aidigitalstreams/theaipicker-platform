@@ -1,10 +1,14 @@
 ---
-title: "ElevenLabs Review (2026): The Best AI Voice Generator — But Is It Worth the Price?"
+title: >-
+  ElevenLabs Review (2026): The Best AI Voice Generator — But Is It Worth the
+  Price?
 slug: elevenlabs-review
 type: post
-status: draft
-meta_title: ElevenLabs Review (2026) — Best AI Voices, But at a Cost
-meta_description: Our in-depth ElevenLabs review covers voice quality, pricing, cloning features, and where it falls short. See how it scores against competitors.
+status: publish
+meta_title: 'ElevenLabs Review (2026) — Best AI Voices, But at a Cost'
+meta_description: >-
+  Our in-depth ElevenLabs review covers voice quality, pricing, cloning
+  features, and where it falls short. See how it scores against competitors.
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

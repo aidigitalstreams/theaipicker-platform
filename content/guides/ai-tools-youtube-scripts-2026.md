@@ -1,13 +1,15 @@
 ---
-title: "7 Best AI Tools for YouTube Scripts in 2026 (Write Faster, Rank Better)"
+title: '7 Best AI Tools for YouTube Scripts in 2026 (Write Faster, Rank Better)'
 slug: ai-tools-youtube-scripts-2026
 type: post
-status: draft
+status: publish
 meta_title: Best AI Tools for YouTube Scripts (2026) — 7 Tools Compared
-meta_description: The best AI tools for writing YouTube scripts in 2026. Hooks, outlines, full scripts, and SEO titles — compared with pricing and honest verdicts.
+meta_description: >-
+  The best AI tools for writing YouTube scripts in 2026. Hooks, outlines, full
+  scripts, and SEO titles — compared with pricing and honest verdicts.
 target_keyword: ai tools for youtube scripts 2026
 category: AI Writing Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

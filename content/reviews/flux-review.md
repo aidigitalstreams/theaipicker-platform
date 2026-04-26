@@ -1,13 +1,15 @@
 ---
-title: "Flux Review (2026): Black Forest Labs' Prompt-Adherence Champion"
+title: 'Flux Review (2026): Black Forest Labs'' Prompt-Adherence Champion'
 slug: flux-review
 type: post
-status: draft
+status: publish
 meta_title: Flux Review (2026) — The Open Model Challenging Midjourney?
-meta_description: Flux scored 82/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: >-
+  Flux scored 82/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown, pricing, and verdict.
 target_keyword: flux ai review 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

@@ -1,13 +1,15 @@
 ---
-title: "Runway vs Kling: Which AI Video Generator Creates Better Clips? (2026)"
+title: 'Runway vs Kling: Which AI Video Generator Creates Better Clips? (2026)'
 slug: runway-vs-kling
 type: post
-status: draft
+status: publish
 meta_title: Runway vs Kling (2026) — AI Video Generators Compared
-meta_description: Runway vs Kling compared across 5 factors. Full breakdown of video quality, generation speed, pricing, creative tools, and verdict.
+meta_description: >-
+  Runway vs Kling compared across 5 factors. Full breakdown of video quality,
+  generation speed, pricing, creative tools, and verdict.
 target_keyword: runway vs kling
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

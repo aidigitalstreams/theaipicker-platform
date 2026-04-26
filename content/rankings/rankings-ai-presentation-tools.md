@@ -1,12 +1,14 @@
 ---
-title: "AI Presentation Tools Rankings 2026"
+title: AI Presentation Tools Rankings 2026
 slug: rankings-ai-presentation-tools
 type: page
-status: draft
+status: publish
 meta_title: AI Presentation Tools Rankings (2026) — Scored & Ranked /100
-meta_description: Every AI presentation tool we've reviewed, ranked by score. Gamma, Decktopus, Beautiful.ai, Canva, and SlidesAI compared with live scores.
+meta_description: >-
+  Every AI presentation tool we've reviewed, ranked by score. Gamma, Decktopus,
+  Beautiful.ai, Canva, and SlidesAI compared with live scores.
 parent: rankings
-wp_id:
+wp_id: null
 ---
 
 # AI Presentation Tools Rankings

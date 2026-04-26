@@ -1,13 +1,17 @@
 ---
-title: "Canva AI Review (2026): Magic Studio Makes Everyone a Designer — But How Good Is It Really?"
+title: >-
+  Canva AI Review (2026): Magic Studio Makes Everyone a Designer — But How Good
+  Is It Really?
 slug: canva-ai-review
 type: post
-status: draft
+status: publish
 meta_title: Canva AI Review (2026) — Magic Studio Scored /100
-meta_description: Canva AI scored 78/100 across 5 factors. Full breakdown of Magic Studio, Dream Lab, Magic Design, 500 AI credits, pricing from £0, and honest verdict.
+meta_description: >-
+  Canva AI scored 78/100 across 5 factors. Full breakdown of Magic Studio, Dream
+  Lab, Magic Design, 500 AI credits, pricing from £0, and honest verdict.
 target_keyword: canva ai review 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

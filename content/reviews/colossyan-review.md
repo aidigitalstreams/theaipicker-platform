@@ -1,13 +1,15 @@
 ---
-title: "Colossyan Review (2026): The Best AI Video Tool for Learning and Development?"
+title: 'Colossyan Review (2026): The Best AI Video Tool for Learning and Development?'
 slug: colossyan-review
 type: post
-status: draft
+status: publish
 meta_title: Colossyan Review (2026) — Best AI Video Tool for L&D Teams?
-meta_description: Our research-based Colossyan review covers Scenes, Conversation Mode, avatars, pricing, and how it compares to Synthesia and HeyGen for L&D.
+meta_description: >-
+  Our research-based Colossyan review covers Scenes, Conversation Mode, avatars,
+  pricing, and how it compares to Synthesia and HeyGen for L&D.
 target_keyword: colossyan review 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

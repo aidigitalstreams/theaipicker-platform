@@ -1,13 +1,16 @@
 ---
-title: "Frase vs NeuronWriter: Budget AI SEO Tools Compared (2026)"
+title: 'Frase vs NeuronWriter: Budget AI SEO Tools Compared (2026)'
 slug: frase-vs-neuronwriter
 type: post
-status: draft
+status: publish
 meta_title: Frase vs NeuronWriter (2026) — Budget SEO Tools Compared
-meta_description: Frase (75/100) vs NeuronWriter (73/100) — the two most affordable AI SEO tools compared on features, pricing, and which is right for budget-conscious bloggers.
+meta_description: >-
+  Frase (75/100) vs NeuronWriter (73/100) — the two most affordable AI SEO tools
+  compared on features, pricing, and which is right for budget-conscious
+  bloggers.
 target_keyword: frase vs neuronwriter
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

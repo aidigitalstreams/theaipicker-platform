@@ -1,13 +1,17 @@
 ---
-title: "Notion AI Review (2026): The Workspace AI That Knows Your Business — If You Live in Notion"
+title: >-
+  Notion AI Review (2026): The Workspace AI That Knows Your Business — If You
+  Live in Notion
 slug: notion-ai-review
 type: post
-status: draft
+status: publish
 meta_title: Notion AI Review (2026) — Workspace AI Assistant Scored /100
-meta_description: Notion AI scored 75/100 across 5 factors. Full breakdown of AI Agents, Workspace Q&A, writing assistant, pricing from £0, and honest verdict.
+meta_description: >-
+  Notion AI scored 75/100 across 5 factors. Full breakdown of AI Agents,
+  Workspace Q&A, writing assistant, pricing from £0, and honest verdict.
 target_keyword: notion ai review 2026
 category: AI Writing Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

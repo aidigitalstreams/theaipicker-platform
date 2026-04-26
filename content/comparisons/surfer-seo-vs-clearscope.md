@@ -1,13 +1,15 @@
 ---
-title: "Surfer SEO vs Clearscope: The AI Content Optimisation Showdown (2026)"
+title: 'Surfer SEO vs Clearscope: The AI Content Optimisation Showdown (2026)'
 slug: surfer-seo-vs-clearscope
 type: post
-status: draft
+status: publish
 meta_title: Surfer SEO vs Clearscope (2026) — AI SEO Tools Compared
-meta_description: Surfer SEO vs Clearscope compared across 5 factors. Surfer scores 82/100, Clearscope scores 79/100. Pricing, accuracy, AI features, and verdict.
+meta_description: >-
+  Surfer SEO vs Clearscope compared across 5 factors. Surfer scores 82/100,
+  Clearscope scores 79/100. Pricing, accuracy, AI features, and verdict.
 target_keyword: surfer seo vs clearscope
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

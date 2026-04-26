@@ -1,13 +1,15 @@
 ---
-title: "Leonardo AI Review (2026): The Best Value AI Image Generator for Creators?"
+title: 'Leonardo AI Review (2026): The Best Value AI Image Generator for Creators?'
 slug: leonardo-review
 type: post
-status: draft
+status: publish
 meta_title: Leonardo AI Review (2026) — Best Value AI Image Generator?
-meta_description: Our research-based Leonardo AI review covers models, pricing, Canvas, custom training, licensing, and how it stacks up against Midjourney and DALL-E 3.
+meta_description: >-
+  Our research-based Leonardo AI review covers models, pricing, Canvas, custom
+  training, licensing, and how it stacks up against Midjourney and DALL-E 3.
 target_keyword: leonardo ai review 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

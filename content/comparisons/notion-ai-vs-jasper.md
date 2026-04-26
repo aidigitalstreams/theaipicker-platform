@@ -1,13 +1,15 @@
 ---
-title: "Notion AI vs Jasper: Workspace Intelligence vs Marketing Power (2026)"
+title: 'Notion AI vs Jasper: Workspace Intelligence vs Marketing Power (2026)'
 slug: notion-ai-vs-jasper
 type: post
-status: draft
+status: publish
 meta_title: Notion AI vs Jasper (2026) — AI Writing Tools Compared
-meta_description: Notion AI (75/100) vs Jasper (72/100) compared. Workspace Q&A vs marketing campaigns — which AI writing tool matches your workflow?
+meta_description: >-
+  Notion AI (75/100) vs Jasper (72/100) compared. Workspace Q&A vs marketing
+  campaigns — which AI writing tool matches your workflow?
 target_keyword: notion ai vs jasper
 category: AI Writing Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

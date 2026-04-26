@@ -1,13 +1,15 @@
 ---
-title: "Windsurf vs Cursor 3: Which AI Code Editor Wins in 2026?"
+title: 'Windsurf vs Cursor 3: Which AI Code Editor Wins in 2026?'
 slug: windsurf-vs-cursor
 type: post
-status: draft
+status: publish
 meta_title: Windsurf vs Cursor 3 (2026) — AI IDE Showdown
-meta_description: Windsurf (80/100) vs Cursor 3 (88/100) compared. Agents, pricing, model support, and which AI code editor fits your workflow and budget.
+meta_description: >-
+  Windsurf (80/100) vs Cursor 3 (88/100) compared. Agents, pricing, model
+  support, and which AI code editor fits your workflow and budget.
 target_keyword: windsurf vs cursor
 category: AI Coding Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

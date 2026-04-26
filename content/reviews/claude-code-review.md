@@ -1,13 +1,15 @@
 ---
-title: "Claude Code Review (2026): The Terminal-Native Coding Agent"
+title: 'Claude Code Review (2026): The Terminal-Native Coding Agent'
 slug: claude-code-review
 type: post
-status: draft
+status: publish
 meta_title: Claude Code Review (2026) — Is Anthropic's CLI Agent Worth It?
-meta_description: Claude Code scored 88/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: >-
+  Claude Code scored 88/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown, pricing, and verdict.
 target_keyword: claude code review 2026
 category: AI Coding Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

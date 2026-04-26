@@ -1,13 +1,15 @@
 ---
-title: "Rev vs Sonix: Which AI Transcription Tool Gets Your Words Right? (2026)"
+title: 'Rev vs Sonix: Which AI Transcription Tool Gets Your Words Right? (2026)'
 slug: rev-vs-sonix
 type: post
-status: draft
+status: publish
 meta_title: Rev vs Sonix (2026) — AI Transcription Tools Compared
-meta_description: Rev vs Sonix compared across 5 factors. Rev scores 78/100, Sonix scores 80/100. Full pricing, accuracy, language support, and verdict.
+meta_description: >-
+  Rev vs Sonix compared across 5 factors. Rev scores 78/100, Sonix scores
+  80/100. Full pricing, accuracy, language support, and verdict.
 target_keyword: rev vs sonix
 category: AI Transcription Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

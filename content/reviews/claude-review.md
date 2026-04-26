@@ -1,13 +1,15 @@
 ---
-title: "Claude Review (2026): The Writer's and Engineer's Chatbot"
+title: 'Claude Review (2026): The Writer''s and Engineer''s Chatbot'
 slug: claude-review
 type: post
-status: draft
+status: publish
 meta_title: Claude Review (2026) — Anthropic's Chatbot Scored Honestly
-meta_description: Claude scored 86/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown, pricing, and honest verdict.
+meta_description: >-
+  Claude scored 86/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown, pricing, and honest verdict.
 target_keyword: claude review 2026
 category: AI Chatbots
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

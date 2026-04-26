@@ -1,13 +1,15 @@
 ---
-title: "Stable Diffusion Review (2026): The Open-Source Power User's Choice"
+title: 'Stable Diffusion Review (2026): The Open-Source Power User''s Choice'
 slug: stable-diffusion-review
 type: post
-status: draft
+status: publish
 meta_title: Stable Diffusion Review (2026) — Is It Still the Power User's Pick?
-meta_description: Stable Diffusion scored 80/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown and honest verdict.
+meta_description: >-
+  Stable Diffusion scored 80/100 across Core Performance, Ease of Use, Value,
+  Output Quality, and Reliability. Full breakdown and honest verdict.
 target_keyword: stable diffusion review 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

@@ -1,13 +1,15 @@
 ---
-title: "Play.ht Review (2026): Budget Voice Cloning That Punches Above Its Weight"
+title: 'Play.ht Review (2026): Budget Voice Cloning That Punches Above Its Weight'
 slug: play-ht-review
 type: post
-status: draft
+status: publish
 meta_title: Play.ht Review (2026) — AI Voice Generator Scored /100
-meta_description: Play.ht scored 74/100 across 5 factors. Full breakdown of 800+ voices, voice cloning, 140+ languages, pricing from $0, and honest verdict.
+meta_description: >-
+  Play.ht scored 74/100 across 5 factors. Full breakdown of 800+ voices, voice
+  cloning, 140+ languages, pricing from $0, and honest verdict.
 target_keyword: play.ht review 2026
 category: AI Voice Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

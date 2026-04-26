@@ -1,13 +1,15 @@
 ---
-title: "Recraft Review (2026): The AI Image Tool Designers Actually Want to Use"
+title: 'Recraft Review (2026): The AI Image Tool Designers Actually Want to Use'
 slug: recraft-review
 type: post
-status: draft
+status: publish
 meta_title: Recraft Review (2026) — AI Design & Image Generator Scored /100
-meta_description: Recraft scored 83/100 across 5 factors. Full breakdown of vector generation, text rendering, brand consistency, infinite canvas, pricing from £0.
+meta_description: >-
+  Recraft scored 83/100 across 5 factors. Full breakdown of vector generation,
+  text rendering, brand consistency, infinite canvas, pricing from £0.
 target_keyword: recraft review 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

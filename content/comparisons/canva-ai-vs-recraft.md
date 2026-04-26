@@ -1,13 +1,15 @@
 ---
-title: "Canva AI vs Recraft: All-in-One Design or Specialist Generator? (2026)"
+title: 'Canva AI vs Recraft: All-in-One Design or Specialist Generator? (2026)'
 slug: canva-ai-vs-recraft
 type: post
-status: draft
+status: publish
 meta_title: Canva AI vs Recraft (2026) — Design Tools Compared
-meta_description: Canva AI (78/100) vs Recraft (83/100) compared. 25+ Magic Studio tools vs vector SVGs and brand consistency. Which AI design tool wins?
+meta_description: >-
+  Canva AI (78/100) vs Recraft (83/100) compared. 25+ Magic Studio tools vs
+  vector SVGs and brand consistency. Which AI design tool wins?
 target_keyword: canva ai vs recraft
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

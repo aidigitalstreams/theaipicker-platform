@@ -1,13 +1,17 @@
 ---
-title: "Leonardo AI vs Ideogram: Which AI Image Generator Fits Your Creative Needs? (2026)"
+title: >-
+  Leonardo AI vs Ideogram: Which AI Image Generator Fits Your Creative Needs?
+  (2026)
 slug: leonardo-vs-ideogram
 type: post
-status: draft
+status: publish
 meta_title: Leonardo AI vs Ideogram (2026) — AI Image Generators Compared
-meta_description: Leonardo AI vs Ideogram compared across 5 factors. Full breakdown of image quality, text rendering, pricing, model training, and verdict.
+meta_description: >-
+  Leonardo AI vs Ideogram compared across 5 factors. Full breakdown of image
+  quality, text rendering, pricing, model training, and verdict.
 target_keyword: leonardo ai vs ideogram
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

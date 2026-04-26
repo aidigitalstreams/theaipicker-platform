@@ -1,13 +1,15 @@
 ---
-title: "Rev Review (2026): The Developer's Transcription Engine, Scored Honestly"
+title: 'Rev Review (2026): The Developer''s Transcription Engine, Scored Honestly'
 slug: rev-review
 type: post
-status: draft
+status: publish
 meta_title: Rev Review (2026) — API-First Transcription Scored /100
-meta_description: Rev scored 78/100 across 5 factors. Full breakdown of accuracy, pricing, API, human review options, and honest verdict for developers and teams.
+meta_description: >-
+  Rev scored 78/100 across 5 factors. Full breakdown of accuracy, pricing, API,
+  human review options, and honest verdict for developers and teams.
 target_keyword: rev review 2026
 category: AI Transcription Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

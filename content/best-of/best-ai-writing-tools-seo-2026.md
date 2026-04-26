@@ -1,13 +1,15 @@
 ---
-title: "5 Best AI Writing Tools for SEO in 2026 (Ranked & Compared)"
+title: 5 Best AI Writing Tools for SEO in 2026 (Ranked & Compared)
 slug: best-ai-writing-tools-seo-2026
 type: post
-status: draft
+status: publish
 meta_title: Best AI Writing Tools for SEO (2026) — 5 Tools Ranked
-meta_description: The best AI writing tools for SEO in 2026. Surfer SEO, Frase, NeuronWriter, Jasper, and Writesonic compared — with scores, pricing, and honest verdicts.
+meta_description: >-
+  The best AI writing tools for SEO in 2026. Surfer SEO, Frase, NeuronWriter,
+  Jasper, and Writesonic compared — with scores, pricing, and honest verdicts.
 target_keyword: best ai writing tools for seo 2026
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

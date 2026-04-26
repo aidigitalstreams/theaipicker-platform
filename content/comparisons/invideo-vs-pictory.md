@@ -1,13 +1,17 @@
 ---
-title: "InVideo AI vs Pictory: Which AI Video Tool Is Better for Content Creators? (2026)"
+title: >-
+  InVideo AI vs Pictory: Which AI Video Tool Is Better for Content Creators?
+  (2026)
 slug: invideo-vs-pictory
 type: post
-status: draft
+status: publish
 meta_title: InVideo AI vs Pictory (2026) — AI Video Creators Compared
-meta_description: InVideo AI (81/100) vs Pictory (74/100) compared. Text-to-video, pricing, and which AI video tool is better for YouTube, social media, and marketing.
+meta_description: >-
+  InVideo AI (81/100) vs Pictory (74/100) compared. Text-to-video, pricing, and
+  which AI video tool is better for YouTube, social media, and marketing.
 target_keyword: invideo ai vs pictory
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

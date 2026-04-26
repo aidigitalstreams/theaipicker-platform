@@ -1,13 +1,16 @@
 ---
-title: "7 Best Alternatives to Midjourney in 2026 (Free & Paid)"
+title: 7 Best Alternatives to Midjourney in 2026 (Free & Paid)
 slug: midjourney-alternatives-2026
 type: post
-status: draft
+status: publish
 meta_title: Best Midjourney Alternatives (2026) — 7 Tools Compared
-meta_description: Looking for Midjourney alternatives? We compared 7 AI image generators — Leonardo, Ideogram, DALL-E 3, Adobe Firefly, Stable Diffusion, Flux, and Recraft.
+meta_description: >-
+  Looking for Midjourney alternatives? We compared 7 AI image generators —
+  Leonardo, Ideogram, DALL-E 3, Adobe Firefly, Stable Diffusion, Flux, and
+  Recraft.
 target_keyword: midjourney alternatives 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

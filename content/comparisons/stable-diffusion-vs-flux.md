@@ -1,13 +1,16 @@
 ---
-title: "Stable Diffusion vs Flux (2026): The Open-Source AI Image Battle"
+title: 'Stable Diffusion vs Flux (2026): The Open-Source AI Image Battle'
 slug: stable-diffusion-vs-flux
 type: post
-status: draft
+status: publish
 meta_title: Stable Diffusion vs Flux (2026) — Open-Source Image Gen Compared
-meta_description: Stable Diffusion (80/100) vs Flux (82/100) compared across quality, flexibility, hardware needs, and community. Honest verdict for creators and developers.
+meta_description: >-
+  Stable Diffusion (80/100) vs Flux (82/100) compared across quality,
+  flexibility, hardware needs, and community. Honest verdict for creators and
+  developers.
 target_keyword: stable diffusion vs flux 2026
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

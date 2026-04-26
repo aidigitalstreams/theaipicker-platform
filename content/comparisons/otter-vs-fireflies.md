@@ -1,13 +1,15 @@
 ---
-title: "Otter vs Fireflies (2026): Which AI Meeting Assistant Should You Pick?"
+title: 'Otter vs Fireflies (2026): Which AI Meeting Assistant Should You Pick?'
 slug: otter-vs-fireflies
 type: post
-status: draft
+status: publish
 meta_title: Otter vs Fireflies (2026) — AI Meeting Assistants Compared
-meta_description: Otter (84/100) vs Fireflies (83/100) compared across transcription, integrations, AI features, pricing, and team workflows. Honest verdict.
+meta_description: >-
+  Otter (84/100) vs Fireflies (83/100) compared across transcription,
+  integrations, AI features, pricing, and team workflows. Honest verdict.
 target_keyword: otter vs fireflies 2026
 category: AI Meeting Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

@@ -1,13 +1,15 @@
 ---
-title: "5 Best AI Video Tools in 2026 (Compared & Ranked)"
+title: 5 Best AI Video Tools in 2026 (Compared & Ranked)
 slug: best-ai-video-tools-2026
 type: post
-status: draft
-meta_title: 5 Best AI Video Tools in 2026 (Compared, Ranked, Scored)
-meta_description: Our research-based ranking of the best AI video tools in 2026. Full scores out of 100, category data, pricing, and who each tool is actually for.
+status: publish
+meta_title: '5 Best AI Video Tools in 2026 (Compared, Ranked, Scored)'
+meta_description: >-
+  Our research-based ranking of the best AI video tools in 2026. Full scores out
+  of 100, category data, pricing, and who each tool is actually for.
 target_keyword: best ai video tools 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

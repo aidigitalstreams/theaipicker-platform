@@ -1,13 +1,15 @@
 ---
-title: "Surfer SEO vs Frase: Premium vs Budget Content Optimisation (2026)"
+title: 'Surfer SEO vs Frase: Premium vs Budget Content Optimisation (2026)'
 slug: surfer-seo-vs-frase
 type: post
-status: draft
+status: publish
 meta_title: Surfer SEO vs Frase (2026) — Is Surfer Worth 5x the Price?
-meta_description: Surfer SEO (82/100) vs Frase (75/100) compared. Is Surfer's $79/mo justified over Frase's $15/mo? Features, scoring, and honest verdict.
+meta_description: >-
+  Surfer SEO (82/100) vs Frase (75/100) compared. Is Surfer's $79/mo justified
+  over Frase's $15/mo? Features, scoring, and honest verdict.
 target_keyword: surfer seo vs frase
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

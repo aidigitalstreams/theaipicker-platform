@@ -1,13 +1,15 @@
 ---
-title: "Decktopus Review (2026): AI Presentations for Lead Gen and Engagement"
+title: 'Decktopus Review (2026): AI Presentations for Lead Gen and Engagement'
 slug: decktopus-review
 type: post
-status: draft
+status: publish
 meta_title: Decktopus Review (2026) — Interactive AI Presentations Scored /100
-meta_description: Decktopus scored 76/100 across 5 factors. Full breakdown of AI deck generation, interactive features, analytics, and honest verdict.
+meta_description: >-
+  Decktopus scored 76/100 across 5 factors. Full breakdown of AI deck
+  generation, interactive features, analytics, and honest verdict.
 target_keyword: decktopus review 2026
 category: AI Presentation Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

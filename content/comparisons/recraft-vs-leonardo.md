@@ -1,13 +1,15 @@
 ---
-title: "Recraft vs Leonardo AI: Design Tool or Image Generator? (2026)"
+title: 'Recraft vs Leonardo AI: Design Tool or Image Generator? (2026)'
 slug: recraft-vs-leonardo
 type: post
-status: draft
+status: publish
 meta_title: Recraft vs Leonardo AI (2026) — AI Image Tools Compared
-meta_description: Recraft (83/100) vs Leonardo (82/100) compared. Vector SVGs, brand design, and image generation — which AI tool fits your creative workflow?
+meta_description: >-
+  Recraft (83/100) vs Leonardo (82/100) compared. Vector SVGs, brand design, and
+  image generation — which AI tool fits your creative workflow?
 target_keyword: recraft vs leonardo ai
 category: AI Image Generators
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

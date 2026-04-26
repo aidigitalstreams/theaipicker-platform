@@ -1,14 +1,16 @@
 ---
-title: "AI Meeting Assistant Rankings (2026) — Every Tool Scored and Ranked"
+title: AI Meeting Assistant Rankings (2026) — Every Tool Scored and Ranked
 slug: rankings-ai-meeting-assistants
 type: page
-status: draft
+status: publish
 meta_title: AI Meeting Assistant Rankings 2026 — Scored & Ranked | The AI Picker
-meta_description: Every AI meeting assistant we've reviewed, ranked by score. Fathom, Otter, and Fireflies compared across free plans, features, and team tools.
+meta_description: >-
+  Every AI meeting assistant we've reviewed, ranked by score. Fathom, Otter, and
+  Fireflies compared across free plans, features, and team tools.
 target_keyword: ai meeting assistant rankings 2026
 category: AI Meeting Assistants
 parent_page: Rankings Hub
-wp_id:
+wp_id: null
 ---
 
 # AI Meeting Assistant Rankings

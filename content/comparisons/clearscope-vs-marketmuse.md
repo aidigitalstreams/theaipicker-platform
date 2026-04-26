@@ -1,13 +1,16 @@
 ---
-title: "Clearscope vs MarketMuse: Which AI SEO Tool Actually Improves Rankings? (2026)"
+title: 'Clearscope vs MarketMuse: Which AI SEO Tool Actually Improves Rankings? (2026)'
 slug: clearscope-vs-marketmuse
 type: post
-status: draft
+status: publish
 meta_title: Clearscope vs MarketMuse (2026) — AI SEO Tools Compared
-meta_description: Clearscope vs MarketMuse compared across 5 factors. Clearscope scores 79/100, MarketMuse scores 77/100. Full breakdown of content scoring, pricing, and verdict.
+meta_description: >-
+  Clearscope vs MarketMuse compared across 5 factors. Clearscope scores 79/100,
+  MarketMuse scores 77/100. Full breakdown of content scoring, pricing, and
+  verdict.
 target_keyword: clearscope vs marketmuse
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

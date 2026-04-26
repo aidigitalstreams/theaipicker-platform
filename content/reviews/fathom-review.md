@@ -1,13 +1,15 @@
 ---
-title: "Fathom Review (2026): The Free-Tier Leader in AI Meeting Assistants"
+title: 'Fathom Review (2026): The Free-Tier Leader in AI Meeting Assistants'
 slug: fathom-review
 type: post
-status: draft
+status: publish
 meta_title: Fathom Review (2026) — Is the Free Tier Really Unlimited?
-meta_description: Fathom scored 86/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: >-
+  Fathom scored 86/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown, pricing, and verdict.
 target_keyword: fathom review 2026
 category: AI Meeting Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

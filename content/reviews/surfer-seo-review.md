@@ -1,13 +1,15 @@
 ---
-title: "Surfer SEO Review (2026): The Content Optimiser That Gamifies Rankings"
+title: 'Surfer SEO Review (2026): The Content Optimiser That Gamifies Rankings'
 slug: surfer-seo-review
 type: post
-status: draft
+status: publish
 meta_title: Surfer SEO Review (2026) — AI Content Optimisation Scored /100
-meta_description: Surfer SEO scored 82/100 across 5 factors. Full breakdown of Content Editor, SERP analysis, NLP, AI Visibility Tracker, pricing, and honest verdict.
+meta_description: >-
+  Surfer SEO scored 82/100 across 5 factors. Full breakdown of Content Editor,
+  SERP analysis, NLP, AI Visibility Tracker, pricing, and honest verdict.
 target_keyword: surfer seo review 2026
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

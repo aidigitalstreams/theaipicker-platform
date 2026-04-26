@@ -1,13 +1,15 @@
 ---
-title: "Sonix Review (2026): The Content Creator's Transcription Tool, Scored Honestly"
+title: 'Sonix Review (2026): The Content Creator''s Transcription Tool, Scored Honestly'
 slug: sonix-review
 type: post
-status: draft
-meta_title: Sonix Review (2026) — Fast, Affordable Transcription Scored /100
-meta_description: Sonix scored 80/100 across 5 factors. Full breakdown of accuracy, pricing, editor quality, and honest verdict for podcasters, journalists, and teams.
+status: publish
+meta_title: 'Sonix Review (2026) — Fast, Affordable Transcription Scored /100'
+meta_description: >-
+  Sonix scored 80/100 across 5 factors. Full breakdown of accuracy, pricing,
+  editor quality, and honest verdict for podcasters, journalists, and teams.
 target_keyword: sonix review 2026
 category: AI Transcription Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

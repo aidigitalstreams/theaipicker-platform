@@ -1,13 +1,15 @@
 ---
-title: "Gamma Review (2026): The AI Presentation Builder That Actually Works"
+title: 'Gamma Review (2026): The AI Presentation Builder That Actually Works'
 slug: gamma-review
 type: post
-status: draft
+status: publish
 meta_title: Gamma Review (2026) — AI Presentations Scored /100
-meta_description: Gamma scored 83/100 across 5 factors. Full breakdown of AI deck generation, collaboration, pricing, and honest verdict for teams and creators.
+meta_description: >-
+  Gamma scored 83/100 across 5 factors. Full breakdown of AI deck generation,
+  collaboration, pricing, and honest verdict for teams and creators.
 target_keyword: gamma review 2026
 category: AI Presentation Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

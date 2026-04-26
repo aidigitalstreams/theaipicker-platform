@@ -1,13 +1,16 @@
 ---
-title: "5 Best AI Tools for Podcast Transcription in 2026 (Accuracy & Price Compared)"
+title: 5 Best AI Tools for Podcast Transcription in 2026 (Accuracy & Price Compared)
 slug: ai-tools-podcast-transcription-2026
 type: post
-status: draft
+status: publish
 meta_title: Best AI Tools for Podcast Transcription (2026) — 5 Tools Compared
-meta_description: The best AI podcast transcription tools in 2026. Accuracy rates, pricing, speaker labels, and show notes — Otter, Descript, Riverside, Whisper, and Podcastle compared.
+meta_description: >-
+  The best AI podcast transcription tools in 2026. Accuracy rates, pricing,
+  speaker labels, and show notes — Otter, Descript, Riverside, Whisper, and
+  Podcastle compared.
 target_keyword: ai tools for podcast transcription 2026
 category: AI Transcription Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

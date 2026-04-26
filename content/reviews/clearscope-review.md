@@ -1,13 +1,15 @@
 ---
-title: "Clearscope Review (2026): The Simplest Path to Better SEO Content"
+title: 'Clearscope Review (2026): The Simplest Path to Better SEO Content'
 slug: clearscope-review
 type: post
-status: draft
+status: publish
 meta_title: Clearscope Review (2026) — Content Optimisation Scored /100
-meta_description: Clearscope scored 79/100 across 5 factors. Full breakdown of content grading, semantic analysis, team features, pricing, and honest verdict.
+meta_description: >-
+  Clearscope scored 79/100 across 5 factors. Full breakdown of content grading,
+  semantic analysis, team features, pricing, and honest verdict.
 target_keyword: clearscope review 2026
 category: AI SEO Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

@@ -1,13 +1,17 @@
 ---
-title: "Udio Review (2026): The Audiophile's AI Music Generator (With a Major Download Problem)"
+title: >-
+  Udio Review (2026): The Audiophile's AI Music Generator (With a Major Download
+  Problem)
 slug: udio-review
 type: post
-status: draft
+status: publish
 meta_title: Udio Review (2026) — AI Music Generator Scored /100
-meta_description: Udio scored 74/100 across 5 factors. Full breakdown of audio quality, stem editing, pricing, the download controversy, and honest verdict.
+meta_description: >-
+  Udio scored 74/100 across 5 factors. Full breakdown of audio quality, stem
+  editing, pricing, the download controversy, and honest verdict.
 target_keyword: udio review 2026
 category: AI Music Generation
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

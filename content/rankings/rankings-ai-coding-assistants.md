@@ -1,14 +1,17 @@
 ---
-title: "AI Coding Assistant Rankings (2026) — Every Tool Scored and Ranked"
+title: AI Coding Assistant Rankings (2026) — Every Tool Scored and Ranked
 slug: rankings-ai-coding-assistants
 type: page
-status: draft
+status: publish
 meta_title: AI Coding Assistant Rankings 2026 — Scored & Ranked | The AI Picker
-meta_description: Every AI coding assistant we've reviewed, ranked by our 5-factor scoring system. Cursor 3, GitHub Copilot, Windsurf, Replit, Tabnine, and Amazon Q compared.
+meta_description: >-
+  Every AI coding assistant we've reviewed, ranked by our 5-factor scoring
+  system. Cursor 3, GitHub Copilot, Windsurf, Replit, Tabnine, and Amazon Q
+  compared.
 target_keyword: ai coding assistant rankings 2026
 category: AI Coding Tools
 parent_page: Rankings Hub
-wp_id:
+wp_id: null
 ---
 
 # AI Coding Assistant Rankings

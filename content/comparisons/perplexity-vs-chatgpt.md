@@ -1,13 +1,17 @@
 ---
-title: "Perplexity vs ChatGPT: AI Search Engine vs AI Chatbot — Which Do You Need? (2026)"
+title: >-
+  Perplexity vs ChatGPT: AI Search Engine vs AI Chatbot — Which Do You Need?
+  (2026)
 slug: perplexity-vs-chatgpt
 type: post
-status: draft
+status: publish
 meta_title: Perplexity vs ChatGPT (2026) — AI Tools Compared
-meta_description: Perplexity vs ChatGPT compared across 5 factors. Research accuracy, citations, creative capabilities, pricing, and honest verdict.
+meta_description: >-
+  Perplexity vs ChatGPT compared across 5 factors. Research accuracy, citations,
+  creative capabilities, pricing, and honest verdict.
 target_keyword: perplexity vs chatgpt
 category: AI Chatbots
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

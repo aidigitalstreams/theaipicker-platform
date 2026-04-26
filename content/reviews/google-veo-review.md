@@ -1,13 +1,15 @@
 ---
-title: "Google Veo Review (2026): Cinematic Video With Synced Audio"
+title: 'Google Veo Review (2026): Cinematic Video With Synced Audio'
 slug: google-veo-review
 type: post
-status: draft
+status: publish
 meta_title: Google Veo Review (2026) — Is Google's Video AI Worth It?
-meta_description: Google Veo scored 83/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: >-
+  Google Veo scored 83/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown, pricing, and verdict.
 target_keyword: google veo review 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

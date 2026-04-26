@@ -1,14 +1,16 @@
 ---
-title: "AI Chatbot Rankings (2026) — Every Tool Scored and Ranked"
+title: AI Chatbot Rankings (2026) — Every Tool Scored and Ranked
 slug: rankings-ai-chatbots
 type: page
-status: draft
+status: publish
 meta_title: AI Chatbot Rankings 2026 — Scored & Ranked | The AI Picker
-meta_description: Every AI chatbot we've reviewed, ranked by our 5-factor scoring system. Updated regularly as new tools launch and existing ones evolve.
+meta_description: >-
+  Every AI chatbot we've reviewed, ranked by our 5-factor scoring system.
+  Updated regularly as new tools launch and existing ones evolve.
 target_keyword: ai chatbot rankings 2026
 category: AI Chatbots
 parent_page: Rankings Hub
-wp_id:
+wp_id: null
 ---
 
 # AI Chatbot Rankings

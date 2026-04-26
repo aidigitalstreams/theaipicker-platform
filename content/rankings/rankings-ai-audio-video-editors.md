@@ -1,14 +1,16 @@
 ---
-title: "AI Audio/Video Editor Rankings (2026) — Every Tool Scored and Ranked"
+title: AI Audio/Video Editor Rankings (2026) — Every Tool Scored and Ranked
 slug: rankings-ai-audio-video-editors
 type: page
-status: draft
+status: publish
 meta_title: AI Audio/Video Editor Rankings 2026 — Scored & Ranked | The AI Picker
-meta_description: AI audio and video editors scored and ranked. Currently featuring Descript with more tools coming soon.
+meta_description: >-
+  AI audio and video editors scored and ranked. Currently featuring Descript
+  with more tools coming soon.
 target_keyword: ai audio video editor rankings 2026
 category: AI Audio/Video Editors
 parent_page: Rankings Hub
-wp_id:
+wp_id: null
 ---
 
 # AI Audio/Video Editor Rankings

@@ -1,13 +1,15 @@
 ---
-title: "8 Best AI Tools for Podcasters in 2026 (Recording, Editing & Growth)"
+title: '8 Best AI Tools for Podcasters in 2026 (Recording, Editing & Growth)'
 slug: best-ai-tools-podcasters-2026
 type: post
-status: draft
+status: publish
 meta_title: Best AI Tools for Podcasters (2026) — 8 Tools Compared
-meta_description: The best AI tools for podcasters in 2026. Recording, editing, transcription, show notes, and growth — compared with pricing and honest verdicts.
+meta_description: >-
+  The best AI tools for podcasters in 2026. Recording, editing, transcription,
+  show notes, and growth — compared with pricing and honest verdicts.
 target_keyword: best ai tools for podcasters 2026
 category: AI Tools Roundups
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

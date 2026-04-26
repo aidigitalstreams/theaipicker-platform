@@ -1,13 +1,17 @@
 ---
-title: "QuillBot Review (2026): The Best Paraphrasing Tool That Won't Replace Your AI Writer"
+title: >-
+  QuillBot Review (2026): The Best Paraphrasing Tool That Won't Replace Your AI
+  Writer
 slug: quillbot-review
 type: post
-status: draft
+status: publish
 meta_title: QuillBot Review (2026) — AI Paraphrasing Tool Scored /100
-meta_description: QuillBot scored 71/100 across 5 factors. Full breakdown of paraphrasing modes, Flow workspace, plagiarism checker, pricing from £0, and honest verdict.
+meta_description: >-
+  QuillBot scored 71/100 across 5 factors. Full breakdown of paraphrasing modes,
+  Flow workspace, plagiarism checker, pricing from £0, and honest verdict.
 target_keyword: quillbot review 2026
 category: AI Writing Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

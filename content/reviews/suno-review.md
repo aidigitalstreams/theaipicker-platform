@@ -1,13 +1,17 @@
 ---
-title: "Suno Review (2026): AI Music Generation That's Eerily Good (and Legally Complicated)"
+title: >-
+  Suno Review (2026): AI Music Generation That's Eerily Good (and Legally
+  Complicated)
 slug: suno-review
 type: post
-status: draft
+status: publish
 meta_title: Suno Review (2026) — AI Music Generator Scored /100
-meta_description: Suno scored 80/100 across 5 factors. Full breakdown of music quality, vocals, pricing, commercial licensing, legal risks, and honest verdict.
+meta_description: >-
+  Suno scored 80/100 across 5 factors. Full breakdown of music quality, vocals,
+  pricing, commercial licensing, legal risks, and honest verdict.
 target_keyword: suno review 2026
 category: AI Music Generation
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

@@ -1,13 +1,15 @@
 ---
-title: "Fireflies.ai Review (2026): The Value Pick for Meeting AI"
+title: 'Fireflies.ai Review (2026): The Value Pick for Meeting AI'
 slug: fireflies-review
 type: post
-status: draft
+status: publish
 meta_title: Fireflies.ai Review (2026) — Is It Better Value Than Otter?
-meta_description: Fireflies.ai scored 83/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown and verdict.
+meta_description: >-
+  Fireflies.ai scored 83/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown and verdict.
 target_keyword: fireflies ai review 2026
 category: AI Meeting Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

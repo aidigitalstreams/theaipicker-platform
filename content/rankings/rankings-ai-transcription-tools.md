@@ -1,12 +1,14 @@
 ---
-title: "AI Transcription Tools Rankings 2026"
+title: AI Transcription Tools Rankings 2026
 slug: rankings-ai-transcription-tools
 type: page
-status: draft
+status: publish
 meta_title: AI Transcription Tools Rankings (2026) — Scored & Ranked /100
-meta_description: Every AI transcription tool we've reviewed, ranked by score. Sonix, Rev, Otter, Descript, and Trint compared with live scores.
+meta_description: >-
+  Every AI transcription tool we've reviewed, ranked by score. Sonix, Rev,
+  Otter, Descript, and Trint compared with live scores.
 parent: rankings
-wp_id:
+wp_id: null
 ---
 
 # AI Transcription Tools Rankings

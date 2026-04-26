@@ -1,13 +1,15 @@
 ---
-title: "3 Best AI Meeting Assistants in 2026 (Compared & Ranked)"
+title: 3 Best AI Meeting Assistants in 2026 (Compared & Ranked)
 slug: best-ai-meeting-assistants-2026
 type: post
-status: draft
+status: publish
 meta_title: 3 Best AI Meeting Assistants in 2026 — Compared & Ranked
-meta_description: The 3 best AI meeting assistants in 2026 scored and ranked. Fathom, Otter, and Fireflies compared across features, free plans, and team workflows.
+meta_description: >-
+  The 3 best AI meeting assistants in 2026 scored and ranked. Fathom, Otter, and
+  Fireflies compared across features, free plans, and team workflows.
 target_keyword: best ai meeting assistants 2026
 category: AI Meeting Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

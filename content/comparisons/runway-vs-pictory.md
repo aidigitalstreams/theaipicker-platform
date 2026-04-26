@@ -1,13 +1,15 @@
 ---
-title: "Runway vs Pictory (2026): Professional AI Video vs Quick Content Creation"
+title: 'Runway vs Pictory (2026): Professional AI Video vs Quick Content Creation'
 slug: runway-vs-pictory
 type: post
-status: draft
+status: publish
 meta_title: Runway vs Pictory (2026) — AI Video Tools Compared
-meta_description: Runway vs Pictory compared across video generation, editing features, pricing, and use cases. Honest verdict on which AI video tool fits your workflow.
+meta_description: >-
+  Runway vs Pictory compared across video generation, editing features, pricing,
+  and use cases. Honest verdict on which AI video tool fits your workflow.
 target_keyword: runway vs pictory 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

@@ -1,13 +1,15 @@
 ---
-title: "ChatGPT vs Gemini (2026): OpenAI vs Google — Which AI Wins?"
+title: 'ChatGPT vs Gemini (2026): OpenAI vs Google — Which AI Wins?'
 slug: chatgpt-vs-gemini
 type: post
-status: draft
+status: publish
 meta_title: ChatGPT vs Gemini (2026) — Full Head-to-Head Comparison
-meta_description: ChatGPT (85/100) vs Gemini (82/100) compared across features, Google integration, pricing, and multimodal capabilities. Honest verdict.
+meta_description: >-
+  ChatGPT (85/100) vs Gemini (82/100) compared across features, Google
+  integration, pricing, and multimodal capabilities. Honest verdict.
 target_keyword: chatgpt vs gemini 2026
 category: AI Chatbots
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

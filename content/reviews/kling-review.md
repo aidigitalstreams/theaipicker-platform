@@ -1,13 +1,15 @@
 ---
-title: "Kling AI Review (2026): Kuaishou's Text-to-Video Challenger"
+title: 'Kling AI Review (2026): Kuaishou''s Text-to-Video Challenger'
 slug: kling-review
 type: post
-status: draft
+status: publish
 meta_title: Kling AI Review (2026) — Real Rival to Runway and Sora?
-meta_description: Kling AI scored 83/100 across Core Performance, Ease of Use, Value, Output Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: >-
+  Kling AI scored 83/100 across Core Performance, Ease of Use, Value, Output
+  Quality, and Reliability. Full breakdown, pricing, and verdict.
 target_keyword: kling ai review 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

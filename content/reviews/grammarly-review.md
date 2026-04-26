@@ -1,13 +1,17 @@
 ---
-title: "Grammarly Review (2026): The Writing Assistant Everyone Has — But Should You Pay?"
+title: >-
+  Grammarly Review (2026): The Writing Assistant Everyone Has — But Should You
+  Pay?
 slug: grammarly-review
 type: post
-status: draft
+status: publish
 meta_title: Grammarly Review (2026) — AI Writing Assistant Scored /100
-meta_description: Grammarly scored 79/100 across 5 factors. Full breakdown of GrammarlyGO, Pro features, grammar accuracy (93-98%), pricing, and honest verdict.
+meta_description: >-
+  Grammarly scored 79/100 across 5 factors. Full breakdown of GrammarlyGO, Pro
+  features, grammar accuracy (93-98%), pricing, and honest verdict.
 target_keyword: grammarly review 2026
 category: AI Writing Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

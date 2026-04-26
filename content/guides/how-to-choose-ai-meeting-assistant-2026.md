@@ -1,13 +1,15 @@
 ---
-title: "How to Choose an AI Meeting Assistant in 2026 — The Team Buyer's Guide"
+title: How to Choose an AI Meeting Assistant in 2026 — The Team Buyer's Guide
 slug: how-to-choose-ai-meeting-assistant-2026
 type: post
-status: draft
+status: publish
 meta_title: How to Choose an AI Meeting Assistant in 2026 — Buyer's Guide
-meta_description: Fathom, Otter, or Fireflies? Our guide covers free plans, real-time features, CRM integration, and which AI meeting tool fits your team.
+meta_description: >-
+  Fathom, Otter, or Fireflies? Our guide covers free plans, real-time features,
+  CRM integration, and which AI meeting tool fits your team.
 target_keyword: how to choose ai meeting assistant 2026
 category: AI Meeting Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you.*

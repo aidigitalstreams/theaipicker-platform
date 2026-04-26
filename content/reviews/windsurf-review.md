@@ -1,13 +1,17 @@
 ---
-title: "Windsurf (Codeium) Review (2026): The AI Coding Editor That's Quietly Catching Cursor"
+title: >-
+  Windsurf (Codeium) Review (2026): The AI Coding Editor That's Quietly Catching
+  Cursor
 slug: windsurf-review
 type: post
-status: draft
+status: publish
 meta_title: Windsurf Review (2026) — AI Coding Assistant Scored /100
-meta_description: Windsurf (formerly Codeium) scored 80/100 across 5 factors. Full breakdown of Cascade Agent, Memories, pricing from £0, and honest verdict.
+meta_description: >-
+  Windsurf (formerly Codeium) scored 80/100 across 5 factors. Full breakdown of
+  Cascade Agent, Memories, pricing from £0, and honest verdict.
 target_keyword: windsurf review 2026
 category: AI Coding Assistants
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

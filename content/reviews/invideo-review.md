@@ -1,13 +1,15 @@
 ---
-title: "InVideo AI Review (2026): The Text-to-Video Tool That Actually Delivers"
+title: 'InVideo AI Review (2026): The Text-to-Video Tool That Actually Delivers'
 slug: invideo-review
 type: post
-status: draft
+status: publish
 meta_title: InVideo AI Review (2026) — AI Video Generator Scored /100
-meta_description: InVideo AI scored 81/100 across 5 factors. Full breakdown of Sora 2 + VEO 3.1 integration, voice cloning, pricing from £0, and honest verdict.
+meta_description: >-
+  InVideo AI scored 81/100 across 5 factors. Full breakdown of Sora 2 + VEO 3.1
+  integration, voice cloning, pricing from £0, and honest verdict.
 target_keyword: invideo ai review 2026
 category: AI Video Tools
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

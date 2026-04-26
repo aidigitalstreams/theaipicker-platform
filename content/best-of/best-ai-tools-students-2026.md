@@ -1,13 +1,15 @@
 ---
-title: "8 Best AI Tools for Students in 2026 (Free & Affordable)"
+title: 8 Best AI Tools for Students in 2026 (Free & Affordable)
 slug: best-ai-tools-students-2026
 type: post
-status: draft
+status: publish
 meta_title: Best AI Tools for Students (2026) — 8 Free & Affordable Picks
-meta_description: The best AI tools for students in 2026. Writing, research, presentations, and study tools — most free or under £15/month.
+meta_description: >-
+  The best AI tools for students in 2026. Writing, research, presentations, and
+  study tools — most free or under £15/month.
 target_keyword: best ai tools for students 2026
 category: AI Tools Roundups
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

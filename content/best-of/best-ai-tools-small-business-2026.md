@@ -1,13 +1,15 @@
 ---
-title: "10 Best AI Tools for Small Businesses in 2026"
+title: 10 Best AI Tools for Small Businesses in 2026
 slug: best-ai-tools-small-business-2026
 type: post
-status: draft
+status: publish
 meta_title: Best AI Tools for Small Business (2026) — 10 Picks That Save Time
-meta_description: The best AI tools for small businesses in 2026. Writing, marketing, design, customer service, and operations tools compared with pricing and ROI.
+meta_description: >-
+  The best AI tools for small businesses in 2026. Writing, marketing, design,
+  customer service, and operations tools compared with pricing and ROI.
 target_keyword: best ai tools for small business 2026
 category: AI Tools Roundups
-wp_id:
+wp_id: null
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*
