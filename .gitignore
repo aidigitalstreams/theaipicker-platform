@@ -37,6 +37,9 @@ yarn-error.log*
 tools/.env
 tools/bridge.log
 
+# bridge working file — transient tasks.md written by execute-bridge.js
+tasks.md
+
 # vercel
 .vercel
 
