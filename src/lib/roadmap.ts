@@ -91,6 +91,21 @@ export const PHASES: Phase[] = [
       { label: 'Shared component library across streams', done: false },
     ],
   },
+  {
+    number: 7,
+    title: 'Operations & Intelligence Centres',
+    summary: 'Pull every signal the Coordinator needs into a single admin so the Owner has one place to look.',
+    status: 'complete',
+    items: [
+      { label: 'Design Centre — palette, type, voice rules, image library', done: true },
+      { label: 'Affiliate audit — content vs program gap analysis', done: true },
+      { label: 'Research Hub — market briefs, competitor watches, new tools', done: true },
+      { label: 'SEO War Room — per-article checklist scores + warnings', done: true },
+      { label: 'Operations Centre — costs, tools, domains, milestones', done: true },
+      { label: 'Notifications — auto alerts + Owner decisions queue', done: true },
+      { label: 'Newsletter compose + archive (manual send for now)', done: true },
+    ],
+  },
 ];
 
 export function phaseStatus(phase: Phase): PhaseStatus {

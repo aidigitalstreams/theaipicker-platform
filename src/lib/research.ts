@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+import { RESEARCH_KINDS, isResearchKind, type ResearchKind } from './research-kinds';
+
+export { RESEARCH_KINDS, isResearchKind } from './research-kinds';
+export type { ResearchKind } from './research-kinds';
 
 const DATA_DIR = path.join(process.cwd(), 'content', 'data');
 const RESEARCH_FILE = path.join(DATA_DIR, 'research.json');
-
-export type ResearchKind = 'market-brief' | 'competitor-watch' | 'new-tool' | 'trend' | 'note';
 
 export interface ResearchNote {
   id: string;
@@ -18,15 +20,6 @@ export interface ResearchNote {
   updatedAt: string;
 }
 
-export const RESEARCH_KINDS: { value: ResearchKind; label: string }[] = [
-  { value: 'market-brief', label: 'Market brief' },
-  { value: 'competitor-watch', label: 'Competitor watch' },
-  { value: 'new-tool', label: 'New tool' },
-  { value: 'trend', label: 'Trend' },
-  { value: 'note', label: 'Note' },
-];
-
-const VALID_KINDS = RESEARCH_KINDS.map(k => k.value);
 const VALID_STATUS: ResearchNote['status'][] = ['open', 'actioned', 'archived'];
 
 function ensureDir() {
@@ -56,10 +49,6 @@ function writeAll(rows: ResearchNote[]): void {
 
 function genId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-}
-
-export function isResearchKind(v: string): v is ResearchKind {
-  return (VALID_KINDS as string[]).includes(v);
 }
 
 export function isResearchStatus(v: string): v is ResearchNote['status'] {

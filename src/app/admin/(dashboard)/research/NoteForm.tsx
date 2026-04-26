@@ -2,7 +2,8 @@
 
 import { useActionState, useState } from 'react';
 import { saveNoteAction, type ResearchFormState } from './actions';
-import { RESEARCH_KINDS, type ResearchNote } from '@/lib/research';
+import { RESEARCH_KINDS } from '@/lib/research-kinds';
+import type { ResearchNote } from '@/lib/research';
 
 export default function NoteForm({ existing }: { existing?: ResearchNote }) {
   const [state, formAction, pending] = useActionState<ResearchFormState | null, FormData>(
