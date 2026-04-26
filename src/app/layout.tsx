@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import LayoutChrome from "@/components/LayoutChrome";
 
 export const metadata: Metadata = {
   title: {
@@ -25,11 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en-GB">
       <body style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <Header />
-        <main style={{ flex: 1 }}>
-          {children}
-        </main>
-        <Footer />
+        <LayoutChrome>{children}</LayoutChrome>
       </body>
     </html>
   );

@@ -1,0 +1,31 @@
+import AdminNav from './_components/AdminNav';
+import { logoutAction } from '../login/actions';
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="admin-shell">
+      <aside className="admin-sidebar">
+        <div className="admin-sidebar-brand">
+          AI Digital Streams
+          <span className="small">Admin</span>
+        </div>
+
+        <nav className="admin-sidebar-nav">
+          <div className="admin-nav-section">Overview</div>
+          <AdminNav href="/admin" exact label="Dashboard" />
+
+          <div className="admin-nav-section">Content</div>
+          <AdminNav href="/admin/content" label="All articles" />
+        </nav>
+
+        <div className="admin-sidebar-footer">
+          <form action={logoutAction}>
+            <button type="submit" className="admin-logout-button">Sign out</button>
+          </form>
+        </div>
+      </aside>
+
+      <div className="admin-main">{children}</div>
+    </div>
+  );
+}
