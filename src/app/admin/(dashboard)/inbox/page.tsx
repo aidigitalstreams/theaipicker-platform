@@ -10,6 +10,7 @@ import {
 import { getLatestHeartbeat, isBridgeOnline } from '@/lib/heartbeat';
 import AddInboxForm from './AddInboxForm';
 import InboxBoard from './InboxBoard';
+import StartBridgeButton from './StartBridgeButton';
 import { deleteInboxItemAction } from './actions';
 
 export const dynamic = 'force-dynamic';
@@ -79,6 +80,7 @@ export default async function InboxPage() {
               )}
             </span>
           </div>
+          <StartBridgeButton bridgeOnline={bridgeOnline} />
           <span className="admin-topbar-meta">
             {counts.totalOpen} open · {counts.completedToday} done today
           </span>
