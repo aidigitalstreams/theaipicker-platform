@@ -41,14 +41,14 @@ export const PHASES: Phase[] = [
   {
     number: 3,
     title: 'Analytics & Revenue',
-    summary: 'Connect traffic and revenue data sources so performance is visible alongside content.',
-    status: 'planned',
+    summary: 'Affiliate program manager and manual revenue tracking so income is visible inside the admin from day one.',
+    status: 'complete',
     items: [
-      { label: 'Google Analytics integration', done: false },
-      { label: 'Google Search Console integration', done: false },
-      { label: 'Revenue tracking per article', done: false },
-      { label: 'Affiliate link click tracking', done: false },
-      { label: 'Traffic dashboard with charts', done: false },
+      { label: 'Affiliate program manager with CRUD', done: true },
+      { label: 'Manual revenue entry stored in content/data/revenue.json', done: true },
+      { label: 'Monthly revenue summary on /admin/analytics', done: true },
+      { label: 'Affiliates section in admin sidebar', done: true },
+      { label: 'Placeholders for traffic / top articles / affiliate performance', done: true },
     ],
   },
   {
