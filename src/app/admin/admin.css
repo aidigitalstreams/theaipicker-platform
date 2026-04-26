@@ -1125,6 +1125,60 @@
 .admin-pill.kind-audience { background: #F3E8FF; color: #6B21A8; }
 .admin-pill.kind-other { background: #F1F5F9; color: #475569; }
 
+/* Bridge heartbeat status — shown on /admin/inbox topbar */
+.admin-bridge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 99px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-content-bg);
+  font-size: 0.82rem;
+  color: var(--admin-text);
+}
+.admin-bridge-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--admin-text-muted);
+  box-shadow: 0 0 0 3px transparent;
+}
+.admin-bridge-status.online {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.08);
+  color: #047857;
+}
+.admin-bridge-status.online .admin-bridge-dot {
+  background: var(--admin-success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+  animation: admin-bridge-pulse 2s ease-in-out infinite;
+}
+.admin-bridge-status.offline {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.06);
+  color: #B91C1C;
+}
+.admin-bridge-status.offline .admin-bridge-dot {
+  background: var(--admin-danger);
+}
+.admin-bridge-text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.admin-bridge-detail {
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+@keyframes admin-bridge-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18); }
+  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.05); }
+}
+
 /* Inbox board */
 .admin-inbox-form-grid {
   display: grid;

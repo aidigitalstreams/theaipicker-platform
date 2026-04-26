@@ -7,6 +7,7 @@ import {
   CATEGORIES,
   type InboxItem,
 } from '@/lib/inbox';
+import { getLatestHeartbeat, isBridgeOnline } from '@/lib/heartbeat';
 import AddInboxForm from './AddInboxForm';
 import InboxBoard from './InboxBoard';
 import { deleteInboxItemAction } from './actions';
@@ -27,12 +28,30 @@ function formatDateTime(iso: string | null): string {
   });
 }
 
+function relativeFromIso(iso: string | null): string {
+  if (!iso) return 'never';
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return iso;
+  const diff = Date.now() - t;
+  const sec = Math.round(diff / 1000);
+  if (sec < 5) return 'just now';
+  if (sec < 60) return `${sec}s ago`;
+  const min = Math.round(sec / 60);
+  if (min < 60) return `${min}m ago`;
+  const hr = Math.round(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  const day = Math.round(hr / 24);
+  return `${day}d ago`;
+}
+
 export default async function InboxPage() {
-  const [open, completed, counts] = await Promise.all([
+  const [open, completed, counts, heartbeat] = await Promise.all([
     getOpenInbox(),
     getCompletedInbox(50),
     getInboxCounts(),
+    getLatestHeartbeat(),
   ]);
+  const bridgeOnline = isBridgeOnline(heartbeat);
 
   return (
     <>
@@ -41,8 +60,28 @@ export default async function InboxPage() {
           <div className="breadcrumb">Operations</div>
           <h1>Inbox</h1>
         </div>
-        <div className="admin-topbar-meta">
-          {counts.totalOpen} open · {counts.completedToday} done today
+        <div className="admin-topbar-actions">
+          <div
+            className={`admin-bridge-status ${bridgeOnline ? 'online' : 'offline'}`}
+            title={
+              heartbeat
+                ? `Last heartbeat from ${heartbeat.machineName} ${relativeFromIso(heartbeat.lastSeen)}`
+                : 'No heartbeat received yet'
+            }
+          >
+            <span className="admin-bridge-dot" aria-hidden="true" />
+            <span className="admin-bridge-text">
+              Bridge {bridgeOnline ? 'online' : 'offline'}
+              {heartbeat && (
+                <span className="admin-bridge-detail">
+                  {heartbeat.machineName} · {relativeFromIso(heartbeat.lastSeen)}
+                </span>
+              )}
+            </span>
+          </div>
+          <span className="admin-topbar-meta">
+            {counts.totalOpen} open · {counts.completedToday} done today
+          </span>
         </div>
       </div>
 

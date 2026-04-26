@@ -186,6 +186,61 @@ export async function deleteInboxItem(id: number): Promise<void> {
   await db.delete(schema.inbox).where(eq(schema.inbox.id, id));
 }
 
+export async function getInboxItemById(id: number): Promise<InboxItem | null> {
+  const db = getDb();
+  const [row] = await db.select().from(schema.inbox).where(eq(schema.inbox.id, id)).limit(1);
+  return row ? rowToItem(row) : null;
+}
+
+export interface InboxFilter {
+  status?: InboxStatus | InboxStatus[];
+  limit?: number;
+}
+
+export async function listInboxItems(filter: InboxFilter = {}): Promise<InboxItem[]> {
+  const db = getDb();
+  const conditions = [] as ReturnType<typeof eq>[];
+  if (filter.status) {
+    const statuses = Array.isArray(filter.status) ? filter.status : [filter.status];
+    if (statuses.length > 0) {
+      conditions.push(inArray(schema.inbox.status, statuses as unknown as string[]));
+    }
+  }
+  const limit = filter.limit ?? 1000;
+  const rows = conditions.length > 0
+    ? await db.select().from(schema.inbox).where(conditions[0])
+        .orderBy(asc(schema.inbox.executionOrder), asc(schema.inbox.id))
+        .limit(limit)
+    : await db.select().from(schema.inbox)
+        .orderBy(asc(schema.inbox.executionOrder), asc(schema.inbox.id))
+        .limit(limit);
+  return rows.map(rowToItem);
+}
+
+export interface UpdateInboxStatusInput {
+  status?: InboxStatus;
+  resultNotes?: string | null;
+}
+
+export async function updateInboxStatus(id: number, input: UpdateInboxStatusInput): Promise<InboxItem | null> {
+  const update: Record<string, unknown> = {};
+  if (input.status) {
+    update.status = input.status;
+    if (input.status === 'done' || input.status === 'failed') {
+      update.completedDate = new Date();
+    }
+  }
+  if (input.resultNotes !== undefined) {
+    update.resultNotes = input.resultNotes;
+  }
+  if (Object.keys(update).length === 0) {
+    return getInboxItemById(id);
+  }
+  const db = getDb();
+  const [row] = await db.update(schema.inbox).set(update).where(eq(schema.inbox.id, id)).returning();
+  return row ? rowToItem(row) : null;
+}
+
 export const PRIORITY_LABELS: Record<InboxPriority, string> = {
   high: 'High',
   medium: 'Medium',
