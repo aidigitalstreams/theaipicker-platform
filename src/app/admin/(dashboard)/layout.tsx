@@ -26,6 +26,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <AdminNav href="/admin/content" label="All articles" />
           <AdminNav href="/admin/pipeline" label="Pipeline" />
 
+          <div className="admin-nav-section">Audience</div>
+          <AdminNav href="/admin/subscribers" label="Subscribers" />
+
           <div className="admin-nav-section">Revenue</div>
           <AdminNav href="/admin/affiliates" label="Affiliates" />
 
