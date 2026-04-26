@@ -1,5 +1,6 @@
 import {
   pgTable,
+  serial,
   text,
   integer,
   numeric,
@@ -162,6 +163,129 @@ export const activityEntries = pgTable(
   }),
 );
 
+/** Coordinator-managed job queue — multi-step work items with optional dependencies. */
+export const jobs = pgTable(
+  'jobs',
+  {
+    id: serial('id').primaryKey(),
+    title: text('title').notNull(),
+    description: text('description').notNull().default(''),
+    category: text('category'),
+    priority: text('priority').notNull().default('medium'),
+    /** queued | in-progress | blocked | completed | cancelled */
+    status: text('status').notNull().default('queued'),
+    createdDate: timestamp('created_date', { withTimezone: true }).defaultNow().notNull(),
+    startedDate: timestamp('started_date', { withTimezone: true }),
+    completedDate: timestamp('completed_date', { withTimezone: true }),
+    notes: text('notes'),
+    /** Optional jobs.id this job is blocked by. */
+    dependsOn: integer('depends_on'),
+  },
+  table => ({
+    jobsStatusIdx: index('jobs_status_idx').on(table.status),
+    jobsPriorityIdx: index('jobs_priority_idx').on(table.priority),
+    jobsDependsOnIdx: index('jobs_depends_on_idx').on(table.dependsOn),
+  }),
+);
+
+/** Major decisions made by the partnership — context, reasoning, outcome captured for the audit trail. */
+export const decisions = pgTable(
+  'decisions',
+  {
+    id: serial('id').primaryKey(),
+    title: text('title').notNull(),
+    description: text('description').notNull().default(''),
+    reasoning: text('reasoning').notNull().default(''),
+    outcome: text('outcome'),
+    createdDate: timestamp('created_date', { withTimezone: true }).defaultNow().notNull(),
+  },
+  table => ({
+    decisionsCreatedIdx: index('decisions_created_idx').on(table.createdDate),
+  }),
+);
+
+/** Owner-facing action queue — short, surfaceable items distinct from longer-running jobs. */
+export const actionQueue = pgTable(
+  'action_queue',
+  {
+    id: serial('id').primaryKey(),
+    title: text('title').notNull(),
+    description: text('description').notNull().default(''),
+    /** owner-approval | review | publish | spend | other */
+    type: text('type').notNull().default('other'),
+    priority: text('priority').notNull().default('medium'),
+    /** open | done | dismissed */
+    status: text('status').notNull().default('open'),
+    createdDate: timestamp('created_date', { withTimezone: true }).defaultNow().notNull(),
+    completedDate: timestamp('completed_date', { withTimezone: true }),
+  },
+  table => ({
+    actionQueueStatusIdx: index('action_queue_status_idx').on(table.status),
+    actionQueuePriorityIdx: index('action_queue_priority_idx').on(table.priority),
+  }),
+);
+
+/** Master keyword list with volume / difficulty / intent / target article + ranking. */
+export const keywords = pgTable(
+  'keywords',
+  {
+    id: serial('id').primaryKey(),
+    keyword: text('keyword').notNull(),
+    searchVolume: integer('search_volume'),
+    difficulty: integer('difficulty'),
+    /** informational | commercial | transactional | navigational */
+    intent: text('intent'),
+    /** high | medium | low */
+    priority: text('priority').notNull().default('medium'),
+    targetArticle: text('target_article'),
+    currentRanking: integer('current_ranking'),
+    /** open | targeting | ranking | dropped */
+    status: text('status').notNull().default('open'),
+    createdDate: timestamp('created_date', { withTimezone: true }).defaultNow().notNull(),
+  },
+  table => ({
+    keywordsKeywordIdx: uniqueIndex('keywords_keyword_idx').on(table.keyword),
+    keywordsStatusIdx: index('keywords_status_idx').on(table.status),
+    keywordsPriorityIdx: index('keywords_priority_idx').on(table.priority),
+  }),
+);
+
+/** Inbox of work the Owner has dropped in for the Coordinator. Ordered by execution_order. */
+export const inbox = pgTable(
+  'inbox',
+  {
+    id: serial('id').primaryKey(),
+    title: text('title').notNull(),
+    priority: text('priority').notNull().default('medium'),
+    category: text('category'),
+    instructions: text('instructions').notNull().default(''),
+    /** queued | in-progress | done | failed */
+    status: text('status').notNull().default('queued'),
+    executionOrder: integer('execution_order').notNull().default(0),
+    createdDate: timestamp('created_date', { withTimezone: true }).defaultNow().notNull(),
+    completedDate: timestamp('completed_date', { withTimezone: true }),
+    resultNotes: text('result_notes'),
+  },
+  table => ({
+    inboxStatusIdx: index('inbox_status_idx').on(table.status),
+    inboxOrderIdx: index('inbox_order_idx').on(table.executionOrder),
+  }),
+);
+
+/** Liveness pings from the desktop bridge (or any worker) so the admin can show "online". */
+export const bridgeHeartbeat = pgTable(
+  'bridge_heartbeat',
+  {
+    id: serial('id').primaryKey(),
+    lastSeen: timestamp('last_seen', { withTimezone: true }).defaultNow().notNull(),
+    machineName: text('machine_name').notNull(),
+  },
+  table => ({
+    bridgeHeartbeatMachineIdx: uniqueIndex('bridge_heartbeat_machine_idx').on(table.machineName),
+    bridgeHeartbeatLastSeenIdx: index('bridge_heartbeat_last_seen_idx').on(table.lastSeen),
+  }),
+);
+
 // Inferred row types for app code.
 export type AppSetting = typeof appSettings.$inferSelect;
 export type Stream = typeof streams.$inferSelect;
@@ -178,3 +302,15 @@ export type Subscriber = typeof subscribers.$inferSelect;
 export type NewSubscriber = typeof subscribers.$inferInsert;
 export type ActivityEntry = typeof activityEntries.$inferSelect;
 export type NewActivityEntry = typeof activityEntries.$inferInsert;
+export type Job = typeof jobs.$inferSelect;
+export type NewJob = typeof jobs.$inferInsert;
+export type Decision = typeof decisions.$inferSelect;
+export type NewDecision = typeof decisions.$inferInsert;
+export type ActionQueueItem = typeof actionQueue.$inferSelect;
+export type NewActionQueueItem = typeof actionQueue.$inferInsert;
+export type Keyword = typeof keywords.$inferSelect;
+export type NewKeyword = typeof keywords.$inferInsert;
+export type InboxItem = typeof inbox.$inferSelect;
+export type NewInboxItem = typeof inbox.$inferInsert;
+export type BridgeHeartbeat = typeof bridgeHeartbeat.$inferSelect;
+export type NewBridgeHeartbeat = typeof bridgeHeartbeat.$inferInsert;
