@@ -1,0 +1,14 @@
+{
+  "activeStreamId": "theaipicker",
+  "streams": [
+    {
+      "id": "theaipicker",
+      "name": "The AI Picker",
+      "slug": "theaipicker",
+      "tagline": "We research AI tools so you don't have to.",
+      "domain": "theaipicker.com",
+      "contentDirs": ["reviews", "comparisons", "best-of", "guides", "rankings"],
+      "status": "active"
+    }
+  ]
+}

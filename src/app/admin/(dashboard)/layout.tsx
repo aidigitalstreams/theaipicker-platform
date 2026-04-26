@@ -1,10 +1,11 @@
 import AdminNav from './_components/AdminNav';
 import StreamSelector from './_components/StreamSelector';
 import { logoutAction } from '../login/actions';
-import { listStreams, ACTIVE_STREAM_ID } from '@/lib/streams';
+import { listStreams, getActiveStreamId } from '@/lib/streams';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const streams = listStreams();
+  const activeStreamId = getActiveStreamId();
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
@@ -13,12 +14,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <span className="small">Admin</span>
         </div>
 
-        <StreamSelector streams={streams} activeStreamId={ACTIVE_STREAM_ID} />
+        <StreamSelector streams={streams} activeStreamId={activeStreamId} />
 
         <nav className="admin-sidebar-nav">
           <div className="admin-nav-section">Overview</div>
           <AdminNav href="/admin" exact label="Dashboard" />
           <AdminNav href="/admin/roadmap" label="Roadmap" />
+          <AdminNav href="/admin/streams" label="Streams" />
 
           <div className="admin-nav-section">Content</div>
           <AdminNav href="/admin/content" label="All articles" />
