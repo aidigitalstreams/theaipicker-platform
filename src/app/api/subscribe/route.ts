@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { addSubscriber, isValidSource, type SubscriberSource } from '@/lib/subscribers';
 import { getActiveStreamId } from '@/lib/streams';
+import { logActivity } from '@/lib/activity';
 
 interface SubscribeBody {
   email?: string;
@@ -26,12 +27,23 @@ export async function POST(request: Request) {
 
   const source: SubscriberSource = isValidSource(sourceRaw) ? sourceRaw : 'other';
 
+  const streamId = getActiveStreamId();
   const result = addSubscriber({
-    streamId: getActiveStreamId(),
+    streamId,
     email,
     source,
     context,
   });
+
+  if (result.ok && result.subscriber) {
+    logActivity({
+      streamId,
+      kind: 'subscriber-added',
+      subject: email,
+      detail: context ? `${source} · ${context}` : source,
+      href: '/admin/subscribers',
+    });
+  }
 
   if (!result.ok) {
     if (result.reason === 'invalid-email') {

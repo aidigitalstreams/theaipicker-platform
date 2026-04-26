@@ -14,6 +14,8 @@ import {
   type EditableArticleType,
   type StructuredDataUpdate,
 } from '@/lib/admin-content';
+import { logActivity } from '@/lib/activity';
+import { getActiveStreamId } from '@/lib/streams';
 
 const VALID_TYPES: EditableArticleType[] = ['review', 'comparison', 'best-of', 'guide', 'ranking'];
 
@@ -100,6 +102,16 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
     existing: { subdir: article.meta.subdir, filename: article.meta.filename },
   });
 
+  const becamePublished = article.meta.status !== 'publish' && validStatus === 'publish';
+  const becameUnpublished = article.meta.status === 'publish' && validStatus !== 'publish';
+  logActivity({
+    streamId: getActiveStreamId(),
+    kind: becamePublished ? 'article-published' : becameUnpublished ? 'article-unpublished' : 'article-saved',
+    subject: title,
+    detail: `${article.meta.type} · ${validStatus}`,
+    href: `/admin/content/${slug}`,
+  });
+
   revalidatePath('/admin');
   revalidatePath('/admin/content');
   revalidatePath('/admin/pipeline');
@@ -134,6 +146,14 @@ export async function togglePublishAction(formData: FormData): Promise<void> {
     existing: { subdir: article.meta.subdir, filename: article.meta.filename },
   });
 
+  logActivity({
+    streamId: getActiveStreamId(),
+    kind: nextStatus === 'publish' ? 'article-published' : 'article-unpublished',
+    subject: article.meta.title,
+    detail: `${article.meta.type} · toggled via topbar`,
+    href: `/admin/content/${article.meta.slug}`,
+  });
+
   revalidatePath('/admin');
   revalidatePath('/admin/content');
   revalidatePath('/admin/pipeline');
@@ -146,6 +166,12 @@ export async function deleteArticleAction(formData: FormData): Promise<void> {
   if (!article) return;
 
   deleteArticle(article.meta.subdir, article.meta.filename);
+  logActivity({
+    streamId: getActiveStreamId(),
+    kind: 'article-deleted',
+    subject: article.meta.title,
+    detail: `${article.meta.type} · ${article.meta.subdir}/${article.meta.filename}`,
+  });
   revalidatePath('/admin');
   revalidatePath('/admin/content');
   redirect('/admin/content');

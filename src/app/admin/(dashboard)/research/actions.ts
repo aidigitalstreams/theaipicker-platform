@@ -6,8 +6,10 @@ import {
   deleteResearchNote,
   isResearchKind,
   isResearchStatus,
+  getResearchNotes,
 } from '@/lib/research';
 import { getActiveStreamId } from '@/lib/streams';
+import { logActivity } from '@/lib/activity';
 
 export interface ResearchFormState {
   ok?: boolean;
@@ -29,14 +31,23 @@ export async function saveNoteAction(
   if (!isResearchKind(kind)) return { error: 'Invalid kind.' };
   if (!isResearchStatus(status)) return { error: 'Invalid status.' };
 
+  const streamId = getActiveStreamId();
   saveResearchNote({
     id: id || undefined,
-    streamId: getActiveStreamId(),
+    streamId,
     kind,
     title,
     body,
     source: source || undefined,
     status,
+  });
+
+  logActivity({
+    streamId,
+    kind: 'research-saved',
+    subject: title,
+    detail: `${kind} · ${status}`,
+    href: '/admin/research',
   });
 
   revalidatePath('/admin/research');
@@ -46,6 +57,15 @@ export async function saveNoteAction(
 export async function deleteNoteAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
+  const streamId = getActiveStreamId();
+  const target = getResearchNotes(streamId).find(n => n.id === id);
   deleteResearchNote(id);
+  if (target) {
+    logActivity({
+      streamId,
+      kind: 'research-deleted',
+      subject: target.title,
+    });
+  }
   revalidatePath('/admin/research');
 }

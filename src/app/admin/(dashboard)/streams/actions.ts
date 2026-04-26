@@ -6,8 +6,10 @@ import {
   setActiveStream,
   deleteStream,
   validateStreamId,
+  getStream,
   type Stream,
 } from '@/lib/streams';
+import { logActivity } from '@/lib/activity';
 
 const VALID_STATUS: Stream['status'][] = ['active', 'planned', 'archived'];
 const VALID_DIRS = ['reviews', 'comparisons', 'best-of', 'guides', 'rankings'];
@@ -42,6 +44,14 @@ export async function saveStreamAction(
 
   saveStream({ id, name, slug, tagline, domain, contentDirs, status }, { activate });
 
+  logActivity({
+    streamId: id,
+    kind: 'stream-saved',
+    subject: name,
+    detail: `${status}${activate ? ' · made active' : ''}`,
+    href: '/admin/streams',
+  });
+
   revalidatePath('/admin/streams');
   revalidatePath('/admin');
   return { ok: true };
@@ -50,7 +60,16 @@ export async function saveStreamAction(
 export async function setActiveStreamAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
+  const target = getStream(id);
   setActiveStream(id);
+  if (target) {
+    logActivity({
+      streamId: id,
+      kind: 'stream-activated',
+      subject: target.name,
+      href: '/admin/streams',
+    });
+  }
   revalidatePath('/admin/streams');
   revalidatePath('/admin');
 }
@@ -58,7 +77,14 @@ export async function setActiveStreamAction(formData: FormData): Promise<void> {
 export async function deleteStreamAction(formData: FormData): Promise<void> {
   const id = String(formData.get('id') ?? '').trim();
   if (!id) return;
+  const target = getStream(id);
   deleteStream(id);
+  if (target) {
+    logActivity({
+      kind: 'stream-deleted',
+      subject: target.name,
+    });
+  }
   revalidatePath('/admin/streams');
   revalidatePath('/admin');
 }

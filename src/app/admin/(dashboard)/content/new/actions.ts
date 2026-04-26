@@ -8,6 +8,8 @@ import {
   slugIsTaken,
   type EditableArticleType,
 } from '@/lib/admin-content';
+import { logActivity } from '@/lib/activity';
+import { getActiveStreamId } from '@/lib/streams';
 
 const VALID_TYPES: EditableArticleType[] = ['review', 'comparison', 'best-of', 'guide', 'ranking'];
 
@@ -66,6 +68,14 @@ export async function createArticleAction(_prev: CreateState | null, formData: F
     metaTitle,
     metaDescription,
     body,
+  });
+
+  logActivity({
+    streamId: getActiveStreamId(),
+    kind: status === 'publish' ? 'article-published' : 'article-saved',
+    subject: title,
+    detail: `${type} · created`,
+    href: `/admin/content/${slug}`,
   });
 
   revalidatePath('/admin');
