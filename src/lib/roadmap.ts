@@ -67,11 +67,13 @@ export const PHASES: Phase[] = [
     number: 5,
     title: 'Platform Infrastructure',
     summary: 'Cut over from WordPress to the Next.js platform and bring the supporting site systems online.',
+    status: 'in-progress',
     items: [
       { label: 'Point theaipicker.com domain from WordPress to Vercel', done: false },
       { label: 'Email capture system (comparison builder + free tools)', done: false },
-      { label: 'Sitemap generation', done: false },
-      { label: 'RSS feed', done: false },
+      { label: 'Sitemap generation', done: true },
+      { label: 'RSS feed', done: true },
+      { label: 'robots.txt blocking /admin', done: true },
     ],
   },
   {
