@@ -10,6 +10,7 @@ interface Props {
   buttonLabel?: string;
   variant?: 'card' | 'inline';
   onDismiss?: () => void;
+  reloadOnSuccess?: boolean;
 }
 
 type Status = 'idle' | 'sending' | 'success' | 'already' | 'error';
@@ -22,6 +23,7 @@ export default function EmailCaptureForm({
   buttonLabel = 'Send it to me',
   variant = 'card',
   onDismiss,
+  reloadOnSuccess = false,
 }: Props) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
@@ -45,6 +47,10 @@ export default function EmailCaptureForm({
         return;
       }
       setStatus(data.alreadySubscribed ? 'already' : 'success');
+      if (reloadOnSuccess) {
+        // Give the success state one frame to render so the user sees feedback before reload.
+        setTimeout(() => window.location.reload(), 600);
+      }
     } catch {
       setStatus('error');
       setErrorMessage('Network error. Try again.');

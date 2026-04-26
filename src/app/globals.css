@@ -393,3 +393,151 @@ body {
   padding: 0;
 }
 .email-capture-dismiss:hover { text-decoration: underline; }
+
+/* Free tools listing */
+.free-tools-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  justify-content: center;
+}
+.free-tools-category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-med);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.free-tools-category-pill:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
+.free-tools-category-pill span {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.05rem 0.45rem;
+  color: var(--text-secondary);
+}
+
+.free-tools-gate-banner {
+  margin: 0 0 2rem;
+}
+
+.free-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.free-tool-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  padding: 1.5rem 1.625rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+.free-tool-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.free-tool-card-name {
+  font-size: 1.125rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+.free-tool-card-category {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+.free-tool-card-score {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.6rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border: 1px solid;
+  font-variant-numeric: tabular-nums;
+}
+.free-tool-card-score span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 0.15rem;
+  opacity: 0.7;
+}
+.free-tool-card-bestfor {
+  font-size: 0.92rem;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.5;
+}
+.free-tool-card-factors {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.4rem;
+  margin: 0;
+}
+.free-tool-card-factors div {
+  background: var(--surface);
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+}
+.free-tool-card-factors dt {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.free-tool-card-factors dd {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0.15rem 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.free-tool-card-limits,
+.free-tool-card-price {
+  font-size: 0.82rem;
+  color: var(--text-med);
+  margin: 0;
+  line-height: 1.5;
+}
+.free-tool-card-locked {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(16,185,129,0.06));
+  border: 1px dashed rgba(37,99,235,0.25);
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.875rem;
+  line-height: 1.5;
+}
+.free-tool-card-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand-blue);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.free-tool-card-link:hover { text-decoration: underline; }

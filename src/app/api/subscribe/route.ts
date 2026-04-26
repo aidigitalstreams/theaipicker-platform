@@ -9,6 +9,21 @@ interface SubscribeBody {
   context?: string;
 }
 
+const FREE_TOOLS_COOKIE = 'aids_free_unlocked';
+const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+
+function withFreeToolsCookie<T>(response: NextResponse<T>, source: SubscriberSource): NextResponse<T> {
+  if (source === 'free-tools') {
+    response.cookies.set(FREE_TOOLS_COOKIE, '1', {
+      maxAge: ONE_YEAR_SECONDS,
+      path: '/',
+      sameSite: 'lax',
+      httpOnly: false,
+    });
+  }
+  return response;
+}
+
 export async function POST(request: Request) {
   let body: SubscribeBody;
   try {
@@ -53,10 +68,14 @@ export async function POST(request: Request) {
       );
     }
     if (result.reason === 'already-subscribed') {
-      return NextResponse.json({ ok: true, alreadySubscribed: true });
+      // Existing subscribers still get the unlock cookie — they're on the list, that's the point.
+      return withFreeToolsCookie(
+        NextResponse.json({ ok: true, alreadySubscribed: true }),
+        source,
+      );
     }
     return NextResponse.json({ ok: false, error: 'Could not save subscription.' }, { status: 400 });
   }
 
-  return NextResponse.json({ ok: true });
+  return withFreeToolsCookie(NextResponse.json({ ok: true }), source);
 }
