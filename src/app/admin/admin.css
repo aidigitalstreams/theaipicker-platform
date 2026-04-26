@@ -1042,6 +1042,56 @@
 .admin-pill.kind-trend { background: #FEF3C7; color: #92400E; }
 .admin-pill.kind-note { background: #F1F5F9; color: #475569; }
 
+/* Notifications — alerts list */
+.admin-alert-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.admin-alert {
+  background: var(--admin-page-bg);
+  border: 1px solid var(--admin-border);
+  border-left: 4px solid var(--admin-text-muted);
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.admin-alert-info { border-left-color: var(--admin-accent); }
+.admin-alert-warn { border-left-color: var(--admin-warning); }
+.admin-alert-error { border-left-color: var(--admin-danger); }
+.admin-alert-decision { border-left-color: #6366F1; }
+.admin-alert-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.admin-alert-title { font-size: 0.92rem; font-weight: 700; color: var(--admin-text); }
+.admin-alert-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--admin-text-muted);
+  background: var(--admin-content-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 99px;
+  padding: 0.1rem 0.5rem;
+  margin-left: auto;
+}
+.admin-alert-detail {
+  font-size: 0.85rem;
+  color: var(--admin-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.admin-pill.severity-info { background: #DBEAFE; color: #1D4ED8; }
+.admin-pill.severity-warn { background: #FEF3C7; color: #92400E; }
+.admin-pill.severity-error { background: #FEE2E2; color: #B91C1C; }
+
 /* Operations Centre — milestone list */
 .admin-milestone-list {
   list-style: none;
