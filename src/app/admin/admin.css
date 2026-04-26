@@ -1042,6 +1042,70 @@
 .admin-pill.kind-trend { background: #FEF3C7; color: #92400E; }
 .admin-pill.kind-note { background: #F1F5F9; color: #475569; }
 
+/* Activity log */
+.admin-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.admin-activity-day-head {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.5rem;
+}
+.admin-activity-entries {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.admin-activity-entry {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem 0.875rem;
+  background: var(--admin-content-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.5rem;
+}
+.admin-activity-entry-time {
+  font-size: 0.78rem;
+  color: var(--admin-text-muted);
+  padding-top: 0.1rem;
+}
+.admin-activity-entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.admin-activity-entry-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.admin-activity-entry-subject {
+  font-size: 0.92rem;
+  color: var(--admin-text);
+  font-weight: 600;
+}
+.admin-activity-entry-detail {
+  font-size: 0.82rem;
+  color: var(--admin-text-muted);
+}
+
+.admin-pill.kind-content { background: #DBEAFE; color: #1D4ED8; }
+.admin-pill.kind-revenue { background: #DCFCE7; color: #166534; }
+.admin-pill.kind-streams { background: #E0E7FF; color: #4338CA; }
+.admin-pill.kind-intelligence { background: #FEE2E2; color: #B91C1C; }
+.admin-pill.kind-audience { background: #F3E8FF; color: #6B21A8; }
+.admin-pill.kind-other { background: #F1F5F9; color: #475569; }
+
 /* Notifications — alerts list */
 .admin-alert-list {
   list-style: none;
