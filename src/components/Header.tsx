@@ -33,6 +33,7 @@ export default function Header() {
     { href: '/compare', label: 'Compare' },
     { href: '/best', label: 'Best Of' },
     { href: '/rankings', label: 'Rankings' },
+    { href: '/free-tools', label: 'Free Tools' },
     { href: '/tools', label: 'All Tools' },
     { href: '/about', label: 'About' },
     { href: '/how-we-review', label: 'How We Review' },
