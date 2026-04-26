@@ -9,6 +9,8 @@ import {
   deleteArticle,
   getAdminArticleBySlug,
   applyStructuredDataUpdates,
+  isArticleStatus,
+  type ArticleStatus,
   type EditableArticleType,
   type StructuredDataUpdate,
 } from '@/lib/admin-content';
@@ -73,9 +75,10 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
   if (slug !== originalSlug && slugIsTaken(slug)) {
     return { error: `Slug "${slug}" is already used by another article.` };
   }
-  if (status !== 'draft' && status !== 'publish') {
-    return { error: 'Status must be draft or publish.' };
+  if (!isArticleStatus(status)) {
+    return { error: 'Status must be draft, in-review, ready, or publish.' };
   }
+  const validStatus: ArticleStatus = status;
 
   const structuredUpdates = parseStructuredUpdates(formData);
   const body = applyStructuredDataUpdates(rawBody, structuredUpdates);
@@ -85,7 +88,7 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
     slug,
     title,
     category,
-    status,
+    status: validStatus,
     targetKeyword,
     metaTitle,
     metaDescription,
@@ -97,6 +100,7 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
 
   revalidatePath('/admin');
   revalidatePath('/admin/content');
+  revalidatePath('/admin/pipeline');
   revalidatePath(`/admin/content/${originalSlug}`);
   if (slug !== originalSlug) {
     revalidatePath(`/admin/content/${slug}`);
@@ -130,6 +134,7 @@ export async function togglePublishAction(formData: FormData): Promise<void> {
 
   revalidatePath('/admin');
   revalidatePath('/admin/content');
+  revalidatePath('/admin/pipeline');
   revalidatePath(`/admin/content/${originalSlug}`);
 }
 

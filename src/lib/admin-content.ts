@@ -195,12 +195,26 @@ export function slugIsTaken(slug: string, ignoreFile?: { subdir: string; filenam
   return false;
 }
 
+export const ARTICLE_STATUSES = ['draft', 'in-review', 'ready', 'publish'] as const;
+export type ArticleStatus = typeof ARTICLE_STATUSES[number];
+
+export const STATUS_LABELS: Record<ArticleStatus, string> = {
+  'draft': 'Draft',
+  'in-review': 'In Review',
+  'ready': 'Ready to Publish',
+  'publish': 'Published',
+};
+
+export function isArticleStatus(value: string): value is ArticleStatus {
+  return (ARTICLE_STATUSES as readonly string[]).includes(value);
+}
+
 export interface SaveArticleInput {
   type: EditableArticleType;
   slug: string;
   title: string;
   category: string;
-  status: 'draft' | 'publish';
+  status: ArticleStatus;
   targetKeyword?: string;
   metaTitle?: string;
   metaDescription?: string;

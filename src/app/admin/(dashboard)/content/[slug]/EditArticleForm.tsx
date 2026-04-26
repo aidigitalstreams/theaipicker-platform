@@ -66,6 +66,14 @@ function freePlanFromStructured(value: string): 'Yes' | 'No' {
   return value.trim().toLowerCase().startsWith('y') ? 'Yes' : 'No';
 }
 
+function normalizeStatus(status: string): 'draft' | 'in-review' | 'ready' | 'publish' {
+  const s = (status ?? '').toLowerCase();
+  if (s === 'in-review' || s === 'review') return 'in-review';
+  if (s === 'ready' || s === 'ready-to-publish') return 'ready';
+  if (s === 'publish' || s === 'published') return 'publish';
+  return 'draft';
+}
+
 export default function EditArticleForm(props: Props) {
   const [state, formAction, pending] = useActionState<UpdateState | null, FormData>(
     updateArticleAction,
@@ -158,10 +166,12 @@ export default function EditArticleForm(props: Props) {
             <select
               id="status"
               name="status"
-              defaultValue={props.status === 'publish' ? 'publish' : 'draft'}
+              defaultValue={normalizeStatus(props.status)}
               className="admin-form-select"
             >
               <option value="draft">Draft</option>
+              <option value="in-review">In Review</option>
+              <option value="ready">Ready to Publish</option>
               <option value="publish">Published</option>
             </select>
           </div>

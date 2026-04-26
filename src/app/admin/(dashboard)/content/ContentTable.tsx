@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { AdminArticle, ArticleType } from '@/lib/admin-content';
 
-type StatusFilter = 'all' | 'publish' | 'draft';
+type StatusFilter = 'all' | 'draft' | 'in-review' | 'ready' | 'publish';
 
 const TYPE_FILTERS: { type: ArticleType | 'all'; label: string }[] = [
   { type: 'all', label: 'All' },
@@ -18,8 +18,10 @@ const TYPE_FILTERS: { type: ArticleType | 'all'; label: string }[] = [
 
 const STATUS_FILTERS: { status: StatusFilter; label: string }[] = [
   { status: 'all', label: 'All' },
-  { status: 'publish', label: 'Published' },
   { status: 'draft', label: 'Draft' },
+  { status: 'in-review', label: 'In Review' },
+  { status: 'ready', label: 'Ready' },
+  { status: 'publish', label: 'Published' },
 ];
 
 function scoreClass(score: number | null): string {
@@ -31,7 +33,9 @@ function scoreClass(score: number | null): string {
 
 function statusLabel(status: string): string {
   if (!status || status === 'unknown') return 'unknown';
-  if (status === 'publish') return 'published';
+  if (status === 'publish' || status === 'published') return 'published';
+  if (status === 'in-review' || status === 'review') return 'in review';
+  if (status === 'ready' || status === 'ready-to-publish') return 'ready';
   return status;
 }
 
