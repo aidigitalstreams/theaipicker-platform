@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState, useTransition, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   PRIORITY_LABELS,
   STATUS_LABELS,
@@ -68,6 +69,7 @@ interface Props {
 }
 
 export default function InboxBoard({ items: initialItems }: Props) {
+  const router = useRouter();
   const [items, setItems] = useState(initialItems);
   const [selected, setSelected] = useState<Set<number>>(new Set());
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
@@ -82,6 +84,15 @@ export default function InboxBoard({ items: initialItems }: Props) {
     setSelected(new Set());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialKey]);
+
+  // Auto-refresh: poll for updates every 8 seconds so the UI
+  // reflects bridge status changes without manual page refresh.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      router.refresh();
+    }, 8_000);
+    return () => clearInterval(interval);
+  }, [router]);
 
   const toggleSelected = (id: number) => {
     setSelected(prev => {
