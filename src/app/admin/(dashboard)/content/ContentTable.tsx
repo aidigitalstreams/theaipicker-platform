@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { AdminArticle, ArticleType } from '@/lib/admin-content';
+import { isScheduledForFuture, type AdminArticle, type ArticleType } from '@/lib/admin-content';
 
 type StatusFilter = 'all' | 'draft' | 'in-review' | 'ready' | 'publish';
 
@@ -143,7 +143,11 @@ export default function ContentTable({ articles }: { articles: AdminArticle[] })
                     {a.category || '—'}
                   </td>
                   <td>
-                    <span className={`admin-pill status-${a.status}`}>{statusLabel(a.status)}</span>
+                    {isScheduledForFuture(a.publishAt) ? (
+                      <span className="admin-pill status-scheduled">Scheduled</span>
+                    ) : (
+                      <span className={`admin-pill status-${a.status}`}>{statusLabel(a.status)}</span>
+                    )}
                   </td>
                   <td style={{ textAlign: 'right' }}>
                     <span className={scoreClass(a.topScore)}>

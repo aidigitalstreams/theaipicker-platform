@@ -66,6 +66,7 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
   const metaTitle = String(formData.get('metaTitle') ?? '').trim();
   const metaDescription = String(formData.get('metaDescription') ?? '').trim();
   const featuredImage = String(formData.get('featuredImage') ?? '').trim();
+  const publishAt = String(formData.get('publishAt') ?? '').trim();
   const rawBody = String(formData.get('body') ?? '');
 
   if (!title) return { error: 'Title is required.' };
@@ -93,6 +94,7 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
     metaTitle,
     metaDescription,
     featuredImage,
+    publishAt,
     body,
     preserveFrontmatter: article.frontmatter,
     existing: { subdir: article.meta.subdir, filename: article.meta.filename },

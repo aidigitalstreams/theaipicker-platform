@@ -20,12 +20,25 @@ export interface ArticleMeta {
   target_keyword?: string;
   status?: string;
   wp_id?: string;
+  publish_at?: string;
+  featured_image?: string;
 }
 
 export interface Article {
   meta: ArticleMeta;
   content: string;       // raw markdown
   htmlContent: string;    // rendered HTML
+}
+
+function isPubliclyVisible(meta: ArticleMeta, now: Date = new Date()): boolean {
+  // Hide non-published articles entirely
+  if (meta.status && meta.status !== 'publish' && meta.status !== 'published') return false;
+  // Hide published articles whose publish_at is still in the future
+  if (meta.publish_at) {
+    const t = Date.parse(meta.publish_at);
+    if (!Number.isNaN(t) && t > now.getTime()) return false;
+  }
+  return true;
 }
 
 export interface StructuredData {
@@ -94,6 +107,8 @@ export async function getArticle(subdir: string, filename: string): Promise<Arti
       target_keyword: data.target_keyword,
       status: data.status,
       wp_id: data.wp_id,
+      publish_at: data.publish_at,
+      featured_image: data.featured_image,
     },
     content,
     htmlContent,
@@ -101,44 +116,70 @@ export async function getArticle(subdir: string, filename: string): Promise<Arti
 }
 
 /**
- * Get all articles from a content subdirectory
+ * Get all articles from a content subdirectory.
+ * Filters out drafts and future-scheduled articles by default.
  */
-export async function getAllArticles(subdir: string): Promise<Article[]> {
+export async function getAllArticles(subdir: string, opts: { includeAll?: boolean } = {}): Promise<Article[]> {
   const files = getContentFiles(subdir);
   const articles: Article[] = [];
 
   for (const file of files) {
     const article = await getArticle(subdir, file);
-    if (article) articles.push(article);
+    if (!article) continue;
+    if (!opts.includeAll && !isPubliclyVisible(article.meta)) continue;
+    articles.push(article);
   }
 
   return articles;
 }
 
 /**
- * Get article by slug from a content subdirectory
+ * Get article by slug from a content subdirectory.
+ * Returns null for drafts and future-scheduled articles unless includeAll is set.
  */
-export async function getArticleBySlug(subdir: string, slug: string): Promise<Article | null> {
+export async function getArticleBySlug(
+  subdir: string,
+  slug: string,
+  opts: { includeAll?: boolean } = {},
+): Promise<Article | null> {
   const files = getContentFiles(subdir);
 
   for (const file of files) {
     const article = await getArticle(subdir, file);
-    if (article && article.meta.slug === slug) return article;
+    if (!article || article.meta.slug !== slug) continue;
+    if (!opts.includeAll && !isPubliclyVisible(article.meta)) return null;
+    return article;
   }
 
   return null;
 }
 
 /**
- * Get all slugs from a content subdirectory (for static generation)
+ * Get all slugs from a content subdirectory (for static generation).
+ * Filters out drafts and future-scheduled articles by default.
  */
-export function getAllSlugs(subdir: string): string[] {
+export function getAllSlugs(subdir: string, opts: { includeAll?: boolean } = {}): string[] {
   const files = getContentFiles(subdir);
-  return files.map(f => {
+  const slugs: string[] = [];
+  for (const f of files) {
     const raw = fs.readFileSync(path.join(CONTENT_DIR, subdir, f), 'utf-8');
     const { data } = matter(raw);
-    return data.slug || f.replace('.md', '');
-  });
+    if (!opts.includeAll) {
+      const meta: ArticleMeta = {
+        slug: data.slug || f.replace('.md', ''),
+        title: data.title || '',
+        type: data.type || 'post',
+        category: data.category || '',
+        meta_title: data.meta_title || '',
+        meta_description: data.meta_description || '',
+        status: data.status,
+        publish_at: data.publish_at,
+      };
+      if (!isPubliclyVisible(meta)) continue;
+    }
+    slugs.push(data.slug || f.replace('.md', ''));
+  }
+  return slugs;
 }
 
 /**

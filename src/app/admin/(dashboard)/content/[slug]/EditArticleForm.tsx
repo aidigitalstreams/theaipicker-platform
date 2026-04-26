@@ -15,6 +15,7 @@ interface Props {
   metaTitle: string;
   metaDescription: string;
   featuredImage: string;
+  publishAt: string;
   body: string;
   structuredData: StructuredData[];
   subdir: string;
@@ -72,6 +73,14 @@ function normalizeStatus(status: string): 'draft' | 'in-review' | 'ready' | 'pub
   if (s === 'ready' || s === 'ready-to-publish') return 'ready';
   if (s === 'publish' || s === 'published') return 'publish';
   return 'draft';
+}
+
+function toLocalDatetime(iso: string): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 export default function EditArticleForm(props: Props) {
@@ -174,6 +183,20 @@ export default function EditArticleForm(props: Props) {
               <option value="ready">Ready to Publish</option>
               <option value="publish">Published</option>
             </select>
+          </div>
+
+          <div className="admin-form-row">
+            <label htmlFor="publishAt" className="admin-form-label">Publish at</label>
+            <input
+              id="publishAt"
+              name="publishAt"
+              type="datetime-local"
+              defaultValue={toLocalDatetime(props.publishAt)}
+              className="admin-form-input"
+            />
+            <span className="admin-form-help">
+              Optional. Published articles with a future date stay hidden from the public site until then.
+            </span>
           </div>
         </div>
 

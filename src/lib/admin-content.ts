@@ -21,6 +21,14 @@ export interface AdminArticle {
   subdir: string;
   topScore: number | null;
   toolCount: number;
+  publishAt: string | null;
+}
+
+export function isScheduledForFuture(publishAt: string | null | undefined, now: Date = new Date()): boolean {
+  if (!publishAt) return false;
+  const t = Date.parse(publishAt);
+  if (Number.isNaN(t)) return false;
+  return t > now.getTime();
 }
 
 export const SUBDIRS: { dir: string; type: ArticleType }[] = [
@@ -68,6 +76,7 @@ function readArticle(subdir: string, type: ArticleType, filename: string): Admin
     subdir,
     topScore,
     toolCount: blocks.length,
+    publishAt: typeof data.publish_at === 'string' && data.publish_at ? data.publish_at : null,
   };
 }
 
@@ -221,6 +230,7 @@ export interface SaveArticleInput {
   metaTitle?: string;
   metaDescription?: string;
   featuredImage?: string;
+  publishAt?: string;
   body: string;
   preserveFrontmatter?: Record<string, unknown>;
   existing?: { subdir: string; filename: string };
@@ -255,6 +265,14 @@ export function saveArticle(input: SaveArticleInput): { subdir: string; filename
     frontmatter.featured_image = featuredImage;
   } else {
     delete frontmatter.featured_image;
+  }
+
+  const publishAt =
+    input.publishAt !== undefined ? input.publishAt : (preserved.publish_at as string | undefined) ?? '';
+  if (publishAt) {
+    frontmatter.publish_at = publishAt;
+  } else {
+    delete frontmatter.publish_at;
   }
 
   const output = matter.stringify(input.body, frontmatter);

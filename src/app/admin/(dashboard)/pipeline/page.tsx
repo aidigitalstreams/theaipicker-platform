@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import { getAllAdminArticles, typeLabel, type AdminArticle } from '@/lib/admin-content';
+import {
+  getAllAdminArticles,
+  typeLabel,
+  isScheduledForFuture,
+  type AdminArticle,
+} from '@/lib/admin-content';
 import { getActiveStream } from '@/lib/streams';
 
 export const dynamic = 'force-dynamic';
@@ -58,6 +63,14 @@ function scoreClass(score: number | null): string {
   return 'admin-score low';
 }
 
+function formatScheduled(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+  const timeStr = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  return `${dateStr} at ${timeStr}`;
+}
+
 export default function PipelinePage() {
   const stream = getActiveStream();
   const articles = getAllAdminArticles(stream);
@@ -89,26 +102,35 @@ export default function PipelinePage() {
                   {items.length === 0 && (
                     <div className="admin-pipeline-empty">No articles in this stage.</div>
                   )}
-                  {items.map(article => (
-                    <Link
-                      key={`${article.subdir}-${article.filename}`}
-                      href={`/admin/content/${article.slug}`}
-                      className="admin-pipeline-card"
-                    >
-                      <div className="admin-pipeline-card-head">
-                        <span className={`admin-pill ${article.type}`}>
-                          {typeLabel(article.type).toLowerCase()}
-                        </span>
-                        {article.topScore !== null && (
-                          <span className={scoreClass(article.topScore)}>{article.topScore}</span>
+                  {items.map(article => {
+                    const scheduled = isScheduledForFuture(article.publishAt);
+                    return (
+                      <Link
+                        key={`${article.subdir}-${article.filename}`}
+                        href={`/admin/content/${article.slug}`}
+                        className="admin-pipeline-card"
+                      >
+                        <div className="admin-pipeline-card-head">
+                          <span className={`admin-pill ${article.type}`}>
+                            {typeLabel(article.type).toLowerCase()}
+                          </span>
+                          {article.topScore !== null && (
+                            <span className={scoreClass(article.topScore)}>{article.topScore}</span>
+                          )}
+                        </div>
+                        <div className="admin-pipeline-card-title">{article.title}</div>
+                        {scheduled && article.publishAt && (
+                          <div className="admin-pipeline-scheduled">
+                            <span className="admin-pill status-scheduled">Scheduled</span>
+                            <span className="admin-pipeline-card-meta">{formatScheduled(article.publishAt)}</span>
+                          </div>
                         )}
-                      </div>
-                      <div className="admin-pipeline-card-title">{article.title}</div>
-                      {article.category && (
-                        <div className="admin-pipeline-card-meta">{article.category}</div>
-                      )}
-                    </Link>
-                  ))}
+                        {article.category && (
+                          <div className="admin-pipeline-card-meta">{article.category}</div>
+                        )}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             );
