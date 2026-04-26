@@ -8,7 +8,9 @@ import {
   slugIsTaken,
   deleteArticle,
   getAdminArticleBySlug,
+  applyStructuredDataUpdates,
   type EditableArticleType,
+  type StructuredDataUpdate,
 } from '@/lib/admin-content';
 
 const VALID_TYPES: EditableArticleType[] = ['review', 'comparison', 'best-of', 'guide', 'ranking'];
@@ -21,6 +23,31 @@ export interface UpdateState {
 
 function isEditableType(t: string): t is EditableArticleType {
   return (VALID_TYPES as string[]).includes(t);
+}
+
+function clampScore(raw: FormDataEntryValue | null): number {
+  const n = Number(String(raw ?? ''));
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(0, Math.min(100, Math.round(n)));
+}
+
+function parseStructuredUpdates(formData: FormData): StructuredDataUpdate[] {
+  const count = Number(formData.get('sd_count') ?? 0);
+  if (!Number.isFinite(count) || count <= 0) return [];
+  const updates: StructuredDataUpdate[] = [];
+  for (let i = 0; i < count; i++) {
+    updates.push({
+      corePerformance: clampScore(formData.get(`sd_${i}_corePerformance`)),
+      easeOfUse: clampScore(formData.get(`sd_${i}_easeOfUse`)),
+      valueForMoney: clampScore(formData.get(`sd_${i}_valueForMoney`)),
+      outputQuality: clampScore(formData.get(`sd_${i}_outputQuality`)),
+      supportReliability: clampScore(formData.get(`sd_${i}_supportReliability`)),
+      bestFor: String(formData.get(`sd_${i}_bestFor`) ?? '').trim(),
+      priceFrom: String(formData.get(`sd_${i}_priceFrom`) ?? '').trim(),
+      freePlan: String(formData.get(`sd_${i}_freePlan`) ?? '').trim() === 'Yes' ? 'Yes' : 'No',
+    });
+  }
+  return updates;
 }
 
 export async function updateArticleAction(_prev: UpdateState | null, formData: FormData): Promise<UpdateState> {
@@ -36,7 +63,8 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
   const targetKeyword = String(formData.get('targetKeyword') ?? '').trim();
   const metaTitle = String(formData.get('metaTitle') ?? '').trim();
   const metaDescription = String(formData.get('metaDescription') ?? '').trim();
-  const body = String(formData.get('body') ?? '');
+  const featuredImage = String(formData.get('featuredImage') ?? '').trim();
+  const rawBody = String(formData.get('body') ?? '');
 
   if (!title) return { error: 'Title is required.' };
   const slugError = validateSlug(slug);
@@ -49,6 +77,9 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
     return { error: 'Status must be draft or publish.' };
   }
 
+  const structuredUpdates = parseStructuredUpdates(formData);
+  const body = applyStructuredDataUpdates(rawBody, structuredUpdates);
+
   saveArticle({
     type: article.meta.type as EditableArticleType,
     slug,
@@ -58,6 +89,7 @@ export async function updateArticleAction(_prev: UpdateState | null, formData: F
     targetKeyword,
     metaTitle,
     metaDescription,
+    featuredImage,
     body,
     preserveFrontmatter: article.frontmatter,
     existing: { subdir: article.meta.subdir, filename: article.meta.filename },

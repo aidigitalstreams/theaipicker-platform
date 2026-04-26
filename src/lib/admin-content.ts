@@ -204,6 +204,7 @@ export interface SaveArticleInput {
   targetKeyword?: string;
   metaTitle?: string;
   metaDescription?: string;
+  featuredImage?: string;
   body: string;
   preserveFrontmatter?: Record<string, unknown>;
   existing?: { subdir: string; filename: string };
@@ -220,6 +221,8 @@ export function saveArticle(input: SaveArticleInput): { subdir: string; filename
   }
 
   const preserved = { ...(input.preserveFrontmatter || {}) };
+  const featuredImage =
+    input.featuredImage !== undefined ? input.featuredImage : (preserved.featured_image as string | undefined) ?? '';
   const frontmatter: Record<string, unknown> = {
     ...preserved,
     title: input.title,
@@ -232,6 +235,11 @@ export function saveArticle(input: SaveArticleInput): { subdir: string; filename
     category: input.category,
     wp_id: preserved.wp_id ?? '',
   };
+  if (featuredImage) {
+    frontmatter.featured_image = featuredImage;
+  } else {
+    delete frontmatter.featured_image;
+  }
 
   const output = matter.stringify(input.body, frontmatter);
   fs.writeFileSync(fullPath, output, 'utf-8');
@@ -251,4 +259,64 @@ export function deleteArticle(subdir: string, filename: string): void {
   if (fs.existsSync(fullPath)) {
     fs.unlinkSync(fullPath);
   }
+}
+
+export const SCORE_WEIGHTS = {
+  corePerformance: 0.30,
+  easeOfUse: 0.20,
+  valueForMoney: 0.25,
+  outputQuality: 0.15,
+  supportReliability: 0.10,
+} as const;
+
+export interface FactorScores {
+  corePerformance: number;
+  easeOfUse: number;
+  valueForMoney: number;
+  outputQuality: number;
+  supportReliability: number;
+}
+
+export function computeOverallScore(s: FactorScores): number {
+  const weighted =
+    s.corePerformance * SCORE_WEIGHTS.corePerformance +
+    s.easeOfUse * SCORE_WEIGHTS.easeOfUse +
+    s.valueForMoney * SCORE_WEIGHTS.valueForMoney +
+    s.outputQuality * SCORE_WEIGHTS.outputQuality +
+    s.supportReliability * SCORE_WEIGHTS.supportReliability;
+  return Math.round(weighted);
+}
+
+export interface StructuredDataUpdate extends FactorScores {
+  bestFor: string;
+  priceFrom: string;
+  freePlan: string;
+}
+
+function replaceStructuredField(section: string, field: string, value: string): string {
+  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(\\|\\s*\\*\\*${escaped}\\*\\*\\s*\\|\\s*)([^|\\n]*?)(\\s*\\|)`);
+  return section.replace(re, (_m, p1, _p2, p3) => `${p1}${value}${p3}`);
+}
+
+export function applyStructuredDataUpdates(body: string, updates: StructuredDataUpdate[]): string {
+  if (!updates.length) return body;
+  const sections = body.split('## Structured Data');
+  for (let i = 1; i < sections.length; i++) {
+    const update = updates[i - 1];
+    if (!update) continue;
+    const overall = computeOverallScore(update);
+    let s = sections[i];
+    s = replaceStructuredField(s, 'Overall Score', `${overall}/100`);
+    s = replaceStructuredField(s, 'Core Performance', `${update.corePerformance}/100`);
+    s = replaceStructuredField(s, 'Ease of Use', `${update.easeOfUse}/100`);
+    s = replaceStructuredField(s, 'Value for Money', `${update.valueForMoney}/100`);
+    s = replaceStructuredField(s, 'Output Quality', `${update.outputQuality}/100`);
+    s = replaceStructuredField(s, 'Support & Reliability', `${update.supportReliability}/100`);
+    s = replaceStructuredField(s, 'Best For', update.bestFor);
+    s = replaceStructuredField(s, 'Price From', update.priceFrom);
+    s = replaceStructuredField(s, 'Free Plan', update.freePlan);
+    sections[i] = s;
+  }
+  return sections.join('## Structured Data');
 }

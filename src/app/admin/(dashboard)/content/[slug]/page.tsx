@@ -57,6 +57,7 @@ export default async function EditArticlePage({ params, searchParams }: PageProp
           targetKeyword={article.meta.targetKeyword}
           metaTitle={String(article.frontmatter.meta_title ?? '')}
           metaDescription={String(article.frontmatter.meta_description ?? '')}
+          featuredImage={String(article.frontmatter.featured_image ?? '')}
           body={article.body}
           structuredData={article.structuredData}
           subdir={article.meta.subdir}

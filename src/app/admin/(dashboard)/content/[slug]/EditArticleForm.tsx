@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useMemo, useState } from 'react';
 import { updateArticleAction, type UpdateState } from './actions';
 import type { ArticleType } from '@/lib/admin-content';
 import type { StructuredData } from '@/lib/content';
@@ -14,10 +14,40 @@ interface Props {
   targetKeyword: string;
   metaTitle: string;
   metaDescription: string;
+  featuredImage: string;
   body: string;
   structuredData: StructuredData[];
   subdir: string;
   filename: string;
+}
+
+const WEIGHTS = {
+  corePerformance: 0.30,
+  easeOfUse: 0.20,
+  valueForMoney: 0.25,
+  outputQuality: 0.15,
+  supportReliability: 0.10,
+} as const;
+
+interface ScoreState {
+  corePerformance: number;
+  easeOfUse: number;
+  valueForMoney: number;
+  outputQuality: number;
+  supportReliability: number;
+  bestFor: string;
+  priceFrom: string;
+  freePlan: string;
+}
+
+function computeOverall(s: ScoreState): number {
+  const weighted =
+    s.corePerformance * WEIGHTS.corePerformance +
+    s.easeOfUse * WEIGHTS.easeOfUse +
+    s.valueForMoney * WEIGHTS.valueForMoney +
+    s.outputQuality * WEIGHTS.outputQuality +
+    s.supportReliability * WEIGHTS.supportReliability;
+  return Math.round(weighted);
 }
 
 function scoreClass(score: number): string {
@@ -26,15 +56,48 @@ function scoreClass(score: number): string {
   return 'admin-score low';
 }
 
+function clampScore(raw: string): number {
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(0, Math.min(100, Math.round(n)));
+}
+
+function freePlanFromStructured(value: string): 'Yes' | 'No' {
+  return value.trim().toLowerCase().startsWith('y') ? 'Yes' : 'No';
+}
+
 export default function EditArticleForm(props: Props) {
   const [state, formAction, pending] = useActionState<UpdateState | null, FormData>(
     updateArticleAction,
     null,
   );
 
+  const [featuredImage, setFeaturedImage] = useState(props.featuredImage);
+
+  const initialScores: ScoreState[] = useMemo(
+    () => props.structuredData.map(d => ({
+      corePerformance: d.corePerformance,
+      easeOfUse: d.easeOfUse,
+      valueForMoney: d.valueForMoney,
+      outputQuality: d.outputQuality,
+      supportReliability: d.supportReliability,
+      bestFor: d.bestFor,
+      priceFrom: d.priceFrom,
+      freePlan: freePlanFromStructured(d.freePlan),
+    })),
+    [props.structuredData],
+  );
+
+  const [scores, setScores] = useState<ScoreState[]>(initialScores);
+
+  const updateScore = (idx: number, patch: Partial<ScoreState>) => {
+    setScores(prev => prev.map((s, i) => (i === idx ? { ...s, ...patch } : s)));
+  };
+
   return (
     <form action={formAction} className="admin-form">
       <input type="hidden" name="originalSlug" value={props.slug} />
+      <input type="hidden" name="sd_count" value={scores.length} />
 
       {state?.error && <div className="admin-form-error">{state.error}</div>}
       {state?.ok && <div className="admin-form-success">Saved.</div>}
@@ -144,29 +207,144 @@ export default function EditArticleForm(props: Props) {
         </div>
       </div>
 
-      {props.structuredData.length > 0 && (
+      <div className="admin-form-section admin-form-section-wide">
+        <h2 className="admin-form-section-title">Featured image</h2>
+        <p className="admin-form-help" style={{ marginBottom: '0.25rem' }}>
+          Path stored in frontmatter as <code>featured_image</code>. Use a path under <code>/public</code> (e.g. <code>/images/jasper-cover.png</code>) or a full URL.
+        </p>
+        <div className="admin-form-row">
+          <label htmlFor="featuredImage" className="admin-form-label">Image path or URL</label>
+          <input
+            id="featuredImage"
+            name="featuredImage"
+            type="text"
+            value={featuredImage}
+            onChange={e => setFeaturedImage(e.target.value)}
+            placeholder="/images/example-cover.png"
+            className="admin-form-input"
+          />
+        </div>
+        {featuredImage && (
+          <div className="admin-featured-image-preview">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={featuredImage} alt="Featured image preview" />
+          </div>
+        )}
+      </div>
+
+      {scores.length > 0 && (
         <div className="admin-form-section admin-form-section-wide">
           <h2 className="admin-form-section-title">Scores</h2>
           <p className="admin-form-help" style={{ marginBottom: '0.75rem' }}>
-            Read-only summary of structured data blocks parsed from the body. Edit scores directly in the markdown for now — a structured data editor lands in Phase 2.
+            Edit factor scores out of 100. Overall score auto-calculates with weights 30/20/25/15/10. Saving writes the values back into the Structured Data block in the article body.
           </p>
-          <div className="admin-score-list">
-            {props.structuredData.map((d, i) => (
-              <div key={i} className="admin-score-row">
-                <div className="admin-score-row-name">
-                  <strong>{d.toolName}</strong>
-                  <span className="admin-form-help">{d.category}</span>
+          <div className="admin-score-edit-list">
+            {scores.map((s, i) => {
+              const block = props.structuredData[i];
+              const overall = computeOverall(s);
+              return (
+                <div key={i} className="admin-score-edit-row">
+                  <div className="admin-score-edit-head">
+                    <div>
+                      <strong>{block.toolName || `Tool ${i + 1}`}</strong>
+                      {block.category && <span className="admin-form-help"> · {block.category}</span>}
+                    </div>
+                    <div className="admin-score-edit-overall">
+                      <span className="admin-form-help">Overall</span>
+                      <span className={scoreClass(overall)}>{overall}</span>
+                      <input type="hidden" name={`sd_${i}_overallScore`} value={overall} />
+                    </div>
+                  </div>
+
+                  <div className="admin-score-edit-grid">
+                    <FactorInput
+                      idx={i}
+                      field="corePerformance"
+                      label="Core Performance (30%)"
+                      value={s.corePerformance}
+                      onChange={v => updateScore(i, { corePerformance: v })}
+                    />
+                    <FactorInput
+                      idx={i}
+                      field="easeOfUse"
+                      label="Ease of Use (20%)"
+                      value={s.easeOfUse}
+                      onChange={v => updateScore(i, { easeOfUse: v })}
+                    />
+                    <FactorInput
+                      idx={i}
+                      field="valueForMoney"
+                      label="Value for Money (25%)"
+                      value={s.valueForMoney}
+                      onChange={v => updateScore(i, { valueForMoney: v })}
+                    />
+                    <FactorInput
+                      idx={i}
+                      field="outputQuality"
+                      label="Output Quality (15%)"
+                      value={s.outputQuality}
+                      onChange={v => updateScore(i, { outputQuality: v })}
+                    />
+                    <FactorInput
+                      idx={i}
+                      field="supportReliability"
+                      label="Support & Reliability (10%)"
+                      value={s.supportReliability}
+                      onChange={v => updateScore(i, { supportReliability: v })}
+                    />
+                  </div>
+
+                  <div className="admin-score-edit-meta">
+                    <div className="admin-form-row">
+                      <label
+                        htmlFor={`sd_${i}_bestFor`}
+                        className="admin-form-label"
+                      >Best For</label>
+                      <input
+                        id={`sd_${i}_bestFor`}
+                        name={`sd_${i}_bestFor`}
+                        type="text"
+                        value={s.bestFor}
+                        onChange={e => updateScore(i, { bestFor: e.target.value })}
+                        className="admin-form-input"
+                      />
+                    </div>
+
+                    <div className="admin-form-row">
+                      <label
+                        htmlFor={`sd_${i}_priceFrom`}
+                        className="admin-form-label"
+                      >Price From</label>
+                      <input
+                        id={`sd_${i}_priceFrom`}
+                        name={`sd_${i}_priceFrom`}
+                        type="text"
+                        value={s.priceFrom}
+                        onChange={e => updateScore(i, { priceFrom: e.target.value })}
+                        className="admin-form-input"
+                      />
+                    </div>
+
+                    <div className="admin-form-row">
+                      <label
+                        htmlFor={`sd_${i}_freePlan`}
+                        className="admin-form-label"
+                      >Free Plan</label>
+                      <select
+                        id={`sd_${i}_freePlan`}
+                        name={`sd_${i}_freePlan`}
+                        value={s.freePlan}
+                        onChange={e => updateScore(i, { freePlan: e.target.value })}
+                        className="admin-form-select"
+                      >
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div className="admin-score-row-cells">
-                  <ScorePill label="Overall" value={d.overallScore} />
-                  <ScorePill label="Core" value={d.corePerformance} />
-                  <ScorePill label="UX" value={d.easeOfUse} />
-                  <ScorePill label="Value" value={d.valueForMoney} />
-                  <ScorePill label="Output" value={d.outputQuality} />
-                  <ScorePill label="Support" value={d.supportReliability} />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -191,12 +369,34 @@ export default function EditArticleForm(props: Props) {
   );
 }
 
-function ScorePill({ label, value }: { label: string; value: number }) {
-  if (!value) return null;
+interface FactorInputProps {
+  idx: number;
+  field: keyof FactorScores;
+  label: string;
+  value: number;
+  onChange: (n: number) => void;
+}
+
+type FactorScores = Pick<
+  ScoreState,
+  'corePerformance' | 'easeOfUse' | 'valueForMoney' | 'outputQuality' | 'supportReliability'
+>;
+
+function FactorInput({ idx, field, label, value, onChange }: FactorInputProps) {
   return (
-    <div className="admin-score-pill">
-      <span className="admin-score-pill-label">{label}</span>
-      <span className={scoreClass(value)}>{value}</span>
+    <div className="admin-form-row">
+      <label htmlFor={`sd_${idx}_${field}`} className="admin-form-label">{label}</label>
+      <input
+        id={`sd_${idx}_${field}`}
+        name={`sd_${idx}_${field}`}
+        type="number"
+        min={0}
+        max={100}
+        step={1}
+        value={value}
+        onChange={e => onChange(clampScore(e.target.value))}
+        className="admin-form-input admin-score-input"
+      />
     </div>
   );
 }
