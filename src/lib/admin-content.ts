@@ -24,12 +24,7 @@ export interface AdminArticle {
   publishAt: string | null;
 }
 
-export function isScheduledForFuture(publishAt: string | null | undefined, now: Date = new Date()): boolean {
-  if (!publishAt) return false;
-  const t = Date.parse(publishAt);
-  if (Number.isNaN(t)) return false;
-  return t > now.getTime();
-}
+export { isScheduledForFuture } from './article-status';
 
 export const SUBDIRS: { dir: string; type: ArticleType }[] = [
   { dir: 'reviews', type: 'review' },

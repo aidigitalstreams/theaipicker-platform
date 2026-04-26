@@ -3,7 +3,8 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { isScheduledForFuture, type AdminArticle, type ArticleType } from '@/lib/admin-content';
+import type { AdminArticle, ArticleType } from '@/lib/admin-content';
+import { isScheduledForFuture } from '@/lib/article-status';
 
 type StatusFilter = 'all' | 'draft' | 'in-review' | 'ready' | 'publish';
 
