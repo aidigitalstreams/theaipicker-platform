@@ -305,25 +305,26 @@ export default function InboxBoard({ items: initialItems }: Props) {
                 </div>
               </button>
 
-              <button
-                type="button"
-                className="admin-button-ghost"
-                style={{ fontSize: '0.7rem', padding: '0.2rem 0.5rem', flexShrink: 0 }}
-                onClick={(e) => { e.stopPropagation(); toggleExpanded(item.id); }}
-                title={isExpanded ? 'Collapse' : 'View instructions'}
-              >
-                {isExpanded ? '▲' : '▼'}
-              </button>
-
-              <button
-                type="button"
-                className="admin-button-danger"
-                style={{ fontSize: '0.7rem', padding: '0.2rem 0.5rem', marginRight: '0.5rem', flexShrink: 0 }}
-                onClick={(e) => { e.stopPropagation(); remove(item.id); }}
-                title="Delete job"
-              >
-                ✕
-              </button>
+              <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  className="admin-button-ghost"
+                  style={{ fontSize: '0.7rem', padding: '0.25rem 0.5rem', lineHeight: 1 }}
+                  onClick={(e) => { e.stopPropagation(); toggleExpanded(item.id); }}
+                  title={isExpanded ? 'Collapse' : 'View instructions'}
+                >
+                  {isExpanded ? '▲' : '▼'}
+                </button>
+                <button
+                  type="button"
+                  className="admin-button-ghost"
+                  style={{ fontSize: '0.7rem', padding: '0.25rem 0.5rem', lineHeight: 1, color: 'var(--admin-text-muted)' }}
+                  onClick={(e) => { e.stopPropagation(); remove(item.id); }}
+                  title="Delete job"
+                >
+                  ✕
+                </button>
+              </div>
 
               {isExpanded && (
                 <div className="admin-inbox-row-body">
