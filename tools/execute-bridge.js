@@ -221,8 +221,63 @@ async function markFailed(id, output) {
   }
 }
 
+// ---------- Cowork file-drop ingestion ----------
+// Cowork writes tools/cowork-jobs.json with an array of job objects.
+// On each poll the bridge checks for this file, POSTs each job to the
+// inbox API, and deletes the file. This lets Cowork push jobs without
+// needing direct network access to Vercel/Neon.
+const COWORK_DROP_PATH = path.join(__dirname, 'cowork-jobs.json');
+
+async function ingestCoworkJobs() {
+  if (!fs.existsSync(COWORK_DROP_PATH)) return;
+  let raw;
+  try {
+    raw = fs.readFileSync(COWORK_DROP_PATH, 'utf-8');
+  } catch (err) {
+    log('WARN', `Could not read cowork-jobs.json: ${err.message}`);
+    return;
+  }
+
+  let jobs;
+  try {
+    jobs = JSON.parse(raw);
+    if (!Array.isArray(jobs)) jobs = [jobs];
+  } catch (err) {
+    log('ERROR', `cowork-jobs.json is invalid JSON: ${err.message}`);
+    // Rename so it doesn't block every cycle
+    fs.renameSync(COWORK_DROP_PATH, COWORK_DROP_PATH + '.bad');
+    return;
+  }
+
+  log('INFO', `Cowork drop: found ${jobs.length} job(s) to ingest`);
+  let ok = 0;
+  for (const job of jobs) {
+    try {
+      await api('POST', '/api/inbox', {
+        title: job.title ?? 'Untitled job',
+        priority: job.priority ?? 'medium',
+        category: job.category ?? undefined,
+        instructions: job.instructions ?? '',
+      });
+      ok++;
+      log('INFO', `Cowork drop: added "${(job.title ?? '').slice(0, 60)}"`);
+    } catch (err) {
+      log('ERROR', `Cowork drop: failed to add "${(job.title ?? '').slice(0, 40)}": ${err.message}`);
+    }
+  }
+  log('INFO', `Cowork drop: ${ok}/${jobs.length} ingested`);
+
+  // Delete the file so we don't re-ingest next cycle
+  try {
+    fs.unlinkSync(COWORK_DROP_PATH);
+  } catch { /* ignore */ }
+}
+
 // ---------- Poll loop ----------
 async function pollOnce() {
+  // Check for Cowork file-drop before polling execute queue
+  await ingestCoworkJobs();
+
   try {
     const data = await api('GET', '/api/inbox/execute');
     const items = Array.isArray(data.items) ? data.items : [];

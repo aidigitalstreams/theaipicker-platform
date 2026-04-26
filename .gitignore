@@ -36,16 +36,7 @@ yarn-error.log*
 !tools/.env.example
 tools/.env
 tools/bridge.log
+tools/cowork-jobs.json
 
-# bridge working file — transient tasks.md written by execute-bridge.js
+# Bridge working file
 tasks.md
-
-# vercel
-.vercel
-
-# claude code local settings
-.claude/
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
