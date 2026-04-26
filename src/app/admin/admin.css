@@ -798,6 +798,98 @@
 }
 .admin-score-input { max-width: 6rem; }
 
+/* Pre-publish checklists (CTA + SEO) */
+.admin-checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 900px) {
+  .admin-checklist-grid { grid-template-columns: 1fr; }
+}
+
+.admin-checklist {
+  background: var(--admin-page-bg);
+  border: 1px solid var(--admin-border);
+  border-left: 4px solid var(--admin-text-muted);
+  border-radius: 0.625rem;
+  padding: 1rem 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.admin-checklist-complete { border-left-color: var(--admin-success); }
+.admin-checklist-good { border-left-color: var(--admin-accent); }
+.admin-checklist-incomplete { border-left-color: var(--admin-warning); }
+
+.admin-checklist-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.admin-checklist-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--admin-text);
+  margin: 0;
+}
+.admin-checklist-score {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--admin-text-muted);
+  background: var(--admin-content-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 99px;
+  padding: 0.15rem 0.55rem;
+}
+
+.admin-checklist-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.admin-checklist-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.admin-checklist-mark {
+  width: 1rem;
+  height: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 99px;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.admin-checklist-item.passed .admin-checklist-mark {
+  background: var(--admin-success);
+  color: #FFFFFF;
+}
+.admin-checklist-item.failed .admin-checklist-mark {
+  background: transparent;
+  color: var(--admin-text-muted);
+  border: 1.5px solid var(--admin-border);
+}
+.admin-checklist-item.passed .admin-checklist-label { color: var(--admin-text); }
+.admin-checklist-item.failed .admin-checklist-label { color: var(--admin-text-muted); }
+.admin-checklist-detail {
+  font-size: 0.74rem;
+  color: var(--admin-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: nowrap;
+}
+
 /* Pipeline kanban board */
 .admin-pipeline-board {
   display: grid;

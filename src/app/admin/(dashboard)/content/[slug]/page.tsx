@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getAdminArticleBySlug, typeLabel } from '@/lib/admin-content';
 import EditArticleForm from './EditArticleForm';
 import DeleteArticleButton from './DeleteArticleButton';
+import Checklists from './Checklists';
 import { togglePublishAction } from './actions';
 
 export const dynamic = 'force-dynamic';
@@ -47,6 +48,12 @@ export default async function EditArticlePage({ params, searchParams }: PageProp
         {saved === '1' && (
           <div className="admin-form-success" role="status">Saved.</div>
         )}
+
+        <Checklists
+          body={article.body}
+          type={article.meta.type}
+          toolCount={article.structuredData.length}
+        />
 
         <EditArticleForm
           slug={article.meta.slug}
