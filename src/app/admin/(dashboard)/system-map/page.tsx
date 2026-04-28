@@ -34,7 +34,7 @@ const EDGES: Edge[] = [
   { from: 'user',      to: 'dashboard', label: 'browse' },
   { from: 'cowork',    to: 'drive',     label: 'mounted FS' },
   { from: 'cowork',    to: 'bridge',    label: 'drops prompt' },
-  { from: 'cowork',    to: 'vercel',    label: 'MCP / HTTP' },
+  { from: 'cowork',    to: 'vercel',    label: 'via Google Drive file drop' },
   { from: 'bridge',    to: 'cc',        label: 'launches' },
   { from: 'cc',        to: 'vercel',    label: 'deploys' },
   { from: 'dashboard', to: 'vercel',    label: 'Next.js' },
