@@ -50,6 +50,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <div className="admin-nav-section">Operations</div>
           <AdminNav href="/admin/operations" label="Operations Centre" />
           <AdminNav href="/admin/inbox" label="Inbox" badge={inboxCounts.totalOpen} />
+          <AdminNav href="/admin/system-map" label="System map" />
           <AdminNav href="/admin/notifications" label="Notifications" />
           <AdminNav href="/admin/activity" label="Activity log" />
         </nav>
