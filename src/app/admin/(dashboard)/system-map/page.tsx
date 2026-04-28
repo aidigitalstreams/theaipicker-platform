@@ -27,16 +27,16 @@ const NODES: SystemNode[] = [
 
 const NODE_MAP: Record<string, SystemNode> = Object.fromEntries(NODES.map(n => [n.id, n]));
 
-type Edge = { from: string; to: string; label: string };
+type Edge = { from: string; to: string; label: string | string[] };
 
 const EDGES: Edge[] = [
   { from: 'user',      to: 'cowork',    label: 'chat' },
   { from: 'user',      to: 'dashboard', label: 'browse' },
-  { from: 'cowork',    to: 'drive',     label: 'mounted FS' },
-  { from: 'cowork',    to: 'bridge',    label: 'drops prompt' },
-  { from: 'cowork',    to: 'vercel',    label: 'via Google Drive file drop' },
-  { from: 'bridge',    to: 'cc',        label: 'launches' },
-  { from: 'cc',        to: 'vercel',    label: 'deploys' },
+  { from: 'cowork',    to: 'drive',     label: 'file drop (cowork-jobs.json)' },
+  { from: 'drive',     to: 'bridge',    label: 'file sync' },
+  { from: 'bridge',    to: 'vercel',    label: ['REST API', '(poll/heartbeat/results)'] },
+  { from: 'bridge',    to: 'cc',        label: 'spawn with tasks.md' },
+  { from: 'cc',        to: 'vercel',    label: 'git push → deploy' },
   { from: 'dashboard', to: 'vercel',    label: 'Next.js' },
   { from: 'vercel',    to: 'neon',      label: 'queries' },
 ];
@@ -94,6 +94,8 @@ export default function SystemMapPage() {
                 const end = edgePoint(from, to);
                 const mx = (start.x + end.x) / 2;
                 const my = (start.y + end.y) / 2;
+                const lines = Array.isArray(edge.label) ? edge.label : [edge.label];
+                const lineHeight = 13;
                 return (
                   <g key={idx}>
                     <line
@@ -104,14 +106,16 @@ export default function SystemMapPage() {
                       y2={end.y}
                       markerEnd="url(#aids-arrow)"
                     />
-                    <text
-                      className="admin-system-map-edge-label"
-                      x={mx}
-                      y={my}
-                      paintOrder="stroke"
-                    >
-                      {edge.label}
-                    </text>
+                    {lines.map((line, i) => (
+                      <text
+                        key={i}
+                        className="admin-system-map-edge-label"
+                        x={mx}
+                        y={my + (i - (lines.length - 1) / 2) * lineHeight}
+                      >
+                        {line}
+                      </text>
+                    ))}
                   </g>
                 );
               })}
