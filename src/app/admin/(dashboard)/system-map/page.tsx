@@ -43,7 +43,7 @@ type Edge = { from: string; to: string; label: string | string[] };
 const EDGES: Edge[] = [
   { from: 'user',      to: 'cowork',    label: 'chat' },
   { from: 'user',      to: 'dashboard', label: 'browse' },
-  { from: 'user',      to: 'homepc',    label: ['VPN +', 'Remote Desktop'] },
+  { from: 'user',      to: 'homepc',    label: 'VPN + Remote Desktop' },
   { from: 'cowork',    to: 'drive',     label: 'file drop' },
   { from: 'drive',     to: 'bridge',    label: 'file sync' },
   { from: 'bridge',    to: 'cc',        label: 'spawn tasks.md' },
