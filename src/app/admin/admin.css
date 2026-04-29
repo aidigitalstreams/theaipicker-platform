@@ -2065,6 +2065,44 @@
   fill: rgba(16, 185, 129, 0.14);
   stroke: rgba(16, 185, 129, 0.5);
 }
+.admin-system-map-node.tone-storage .admin-system-map-node-rect {
+  fill: rgba(148, 163, 184, 0.08);
+  stroke: rgba(148, 163, 184, 0.35);
+}
+.admin-system-map-node.tone-code .admin-system-map-node-rect {
+  fill: rgba(167, 139, 250, 0.14);
+  stroke: rgba(167, 139, 250, 0.5);
+}
+.admin-system-map-node.tone-cloud .admin-system-map-node-rect {
+  fill: rgba(245, 158, 11, 0.13);
+  stroke: rgba(245, 158, 11, 0.5);
+}
+
+/* Containers (Home PC etc.) */
+.admin-system-map-container-rect {
+  fill: rgba(255, 255, 255, 0.015);
+  stroke: rgba(245, 158, 11, 0.35);
+  stroke-width: 1.25;
+  stroke-dasharray: 6 4;
+}
+.admin-system-map-container.tone-cloud .admin-system-map-container-rect {
+  stroke: rgba(245, 158, 11, 0.45);
+}
+.admin-system-map-container-label {
+  fill: var(--admin-sidebar-text-active);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.admin-system-map-container-sub {
+  fill: var(--admin-sidebar-text);
+  font-size: 9px;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
 .admin-system-map-node-label {
   fill: var(--admin-sidebar-text-active);
   font-size: 13px;
@@ -2101,6 +2139,58 @@
   fill: rgba(148, 163, 184, 0.7);
   stroke: none;
 }
+
+.admin-system-map .admin-card-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.admin-system-map-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  background: rgba(245, 158, 11, 0.16);
+  color: #B45309;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.admin-system-map-status-sep {
+  color: var(--admin-text-muted);
+}
+
+.admin-system-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--admin-sidebar-bg);
+  border: 1px solid var(--admin-sidebar-border);
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--admin-sidebar-text);
+}
+.admin-system-map-legend-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.admin-system-map-swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.admin-system-map-swatch.tone-user    { background: rgba(37, 99, 235, 0.4);  border-color: rgba(37, 99, 235, 0.7); }
+.admin-system-map-swatch.tone-cloud   { background: rgba(245, 158, 11, 0.35); border-color: rgba(245, 158, 11, 0.7); }
+.admin-system-map-swatch.tone-storage { background: rgba(148, 163, 184, 0.3); border-color: rgba(148, 163, 184, 0.6); }
+.admin-system-map-swatch.tone-code    { background: rgba(167, 139, 250, 0.35); border-color: rgba(167, 139, 250, 0.7); }
+.admin-system-map-swatch.tone-db      { background: rgba(16, 185, 129, 0.35); border-color: rgba(16, 185, 129, 0.7); }
 
 /* Claude Code launch page */
 .admin-cc-steps {
