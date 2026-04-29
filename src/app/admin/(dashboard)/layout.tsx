@@ -1,4 +1,5 @@
 import AdminNav from './_components/AdminNav';
+import LaunchClaudeButton from './_components/LaunchClaudeButton';
 import StreamSelector from './_components/StreamSelector';
 import { logoutAction } from '../login/actions';
 import { listStreams, getActiveStreamId } from '@/lib/streams';
@@ -53,6 +54,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <AdminNav href="/admin/system-map" label="System map" />
           <AdminNav href="/admin/notifications" label="Notifications" />
           <AdminNav href="/admin/activity" label="Activity log" />
+          <LaunchClaudeButton />
         </nav>
 
         <div className="admin-sidebar-footer">
