@@ -2,19 +2,17 @@
 
 import { useState } from 'react';
 
-const LAUNCH_COMMAND = `cd "C:\\Users\\John\\My Drive\\Business Operations\\theaipicker-platform" && claude`;
-
-export default function LaunchClaudeButton() {
+export default function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
 
   async function handleClick() {
     try {
-      await navigator.clipboard.writeText(LAUNCH_COMMAND);
+      await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
       const ta = document.createElement('textarea');
-      ta.value = LAUNCH_COMMAND;
+      ta.value = text;
       document.body.appendChild(ta);
       ta.select();
       document.execCommand('copy');
@@ -27,12 +25,11 @@ export default function LaunchClaudeButton() {
   return (
     <button
       type="button"
-      className="admin-sidebar-launch"
+      className="admin-cc-copy-button"
       onClick={handleClick}
+      aria-label={copied ? 'Copied' : 'Copy command to clipboard'}
     >
-      <span className="admin-nav-link-label">
-        {copied ? 'Copied ✓' : 'Launch Claude Code'}
-      </span>
+      {copied ? 'Copied ✓' : 'Copy'}
     </button>
   );
 }

@@ -206,29 +206,6 @@
   padding: 1rem 0.875rem 0.5rem;
 }
 
-.admin-sidebar-launch {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  width: 100%;
-  margin-top: 0.375rem;
-  padding: 0.625rem 0.875rem;
-  font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--admin-sidebar-text-active);
-  background: rgba(37, 99, 235, 0.18);
-  border: 1px solid rgba(37, 99, 235, 0.4);
-  border-radius: 0.5rem;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.15s, border-color 0.15s;
-}
-.admin-sidebar-launch:hover {
-  background: rgba(37, 99, 235, 0.3);
-  border-color: rgba(37, 99, 235, 0.6);
-}
-
 .admin-sidebar-footer {
   padding: 1rem 0.75rem 1.25rem;
   border-top: 1px solid var(--admin-sidebar-border);
@@ -2042,4 +2019,113 @@
 .admin-system-map-arrow {
   fill: rgba(148, 163, 184, 0.7);
   stroke: none;
+}
+
+/* Claude Code launch page */
+.admin-cc-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.admin-cc-step {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--admin-page-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 0.625rem;
+}
+.admin-cc-step-number {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--admin-sidebar-bg);
+  color: var(--admin-sidebar-text-active);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.admin-cc-step-body {
+  min-width: 0;
+}
+.admin-cc-step-title {
+  margin: 0 0 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+.admin-cc-step-text {
+  margin: 0 0 0.75rem;
+  color: var(--admin-text);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.admin-cc-step-text:last-child {
+  margin-bottom: 0;
+}
+.admin-cc-kbd {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  background: #1E293B;
+  color: #F8FAFC;
+  border-radius: 0.3rem;
+  border: 1px solid #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.admin-cc-kbd-plus {
+  margin: 0 0.15rem;
+  color: var(--admin-text-muted);
+  font-weight: 600;
+}
+.admin-cc-inline {
+  padding: 0.1rem 0.4rem;
+  background: #1E293B;
+  color: #F8FAFC;
+  border-radius: 0.3rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+}
+.admin-cc-command {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  background: #0F172A;
+  border: 1px solid #1E293B;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+}
+.admin-cc-command-text {
+  flex: 1;
+  min-width: 0;
+  color: #F8FAFC;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  word-break: break-all;
+  white-space: pre-wrap;
+  align-self: center;
+}
+.admin-cc-copy-button {
+  flex-shrink: 0;
+  padding: 0.4rem 0.85rem;
+  background: var(--admin-accent);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.admin-cc-copy-button:hover {
+  background: var(--admin-accent-hover);
 }
