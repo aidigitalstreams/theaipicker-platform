@@ -20,6 +20,7 @@
   min-height: 100vh;
   background: var(--admin-page-bg);
   display: flex;
+  flex-direction: column;
 }
 
 .admin-shell * { box-sizing: border-box; }
@@ -237,6 +238,86 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+}
+
+/* Top header (replaces the sidebar) */
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 2rem;
+  background: var(--admin-sidebar-bg);
+  color: var(--admin-sidebar-text-active);
+  border-bottom: 1px solid var(--admin-sidebar-border);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.admin-header-left,
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.admin-header-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--admin-sidebar-text-active);
+}
+.admin-header-brand .small {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--admin-sidebar-text);
+}
+.admin-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--admin-sidebar-text-active);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.admin-back-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.admin-header-signout {
+  padding: 0.4rem 0.85rem;
+  background: transparent;
+  color: var(--admin-sidebar-text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.45rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.admin-header-signout:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--admin-sidebar-text-active);
+}
+/* Stream selector inside the header — drop the original margin */
+.admin-header .admin-stream-selector {
+  margin: 0;
+  min-width: 200px;
+}
+.admin-header .admin-stream-trigger {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.admin-header .admin-stream-trigger:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .admin-topbar {
@@ -2128,4 +2209,188 @@
 }
 .admin-cc-copy-button:hover {
   background: var(--admin-accent-hover);
+}
+
+/* Dashboard control room (dark theme) */
+.admin-dashboard-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2.25rem 2rem 1.25rem;
+  background: var(--admin-sidebar-bg);
+  color: var(--admin-sidebar-text-active);
+  border-bottom: 1px solid var(--admin-sidebar-border);
+}
+.admin-dashboard-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--admin-sidebar-text);
+}
+.admin-dashboard-title {
+  margin: 0.25rem 0 0;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--admin-sidebar-text-active);
+}
+.admin-dashboard-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--admin-sidebar-text);
+}
+.admin-dashboard-summary .dot {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.admin-dashboard-content {
+  flex: 1;
+  background: #0B1120;
+  padding: 2rem;
+  color: #E2E8F0;
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .admin-dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .admin-dashboard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.admin-dashboard-card {
+  background: #111827;
+  border: 1px solid #1F2937;
+  border-radius: 0.85rem;
+  padding: 1.35rem 1.35rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: grab;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.admin-dashboard-card:hover {
+  border-color: #334155;
+}
+.admin-dashboard-card.dragging {
+  opacity: 0.55;
+  cursor: grabbing;
+}
+.admin-dashboard-card.drag-over {
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 1px var(--admin-accent);
+  transform: translateY(-2px);
+}
+
+.admin-dashboard-card-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+.admin-dashboard-card-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(37, 99, 235, 0.15);
+  color: #93C5FD;
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.admin-dashboard-card-title-block {
+  min-width: 0;
+}
+.admin-dashboard-card-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  letter-spacing: 0.2px;
+}
+.admin-dashboard-card-stat {
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.admin-dashboard-card-stat-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  line-height: 1;
+}
+.admin-dashboard-card-stat-label {
+  font-size: 0.78rem;
+  color: #94A3B8;
+}
+.admin-dashboard-card-stat.tone-success .admin-dashboard-card-stat-value { color: #34D399; }
+.admin-dashboard-card-stat.tone-warning .admin-dashboard-card-stat-value { color: #FBBF24; }
+.admin-dashboard-card-stat.tone-danger  .admin-dashboard-card-stat-value { color: #F87171; }
+
+.admin-dashboard-card-grip {
+  font-size: 0.95rem;
+  letter-spacing: -1px;
+  color: #475569;
+  user-select: none;
+  padding: 0.1rem 0.2rem;
+}
+.admin-dashboard-card:hover .admin-dashboard-card-grip {
+  color: #94A3B8;
+}
+
+.admin-dashboard-card-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.admin-dashboard-card-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.7rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  color: #CBD5E1;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.admin-dashboard-card-link:hover {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.35);
+  color: #F8FAFC;
+}
+.admin-dashboard-card-link span:last-child {
+  color: #64748B;
+  font-size: 0.85rem;
+  transition: color 0.15s, transform 0.15s;
+}
+.admin-dashboard-card-link:hover span:last-child {
+  color: #93C5FD;
+  transform: translateX(2px);
+}
+
+.admin-dashboard-hint {
+  margin: 1.5rem 0 0;
+  font-size: 0.78rem;
+  color: #64748B;
+  text-align: center;
 }

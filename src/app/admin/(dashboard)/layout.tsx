@@ -1,67 +1,31 @@
-import AdminNav from './_components/AdminNav';
+import Link from 'next/link';
+import BackButton from './_components/BackButton';
 import StreamSelector from './_components/StreamSelector';
 import { logoutAction } from '../login/actions';
 import { listStreams, getActiveStreamId } from '@/lib/streams';
-import { getInboxCounts } from '@/lib/inbox';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [streams, activeStreamId, inboxCounts] = await Promise.all([
+  const [streams, activeStreamId] = await Promise.all([
     listStreams(),
     getActiveStreamId(),
-    getInboxCounts(),
   ]);
   return (
-    <div className="admin-shell">
-      <aside className="admin-sidebar">
-        <div className="admin-sidebar-brand">
-          AI Digital Streams
-          <span className="small">Admin</span>
+    <div className="admin-shell admin-shell-dark">
+      <header className="admin-header">
+        <div className="admin-header-left">
+          <BackButton />
+          <Link href="/admin" className="admin-header-brand">
+            AI Digital Streams
+            <span className="small">Admin</span>
+          </Link>
         </div>
-
-        <StreamSelector streams={streams} activeStreamId={activeStreamId} />
-
-        <nav className="admin-sidebar-nav">
-          <div className="admin-nav-section">Overview</div>
-          <AdminNav href="/admin" exact label="Dashboard" />
-          <AdminNav href="/admin/roadmap" label="Roadmap" />
-          <AdminNav href="/admin/streams" label="Streams" />
-
-          <div className="admin-nav-section">Content</div>
-          <AdminNav href="/admin/content" label="All articles" />
-          <AdminNav href="/admin/pipeline" label="Pipeline" />
-
-          <div className="admin-nav-section">Intelligence</div>
-          <AdminNav href="/admin/research" label="Research Hub" />
-
-          <div className="admin-nav-section">Brand</div>
-          <AdminNav href="/admin/design" label="Design Centre" />
-
-          <div className="admin-nav-section">Audience</div>
-          <AdminNav href="/admin/subscribers" label="Subscribers" />
-          <AdminNav href="/admin/newsletter/compose" label="Newsletter" />
-
-          <div className="admin-nav-section">Revenue</div>
-          <AdminNav href="/admin/affiliates" label="Affiliates" />
-
-          <div className="admin-nav-section">Insights</div>
-          <AdminNav href="/admin/analytics" label="Analytics" />
-          <AdminNav href="/admin/seo" label="SEO War Room" />
-
-          <div className="admin-nav-section">Operations</div>
-          <AdminNav href="/admin/operations" label="Operations Centre" />
-          <AdminNav href="/admin/inbox" label="Inbox" badge={inboxCounts.totalOpen} />
-          <AdminNav href="/admin/system-map" label="System map" />
-          <AdminNav href="/admin/notifications" label="Notifications" />
-          <AdminNav href="/admin/activity" label="Activity log" />
-          <AdminNav href="/admin/claude-code" label="Launch Claude Code" />
-        </nav>
-
-        <div className="admin-sidebar-footer">
+        <div className="admin-header-right">
+          <StreamSelector streams={streams} activeStreamId={activeStreamId} />
           <form action={logoutAction}>
-            <button type="submit" className="admin-logout-button">Sign out</button>
+            <button type="submit" className="admin-header-signout">Sign out</button>
           </form>
         </div>
-      </aside>
+      </header>
 
       <div className="admin-main">{children}</div>
     </div>
