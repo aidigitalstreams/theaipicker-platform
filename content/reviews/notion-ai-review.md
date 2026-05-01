@@ -6,9 +6,7 @@ slug: notion-ai-review
 type: post
 status: publish
 meta_title: Notion AI Review (2026) — Workspace AI Assistant Scored /100
-meta_description: >-
-  Notion AI scored 75/100 across 5 factors. Full breakdown of AI Agents,
-  Workspace Q&A, writing assistant, pricing from £0, and honest verdict.
+meta_description: "Notion AI scored 75/100 in our 2026 research review — AI Agents, Workspace Q&A, writing assistant, pricing, and reliability. Find out if it's worth it."
 target_keyword: notion ai review 2026
 category: AI Writing Tools
 wp_id: null

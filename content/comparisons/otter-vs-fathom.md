@@ -4,9 +4,7 @@ slug: otter-vs-fathom
 type: post
 status: publish
 meta_title: Otter vs Fathom (2026) — AI Meeting Assistants Compared
-meta_description: >-
-  Otter (84/100) vs Fathom (86/100) compared across features, free plans, ease
-  of use, and team workflows. Honest verdict on which to choose.
+meta_description: "Otter (84/100) vs Fathom (86/100) for 2026 — features, free plans, ease of use, integrations, and team workflows all compared in research. See how they compare."
 target_keyword: otter vs fathom 2026
 category: AI Meeting Assistants
 wp_id: null

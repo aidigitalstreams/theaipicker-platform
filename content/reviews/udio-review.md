@@ -6,9 +6,7 @@ slug: udio-review
 type: post
 status: publish
 meta_title: Udio Review (2026) — AI Music Generator Scored /100
-meta_description: >-
-  Udio scored 74/100 across 5 factors. Full breakdown of audio quality, stem
-  editing, pricing, the download controversy, and honest verdict.
+meta_description: "Udio scored 74/100 in our 2026 research review — audio quality, stem editing, licensing, pricing, ease of use, and reliability. Find out if it's worth it."
 target_keyword: udio review 2026
 category: AI Music Generation
 wp_id: null

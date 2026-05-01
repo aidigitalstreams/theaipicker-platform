@@ -4,9 +4,7 @@ slug: gemini-review
 type: post
 status: publish
 meta_title: Gemini Review (2026) — Is Google's Chatbot Worth Paying For?
-meta_description: >-
-  Gemini scored 83/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and honest verdict.
+meta_description: "Gemini scored 83/100 in our 2026 research review — reasoning, writing, Google integration, pricing, and reliability all compared. Find out if it's worth it."
 target_keyword: gemini review 2026
 category: AI Chatbots
 wp_id: null

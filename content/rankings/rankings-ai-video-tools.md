@@ -4,9 +4,7 @@ slug: rankings-ai-video-tools
 type: page
 status: publish
 meta_title: AI Video Tools Ranked 2026 — The AI Picker Leaderboard
-meta_description: >-
-  Every AI video tool we've reviewed, ranked by score out of 100. Updated as new
-  tools are reviewed. Transparent, research-based, honest.
+meta_description: "Every AI video tool we've reviewed for 2026, ranked by score out of 100 — updated as new tools launch. Transparent and research-based. See how they compare."
 target_keyword: ai video tools ranked
 parent: rankings-hub
 wp_id: null

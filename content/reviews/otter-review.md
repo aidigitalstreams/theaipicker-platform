@@ -4,9 +4,7 @@ slug: otter-review
 type: post
 status: publish
 meta_title: Otter.ai Review (2026) — Is It Still the Best Meeting Assistant?
-meta_description: >-
-  Otter.ai scored 84/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: "Otter.ai scored 84/100 in our 2026 research review — transcription accuracy, integrations, free plan, pricing, and reliability. Find out if it's worth it."
 target_keyword: otter ai review 2026
 category: AI Meeting Assistants
 wp_id: null

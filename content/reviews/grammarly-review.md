@@ -6,9 +6,7 @@ slug: grammarly-review
 type: post
 status: publish
 meta_title: Grammarly Review (2026) — AI Writing Assistant Scored /100
-meta_description: >-
-  Grammarly scored 79/100 across 5 factors. Full breakdown of GrammarlyGO, Pro
-  features, grammar accuracy (93-98%), pricing, and honest verdict.
+meta_description: "Grammarly scored 79/100 in our 2026 research review — grammar accuracy, GrammarlyGO, Pro features, pricing, and reliability. Find out if it's worth it."
 target_keyword: grammarly review 2026
 category: AI Writing Tools
 wp_id: null

@@ -4,9 +4,7 @@ slug: grok-review
 type: post
 status: publish
 meta_title: Grok Review (2026) — Is xAI's Chatbot Worth Paying For?
-meta_description: >-
-  Grok scored 76/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and honest verdict.
+meta_description: "Grok scored 76/100 in our 2026 research review — reasoning, real-time search, X integration, pricing, and reliability all compared. Find out if it's worth it."
 target_keyword: grok review 2026
 category: AI Chatbots
 wp_id: null

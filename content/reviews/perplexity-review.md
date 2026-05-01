@@ -4,9 +4,7 @@ slug: perplexity-review
 type: post
 status: publish
 meta_title: Perplexity Review (2026) — Is It the Best AI Research Tool?
-meta_description: >-
-  Perplexity scored 82/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and honest verdict.
+meta_description: "Perplexity scored 82/100 in our 2026 research review — research accuracy, citations, Pro features, pricing, and reliability. Find out if it's worth it."
 target_keyword: perplexity review 2026
 category: AI Chatbots
 wp_id: null

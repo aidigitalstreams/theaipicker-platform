@@ -4,9 +4,7 @@ slug: fireflies-review
 type: post
 status: publish
 meta_title: Fireflies.ai Review (2026) — Is It Better Value Than Otter?
-meta_description: >-
-  Fireflies.ai scored 83/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown and verdict.
+meta_description: "Fireflies.ai scored 83/100 in our 2026 research review — transcription, integrations, AI features, pricing, and reliability. Find out if it's worth it."
 target_keyword: fireflies ai review 2026
 category: AI Meeting Assistants
 wp_id: null

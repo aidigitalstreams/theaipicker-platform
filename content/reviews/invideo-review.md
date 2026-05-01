@@ -4,9 +4,7 @@ slug: invideo-review
 type: post
 status: publish
 meta_title: InVideo AI Review (2026) — AI Video Generator Scored /100
-meta_description: >-
-  InVideo AI scored 81/100 across 5 factors. Full breakdown of Sora 2 + VEO 3.1
-  integration, voice cloning, pricing from £0, and honest verdict.
+meta_description: "InVideo AI scored 81/100 in our 2026 research review — Sora 2 + VEO 3.1 integration, voice cloning, pricing from £0, and reliability. Find out if it's worth it."
 target_keyword: invideo ai review 2026
 category: AI Video Tools
 wp_id: null

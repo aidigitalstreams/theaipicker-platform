@@ -4,9 +4,7 @@ slug: fathom-review
 type: post
 status: publish
 meta_title: Fathom Review (2026) — Is the Free Tier Really Unlimited?
-meta_description: >-
-  Fathom scored 86/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: "Fathom scored 86/100 in our 2026 research review — meeting summaries, integrations, free plan, pricing, and reliability all compared. Find out if it's worth it."
 target_keyword: fathom review 2026
 category: AI Meeting Assistants
 wp_id: null

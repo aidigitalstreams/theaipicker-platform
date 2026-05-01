@@ -4,9 +4,7 @@ slug: cursor-review
 type: post
 status: publish
 meta_title: Cursor Review (2026) — Is It Still the Best AI IDE?
-meta_description: >-
-  Cursor scored 86/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and honest verdict.
+meta_description: "Cursor scored 86/100 in our 2026 research review — agent mode, model support, pricing, ease of use, and reliability all compared. Find out if it's worth it."
 target_keyword: cursor review 2026
 category: AI Coding Assistants
 wp_id: null

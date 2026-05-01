@@ -4,9 +4,7 @@ slug: google-veo-review
 type: post
 status: publish
 meta_title: Google Veo Review (2026) — Is Google's Video AI Worth It?
-meta_description: >-
-  Google Veo scored 83/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: "Google Veo scored 83/100 in our 2026 research review — video quality, prompt fidelity, pricing, and reliability all compared. Find out if it's worth it."
 target_keyword: google veo review 2026
 category: AI Video Tools
 wp_id: null

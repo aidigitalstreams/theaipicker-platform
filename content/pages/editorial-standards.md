@@ -4,7 +4,7 @@ slug: editorial-standards
 type: page
 status: draft
 meta_title: Editorial Standards | The AI Picker
-meta_description: The rules that govern every review we publish — research sources, scoring rigour, AI disclosure, conflict-of-interest policy, and update cadence.
+meta_description: "The rules that govern every review we publish on The AI Picker for 2026 — research sources, scoring rigour, AI disclosure, and update cadence. See how it works."
 target_keyword: editorial standards
 parent_page: about
 wp_id:

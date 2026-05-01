@@ -4,9 +4,7 @@ slug: sonix-review
 type: post
 status: publish
 meta_title: 'Sonix Review (2026) — Fast, Affordable Transcription Scored /100'
-meta_description: >-
-  Sonix scored 80/100 across 5 factors. Full breakdown of accuracy, pricing,
-  editor quality, and honest verdict for podcasters, journalists, and teams.
+meta_description: "Sonix scored 80/100 in our 2026 research review — accuracy, editor quality, languages, pricing, and reliability all compared. Find out if it's worth it."
 target_keyword: sonix review 2026
 category: AI Transcription Tools
 wp_id: null

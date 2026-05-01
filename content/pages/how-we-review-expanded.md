@@ -4,7 +4,7 @@ slug: how-we-review
 type: page
 status: draft (expanded v2)
 meta_title: How We Review AI Tools — Our Process | The AI Picker
-meta_description: Every AI tool on The AI Picker is scored out of 100 on five weighted factors. Full methodology, category data points, and the quality gates we apply.
+meta_description: "Every AI tool on The AI Picker is scored out of 100 on five weighted factors. Full 2026 methodology, category data, and quality gates shown. See how it works."
 target_keyword: how we review ai tools
 parent_page: about
 wp_id: [live page — this is the expanded draft for John's approval before replacing]

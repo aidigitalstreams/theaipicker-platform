@@ -4,9 +4,7 @@ slug: gamma-review
 type: post
 status: publish
 meta_title: Gamma Review (2026) — AI Presentations Scored /100
-meta_description: >-
-  Gamma scored 83/100 across 5 factors. Full breakdown of AI deck generation,
-  collaboration, pricing, and honest verdict for teams and creators.
+meta_description: "Gamma scored 83/100 in our 2026 research review — AI deck generation, design quality, collaboration, pricing, and reliability. Find out if it's worth it."
 target_keyword: gamma review 2026
 category: AI Presentation Tools
 wp_id: null

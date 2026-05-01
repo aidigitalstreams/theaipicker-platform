@@ -4,7 +4,7 @@ slug: anyword-review
 type: post
 status: publish
 meta_title: Anyword Review (2026) — Is the Predictive Score Worth $39/mo?
-meta_description: Anyword claims 82% accuracy predicting which copy converts. We researched features, pricing, and user feedback. Here's our honest 2026 verdict.
+meta_description: "Anyword scored 73/100 in our 2026 research review — Predictive Score, Brand Voice, copy quality, pricing, and reliability assessed. Find out if it's worth it."
 wp_id: 77
 target_keyword: anyword review 2026
 featured_image: ''

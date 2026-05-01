@@ -4,9 +4,7 @@ slug: rankings
 type: page
 status: publish
 meta_title: AI Tool Rankings 2026 — Every Category Scored | The AI Picker
-meta_description: >-
-  Browse AI tool rankings across every category. Writing, voice, video, image,
-  chatbots, coding, meetings, and more — all scored /100.
+meta_description: "Browse our AI tool rankings for 2026 across every category — writing, voice, video, image, chatbots, coding, meetings, and more. See how they compare."
 target_keyword: ai tool rankings 2026
 wp_id: null
 note: >-

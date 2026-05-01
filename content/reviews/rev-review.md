@@ -4,9 +4,7 @@ slug: rev-review
 type: post
 status: publish
 meta_title: Rev Review (2026) — API-First Transcription Scored /100
-meta_description: >-
-  Rev scored 78/100 across 5 factors. Full breakdown of accuracy, pricing, API,
-  human review options, and honest verdict for developers and teams.
+meta_description: "Rev scored 78/100 in our 2026 research review — accuracy, API, human review options, pricing, and reliability all compared. Find out if it's worth it."
 target_keyword: rev review 2026
 category: AI Transcription Tools
 wp_id: null

@@ -4,9 +4,7 @@ slug: descript-review
 type: post
 status: publish
 meta_title: Descript Review (2026) — Is Text-Based Editing Worth It?
-meta_description: >-
-  Descript scored 84/100 across Core Performance, Ease of Use, Value, Output
-  Quality, and Reliability. Full breakdown, pricing, and verdict.
+meta_description: "Descript scored 84/100 in our 2026 research review — editing speed, transcription, Studio Sound, pricing, and reliability assessed. Find out if it's worth it."
 target_keyword: descript review 2026
 category: AI Audio/Video Editors
 wp_id: null

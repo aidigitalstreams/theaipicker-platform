@@ -4,9 +4,7 @@ slug: clearscope-review
 type: post
 status: publish
 meta_title: Clearscope Review (2026) — Content Optimisation Scored /100
-meta_description: >-
-  Clearscope scored 79/100 across 5 factors. Full breakdown of content grading,
-  semantic analysis, team features, pricing, and honest verdict.
+meta_description: "Clearscope scored 79/100 in our 2026 research review — content grading, semantic analysis, team features, pricing, and reliability. Find out if it's worth it."
 target_keyword: clearscope review 2026
 category: AI SEO Tools
 wp_id: null

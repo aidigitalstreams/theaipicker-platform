@@ -4,9 +4,7 @@ slug: rankings-ai-seo-tools
 type: page
 status: publish
 meta_title: AI SEO Tools Rankings (2026) — Scored & Ranked /100
-meta_description: >-
-  Every AI SEO tool we've reviewed, ranked by score. Surfer SEO, Clearscope,
-  MarketMuse, Frase, and NeuronWriter compared with live scores.
+meta_description: "Every AI SEO tool we've reviewed for 2026, ranked by score — Surfer SEO, Clearscope, MarketMuse, Frase, and NeuronWriter compared. See how they compare."
 parent: rankings
 wp_id: null
 target_keyword: ai seo tools rankings 2026
