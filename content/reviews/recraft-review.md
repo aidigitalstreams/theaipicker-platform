@@ -4,9 +4,7 @@ slug: recraft-review
 type: post
 status: publish
 meta_title: Recraft Review (2026) — AI Design & Image Generator Scored /100
-meta_description: >-
-  Recraft scored 83/100 across 5 factors. Full breakdown of vector generation,
-  text rendering, brand consistency, infinite canvas, pricing from £0.
+meta_description: Our 2026 Recraft review covers vector generation, text rendering, brand styles, infinite canvas, pricing, and limits. Find out if it's worth it for you.
 target_keyword: recraft review 2026
 category: AI Image Generators
 wp_id: null

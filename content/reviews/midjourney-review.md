@@ -4,7 +4,7 @@ slug: midjourney-review
 type: post
 status: publish
 meta_title: Midjourney Review (2026) — Is It Still the Best AI Image Generator?
-meta_description: Our in-depth Midjourney review covers v7 quality, pricing, workflow, commercial licensing, and who it's really for. Research-based scoring out of 100.
+meta_description: Our 2026 Midjourney review covers v7 image quality, pricing tiers, workflow, commercial licensing, and who it really suits. Find out if it's worth it.
 target_keyword: midjourney review 2026
 category: AI Image Generators
 wp_id: 110

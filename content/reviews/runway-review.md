@@ -4,9 +4,7 @@ slug: runway-review
 type: post
 status: publish
 meta_title: Runway Review (2026) — Is Gen-4 Still the Best AI Video Tool?
-meta_description: >-
-  Our research-based Runway review covers Gen-4, pricing, Act-One, motion brush,
-  commercial licensing, and who Runway actually suits in 2026.
+meta_description: Our 2026 Runway review covers Gen-4 video quality, Act-One, motion brush, pricing tiers, commercial licensing, and who it suits today. See how it compares.
 target_keyword: runway ai review 2026
 category: AI Video Tools
 wp_id: null
