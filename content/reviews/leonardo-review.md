@@ -8,6 +8,7 @@ meta_description: Our 2026 Leonardo AI review covers models, Canvas, custom trai
 target_keyword: leonardo ai review 2026
 category: AI Image Generators
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

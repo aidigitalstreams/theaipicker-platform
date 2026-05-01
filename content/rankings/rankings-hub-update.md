@@ -12,6 +12,7 @@ wp_id: null
 note: >-
   This is an UPDATE to the existing Rankings Hub page. Merge the new category
   links into the existing page rather than replacing it.
+featured_image: ''
 ---
 
 # AI Tool Rankings

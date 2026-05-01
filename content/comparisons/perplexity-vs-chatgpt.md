@@ -12,6 +12,7 @@ meta_description: >-
 target_keyword: perplexity vs chatgpt
 category: AI Chatbots
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

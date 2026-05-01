@@ -11,6 +11,7 @@ target_keyword: ai audio video editor rankings 2026
 category: AI Audio/Video Editors
 parent_page: Rankings Hub
 wp_id: null
+featured_image: ''
 ---
 
 # AI Audio/Video Editor Rankings

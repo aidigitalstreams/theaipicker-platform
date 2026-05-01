@@ -11,6 +11,7 @@ target_keyword: ai meeting assistant rankings 2026
 category: AI Meeting Assistants
 parent_page: Rankings Hub
 wp_id: null
+featured_image: ''
 ---
 
 # AI Meeting Assistant Rankings

@@ -10,6 +10,7 @@ meta_description: >-
 target_keyword: ai transcription tools rankings 2026
 parent: rankings
 wp_id: null
+featured_image: ''
 ---
 
 # AI Transcription Tools Rankings

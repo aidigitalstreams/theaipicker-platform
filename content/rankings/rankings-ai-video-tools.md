@@ -10,6 +10,7 @@ meta_description: >-
 target_keyword: ai video tools ranked
 parent: rankings-hub
 wp_id: null
+featured_image: ''
 ---
 
 *The AI Picker's live leaderboard of every AI video tool we've reviewed. Each tool is scored out of 100 using our [five-factor methodology](/how-we-review/): Core Performance (30%), Ease of Use (20%), Value for Money (25%), Output Quality (15%), Support & Reliability (10%). Updated automatically as new reviews and score changes land.*

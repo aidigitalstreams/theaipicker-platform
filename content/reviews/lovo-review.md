@@ -6,6 +6,8 @@ status: publish
 meta_title: Lovo AI Review (2026) — Genny Voices, Pricing & Honest Verdict
 meta_description: Lovo AI's Genny offers 500+ voices in 100 languages plus a built-in video editor. We researched features, pricing, and user feedback. Here's our 2026 verdict.
 wp_id: 78
+target_keyword: lovo review 2026
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

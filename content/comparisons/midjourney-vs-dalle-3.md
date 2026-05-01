@@ -10,6 +10,7 @@ meta_description: >-
 target_keyword: midjourney vs dalle 3
 category: AI Image Generators
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our comparisons — we research tools honestly and score transparently.*

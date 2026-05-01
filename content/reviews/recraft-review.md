@@ -8,6 +8,7 @@ meta_description: Our 2026 Recraft review covers vector generation, text renderi
 target_keyword: recraft review 2026
 category: AI Image Generators
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*

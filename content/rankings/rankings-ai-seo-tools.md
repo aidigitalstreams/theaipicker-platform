@@ -9,6 +9,8 @@ meta_description: >-
   MarketMuse, Frase, and NeuronWriter compared with live scores.
 parent: rankings
 wp_id: null
+target_keyword: ai seo tools rankings 2026
+featured_image: ''
 ---
 
 # AI SEO Tools Rankings

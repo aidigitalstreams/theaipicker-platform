@@ -11,6 +11,7 @@ target_keyword: ai chatbot rankings 2026
 category: AI Chatbots
 parent_page: Rankings Hub
 wp_id: null
+featured_image: ''
 ---
 
 # AI Chatbot Rankings

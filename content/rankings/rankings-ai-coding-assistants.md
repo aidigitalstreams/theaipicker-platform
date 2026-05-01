@@ -12,6 +12,7 @@ target_keyword: ai coding assistant rankings 2026
 category: AI Coding Tools
 parent_page: Rankings Hub
 wp_id: null
+featured_image: ''
 ---
 
 # AI Coding Assistant Rankings

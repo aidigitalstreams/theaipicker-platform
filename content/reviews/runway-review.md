@@ -8,6 +8,7 @@ meta_description: Our 2026 Runway review covers Gen-4 video quality, Act-One, mo
 target_keyword: runway ai review 2026
 category: AI Video Tools
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

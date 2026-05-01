@@ -10,6 +10,7 @@ meta_description: >-
 target_keyword: colossyan review 2026
 category: AI Video Tools
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

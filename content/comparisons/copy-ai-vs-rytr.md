@@ -8,6 +8,7 @@ meta_description: "Copy.ai at $49/mo vs Rytr at $9/mo. We compared output, featu
 target_keyword: copy ai vs rytr
 category: AI Writing Tools
 wp_id: 106
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

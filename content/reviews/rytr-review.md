@@ -7,6 +7,8 @@ meta_title: Rytr Review (2026) — Is $9/mo AI Writing Worth It?
 meta_description: >-
   Our in-depth Rytr review covers pricing, output quality, long-form
   limitations, and who it's right for. Research-based scoring out of 100.
+target_keyword: rytr review 2026
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our reviews — we recommend tools based on thorough research, not commission rates.*

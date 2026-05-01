@@ -10,6 +10,7 @@ meta_description: >-
 target_keyword: ai presentation tools rankings 2026
 parent: rankings
 wp_id: null
+featured_image: ''
 ---
 
 # AI Presentation Tools Rankings

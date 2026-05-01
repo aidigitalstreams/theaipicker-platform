@@ -11,6 +11,7 @@ meta_description: >-
 target_keyword: frase vs neuronwriter
 category: AI SEO Tools
 wp_id: null
+featured_image: ''
 ---
 
 *Disclosure: We earn a commission if you make a purchase through our links, at no extra cost to you. This doesn't influence our scoring — we research tools honestly and score transparently.*
